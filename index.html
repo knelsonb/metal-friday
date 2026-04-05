@@ -344,6 +344,7 @@
 
     .curator-badge.trey { color: var(--trey); border-color: var(--trey); }
     .curator-badge.keith { color: var(--keith); border-color: var(--keith); }
+    .curator-badge.sauron { color: var(--accent-glow); border-color: var(--accent-glow); }
 
     .track-count { font-size: 0.8rem; color: var(--text-dim); }
 
@@ -1303,6 +1304,7 @@
         <h3 class="planning-section-title">Pending Suggestions</h3>
         <div id="suggestions-list">Loading suggestions...</div>
       </div>
+      <div class="planning-section" id="planning-bios"></div>
     </div>
   </div>
 
@@ -2154,9 +2156,11 @@
             const pArtistLinks = [];
             if (p.artist_spotify) pArtistLinks.push(`<a class="track-link" href="${p.artist_spotify}" target="_blank">&#127911; Artist</a>`);
             if (p.artist_youtube) pArtistLinks.push(`<a class="track-link" href="${p.artist_youtube}" target="_blank">${ytSvg} Channel</a>`);
+            const recBy = p.rec_by ? `<span class="curator-badge ${p.rec_by}" style="font-size:0.55rem;padding:0.1rem 0.4rem">${p.rec_by}</span>` : '';
             return `
               <div class="plan-pick ${p.status || 'open'}">
                 <span class="plan-status ${p.status || 'open'}">${p.status || 'open'}</span>
+                ${recBy}
                 <span class="plan-pick-artist">${escHtml(p.artist)}</span>
                 <span style="color:var(--text);font-size:0.9rem">"${escHtml(p.track)}"</span>
                 <span class="genre-tag">${escHtml(p.genre)}</span>
@@ -2185,10 +2189,12 @@
               `;
             }).join('');
 
+            const bRecBy = b.rec_by ? `<span class="curator-badge ${b.rec_by}" style="font-size:0.55rem;padding:0.1rem 0.4rem">${b.rec_by}</span>` : '';
             return `
               <div class="artist-card" style="margin-bottom:0.75rem">
                 <div class="artist-header" onclick="this.closest('.artist-card').classList.toggle('open')" style="flex-wrap:wrap">
                   <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap">
+                    ${bRecBy}
                     <span class="artist-name">${escHtml(b.artist)}</span>
                     <span class="genre-tag">${escHtml(b.genre || '')}</span>
                   </div>
@@ -2210,9 +2216,11 @@
             const mArtistLinks = [];
             if (p.artist_spotify) mArtistLinks.push(`<a class="track-link" href="${p.artist_spotify}" target="_blank">&#127911; Artist</a>`);
             if (p.artist_youtube) mArtistLinks.push(`<a class="track-link" href="${p.artist_youtube}" target="_blank">${ytSvg} Channel</a>`);
+            const mRecBy = p.rec_by ? `<span class="curator-badge ${p.rec_by || 'sauron'}" style="font-size:0.55rem;padding:0.1rem 0.4rem">${p.rec_by}</span>` : '';
             return `
               <div class="plan-pick open">
                 <span class="plan-status open">maybe</span>
+                ${mRecBy}
                 <span class="plan-pick-artist">${escHtml(p.artist)}</span>
                 ${p.track ? `<span style="color:var(--text);font-size:0.9rem">"${escHtml(p.track)}"</span>` : ''}
                 <span class="genre-tag">${escHtml(p.genre)}</span>
@@ -2245,6 +2253,15 @@
               Last updated: ${plan.updated || 'unknown'}
             </div>
           `;
+
+          // Render bios
+          if (plan.bios) {
+            const bioHtml = Object.entries(plan.bios).map(([key, bio]) => {
+              const color = key === 'trey' ? 'var(--trey)' : key === 'keith' ? 'var(--keith)' : 'var(--accent-glow)';
+              return `<div style="padding:0.75rem 1rem;border-left:3px solid ${color};margin-bottom:0.75rem;background:var(--bg-card);border-radius:0 4px 4px 0"><span style="font-family:Oswald,sans-serif;font-weight:600;color:${color};text-transform:uppercase;font-size:0.85rem">${escHtml(key)}</span><span style="font-size:0.8rem;color:var(--text-dim);display:block;margin-top:0.25rem">${escHtml(bio)}</span></div>`;
+            }).join('');
+            document.getElementById('planning-bios').innerHTML = `<h3 class="planning-section-title">Who's Who</h3>${bioHtml}`;
+          }
         })
         .catch(() => {
           document.getElementById('planning-content').innerHTML =
