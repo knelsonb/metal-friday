@@ -134,6 +134,116 @@
         { "track": "Tear Down This Holy Mountain", "youtube_url": "https://www.youtube.com/watch?v=2DxS-aRsMYo", "youtube_music_url": "https://music.youtube.com/search?q=An+Abstract+Illusion+Tear+Down", "spotify_url": "https://open.spotify.com/track/43foMIhM2GdCzEKnaOfsn4", "bandcamp_url": "https://anabstractillusion.bandcamp.com/track/tear-down-this-holy-mountain", "note": "From 'Woe'. Atmospheric death with synth layers." },
         { "track": "In the Heavens Above, You Will Become a Monster", "youtube_url": "https://www.youtube.com/watch?v=qFKKbSNa2jQ", "youtube_music_url": "https://music.youtube.com/search?q=An+Abstract+Illusion+Heavens+Above", "spotify_url": "https://open.spotify.com/track/5tQ2C5YfR72LHCQ3Gnp6ot", "note": "The track title alone is Metal Friday material." }
       ]
+    },
+    {
+      "artist": "Heilung",
+      "genre": "amplified history",
+      "note": "A band whose genre is literally 'amplified history.' They perform Viking-era ritual music with bone instruments, throat singing, and animal skins, and somehow it sounds like what would happen if you gave a Bronze Age war party a PA system. The audience at their live shows does coordinated chanting. It's a cult. (This is not a metaphor.)",
+      "artist_spotify": "https://open.spotify.com/artist/1PjKAVbKtMEVMmYSLrJkMj",
+      "artist_youtube": "https://www.youtube.com/@Heilung",
+      "tracks": [
+        { "track": "Krigsgaldr", "youtube_url": "https://www.youtube.com/watch?v=K7ZqZVunCb4", "youtube_music_url": "https://music.youtube.com/search?q=Heilung+Krigsgaldr", "spotify_url": "https://open.spotify.com/track/5rwJPCZDjhFGadFUZiaPji", "note": "Starts quiet. Does not stay quiet." },
+        { "track": "In Maidjan", "youtube_url": "https://www.youtube.com/watch?v=kmWTZ3KfnXE", "youtube_music_url": "https://music.youtube.com/search?q=Heilung+In+Maidjan", "spotify_url": "https://open.spotify.com/track/1PmYLHCZMHb3jb5D5F1VYj", "note": "The live version from their Lifa concert. 3000 people chanting in unison. It's fine. Everything is fine." }
+      ]
+    },
+    {
+      "artist": "Polyphia",
+      "genre": "progressive/instrumental",
+      "note": "Four guys who play guitar like they're speedrunning music theory. The time signatures change more often than the weather in a chaotic system simulation. Technically not metal, but the sheer density of notes per second suggests the guitars are undergoing some kind of phase transition.",
+      "artist_spotify": "https://open.spotify.com/artist/4vGrte8FDu062Ntj0RsPiZ",
+      "artist_youtube": "https://www.youtube.com/@Polyphia",
+      "tracks": [
+        { "track": "G.O.A.T.", "youtube_url": "https://www.youtube.com/watch?v=9_gkpYoRjgI", "youtube_music_url": "https://music.youtube.com/search?q=Polyphia+GOAT", "spotify_url": "https://open.spotify.com/track/64GQBY5qVYRzRaOiSXafjI", "note": "The one with 200M views. Tim Henson's right hand should be studied by biomechanics researchers." },
+        { "track": "Playing God", "youtube_url": "https://www.youtube.com/watch?v=Z5NoQg8LdDk", "youtube_music_url": "https://music.youtube.com/search?q=Polyphia+Playing+God", "spotify_url": "https://open.spotify.com/track/7KFOGKMFRETBgrRJhAariB", "note": "Features a flamenco section that lasts exactly long enough to make you think they've calmed down. They have not." }
+      ]
+    },
+    {
+      "artist": "Jinjer",
+      "genre": "progressive metalcore",
+      "note": "Ukrainian band whose vocalist switches between clean singing and a growl that registers on seismographs. The transition happens without warning, which is approximately the experience of stepping on a Lego in the dark except the Lego is a freight train.",
+      "artist_spotify": "https://open.spotify.com/artist/4qw09SNnTjCAVNxrFGKIHY",
+      "artist_youtube": "https://www.youtube.com/@JinjerOfficial",
+      "tracks": [
+        { "track": "Pisces", "youtube_url": "https://www.youtube.com/watch?v=SQNtGoM3FVo", "youtube_music_url": "https://music.youtube.com/search?q=Jinjer+Pisces", "spotify_url": "https://open.spotify.com/track/3MODES4TNtygekLl145Oi3", "note": "The live session video that broke the internet. 59M views. The vocal switch at 1:08 has ended careers." },
+        { "track": "Judgement (& Punishment)", "youtube_url": "https://www.youtube.com/watch?v=FnITsKnGMgQ", "youtube_music_url": "https://music.youtube.com/search?q=Jinjer+Judgement", "spotify_url": "https://open.spotify.com/track/4rJdKTYEhX7q6JVSz5LQPA", "note": "More recent. The groove at 2:30 is legally classified as a weapon in several jurisdictions." }
+      ]
+    },
+    {
+      "artist": "Rivers of Nihil",
+      "genre": "progressive death",
+      "note": "A death metal band that brought a saxophone player and somehow it works. This is the musical equivalent of putting hot sauce on ice cream — you know it shouldn't work, and then it absolutely does, and now you can't go back. (Note: featured once before in 2018 with 'A Home' — a repeat would need justification.)",
+      "artist_spotify": "https://open.spotify.com/artist/1cS2VBBEkwKhjKCnJh4awS",
+      "artist_youtube": "https://www.youtube.com/@RiversofNihil",
+      "tracks": [
+        { "track": "The Silent Life", "youtube_url": "https://www.youtube.com/watch?v=3LBGiMmVKk0", "youtube_music_url": "https://music.youtube.com/search?q=Rivers+of+Nihil+Silent+Life", "spotify_url": "https://open.spotify.com/track/5xYHPu3e3WFqZ9B5B5QrYP", "note": "The one with the saxophone solo that made death metal forums have a crisis of identity." },
+        { "track": "Clean", "youtube_url": "https://www.youtube.com/watch?v=bHSmSBYjFro", "youtube_music_url": "https://music.youtube.com/search?q=Rivers+of+Nihil+Clean", "spotify_url": "https://open.spotify.com/track/1q9K4f8bUYPmSkuHLKFHNl", "note": "From the new album. Still has saxophone. Still shouldn't work. Still does." }
+      ]
+    },
+    {
+      "artist": "Tesseract",
+      "genre": "djent/atmospheric",
+      "note": "If you took Meshuggah's polyrhythmic guitar tone and wrapped it in a warm blanket of ambient reverb, you'd get something like Tesseract. They make math metal that you can fall asleep to, which is either a compliment or an insult depending on how many energy drinks you've had.",
+      "artist_spotify": "https://open.spotify.com/artist/23ytwhG1pzX6DIVWRWvW1r",
+      "artist_youtube": "https://www.youtube.com/@tesseractband",
+      "tracks": [
+        { "track": "Altered State", "youtube_url": "https://www.youtube.com/watch?v=JCKfVbOiDqo", "youtube_music_url": "https://music.youtube.com/search?q=Tesseract+Altered+State", "spotify_url": "https://open.spotify.com/track/6BynhdoI5TXj0xwwc16oGr", "note": "The whole album is one continuous piece. This track is the part where the time signature stops pretending to be normal." },
+        { "track": "Luminary", "youtube_url": "https://www.youtube.com/watch?v=OufMjY3mMos", "youtube_music_url": "https://music.youtube.com/search?q=Tesseract+Luminary", "spotify_url": "https://open.spotify.com/track/0CIY3ZHTAX91Oqj6XPlCpS", "note": "More accessible. The vocal melody is genuinely beautiful, which feels illegal in djent." }
+      ]
+    },
+    {
+      "artist": "Opeth",
+      "genre": "progressive death / prog rock",
+      "note": "Started as progressive death metal, pivoted entirely to 70s prog rock, and somehow alienated exactly half their fanbase with each album. The Wikipedia talk page for their genre classification has more edit wars than most geopolitical articles. Mikael Akerfeldt's clean voice and growl sound like they come from two different species.",
+      "artist_spotify": "https://open.spotify.com/artist/0ybFZ2Ab08V8hueghSXm6E",
+      "artist_youtube": "https://www.youtube.com/@Opeth",
+      "tracks": [
+        { "track": "Ghost of Perdition", "youtube_url": "https://www.youtube.com/watch?v=MDBykpSXsSE", "youtube_music_url": "https://music.youtube.com/search?q=Opeth+Ghost+of+Perdition", "spotify_url": "https://open.spotify.com/track/3TVN3MiZiGiPnJWjzGxppl", "note": "The death metal era's masterpiece. 10 minutes of mood swings that would concern a psychiatrist." },
+        { "track": "Sorceress", "youtube_url": "https://www.youtube.com/watch?v=lEMKzPuOMvU", "youtube_music_url": "https://music.youtube.com/search?q=Opeth+Sorceress", "spotify_url": "https://open.spotify.com/track/4pqmG8F2cUQdz3qQYU4JWV", "note": "The prog rock era. No screaming. Trey will hate it. (This is why we include it.)" }
+      ]
+    },
+    {
+      "artist": "Gojira",
+      "genre": "progressive death / groove",
+      "note": "French environmental death metal. They write songs about whales and deforestation and somehow make it the heaviest thing you've ever heard. The pick-scrape harmonic at the start of 'Flying Whales' has been calculated to deliver approximately 4.7 gigajoules of emotional energy per listen. [citation needed]",
+      "artist_spotify": "https://open.spotify.com/artist/0GDGKpJFhVpcjIGF8N6Ewt",
+      "artist_youtube": "https://www.youtube.com/@Gojira",
+      "tracks": [
+        { "track": "Flying Whales", "youtube_url": "https://www.youtube.com/watch?v=_-XaaTqOICU", "youtube_music_url": "https://music.youtube.com/search?q=Gojira+Flying+Whales", "spotify_url": "https://open.spotify.com/track/0VaX7mMvPVNIz2bPFaeb0G", "note": "The intro is the sound of a whale breaching, if the whale weighed 40,000 tons and was made of distortion pedals." },
+        { "track": "Stranded", "youtube_url": "https://www.youtube.com/watch?v=FNdC_3LR2AI", "youtube_music_url": "https://music.youtube.com/search?q=Gojira+Stranded", "spotify_url": "https://open.spotify.com/track/01qFMimVLaNkOVJaFEMXBn", "note": "Their most accessible track. This is the gateway drug." }
+      ]
+    },
+    {
+      "artist": "Between the Buried and Me",
+      "genre": "progressive death / everything",
+      "note": "A band that treats genre boundaries the way a wrecking ball treats load-bearing walls. A single song might contain death metal, jazz fusion, country, 8-bit chiptune, and circus music — in that order — and transition between them with the confidence of someone who has never once considered whether this is a good idea. (It is.)",
+      "artist_spotify": "https://open.spotify.com/artist/6hR0GABaXcFi8HwiRDuFzj",
+      "artist_youtube": "https://www.youtube.com/@BTBAMofficial",
+      "tracks": [
+        { "track": "Selkies: The Endless Obsession", "youtube_url": "https://www.youtube.com/watch?v=19UZd_DKs2Q", "youtube_music_url": "https://music.youtube.com/search?q=Between+the+Buried+and+Me+Selkies", "spotify_url": "https://open.spotify.com/track/6CPW0H1dqalHIvFwqORPVq", "note": "The guitar solo at the end is what happens when someone with a music theory PhD gets angry." },
+        { "track": "White Walls", "youtube_url": "https://www.youtube.com/watch?v=FNdRh2un5eg", "youtube_music_url": "https://music.youtube.com/search?q=Between+Buried+Me+White+Walls", "spotify_url": "https://open.spotify.com/track/3Y1oJn5IZfqwEVsBbrGzjP", "note": "14 minutes. Contains at least 7 genres. The last 3 minutes are the most triumphant thing in metal." }
+      ]
+    },
+    {
+      "artist": "Deftones",
+      "genre": "alternative metal / shoegaze",
+      "note": "The band that proved you could be crushingly heavy and hauntingly beautiful in the same measure — often in the same bar. Chino Moreno sings like he's trying to seduce you while Stephen Carpenter's guitar tries to collapse your ribcage. The tension between these two impulses is the entire point.",
+      "artist_spotify": "https://open.spotify.com/artist/40Yq4wzEz9hu0VaHinpHmJ",
+      "artist_youtube": "https://www.youtube.com/@daboratorio",
+      "tracks": [
+        { "track": "Digital Bath", "youtube_url": "https://www.youtube.com/watch?v=9tmPBuSpmWI", "youtube_music_url": "https://music.youtube.com/search?q=Deftones+Digital+Bath", "spotify_url": "https://open.spotify.com/track/2qJMwIaEUItaHJYquCF8UX", "note": "The title is a murder euphemism. The song is gorgeous. These two facts coexist." },
+        { "track": "Rosemary", "youtube_url": "https://www.youtube.com/watch?v=6Gk3bPIVf6I", "youtube_music_url": "https://music.youtube.com/search?q=Deftones+Rosemary", "spotify_url": "https://open.spotify.com/track/68rh5M8OU0i4d0MaHFdbwM", "note": "From Koi No Yokan. The shoegaze influence is at maximum. It sounds like drowning in something warm." }
+      ]
+    },
+    {
+      "artist": "Dvne",
+      "genre": "progressive sludge / post-metal",
+      "note": "Scottish band named after the Frank Herbert novel (stylized to avoid the lawyers). They make the kind of sprawling, atmospheric sludge metal that sounds like a geological process — tectonic plates grinding together at a pace that somehow has a time signature. Each song is a small continent forming.",
+      "artist_spotify": "https://open.spotify.com/artist/1MrUkGFe8cdjrp4nRDq7zT",
+      "artist_youtube": "https://www.youtube.com/@DVNEband",
+      "tracks": [
+        { "track": "Towers", "youtube_url": "https://www.youtube.com/watch?v=eFqwEFr5bU0", "youtube_music_url": "https://music.youtube.com/search?q=Dvne+Towers", "spotify_url": "https://open.spotify.com/track/3e4WcOuJAbreVJnzSmqmZF", "note": "Starts heavy, goes atmospheric, comes back heavier. The standard sludge trajectory, executed flawlessly." },
+        { "track": "Omega Severer", "youtube_url": "https://www.youtube.com/watch?v=hMM8xOHjpHw", "youtube_music_url": "https://music.youtube.com/search?q=Dvne+Omega+Severer", "spotify_url": "https://open.spotify.com/track/0hHNhCJ6U7bFxoVSXyZDqT", "note": "From Etemen Anki. The riff at 3:40 has the gravitational pull of a small moon." }
+      ]
     }
   ],
   "updated": "2026-04-05"
