@@ -11,7 +11,10 @@
         "note": "Death Stranding soundtrack. BMTH 4th appearance — lean into the genre evolution angle. Bridges from Trey's metalcore picks last week.",
         "status": "confirmed",
         "youtube_url": "https://www.youtube.com/watch?v=B9wvTuDC-H0",
-        "youtube_music_url": "https://music.youtube.com/watch?v=B9wvTuDC-H0"
+        "youtube_music_url": "https://music.youtube.com/watch?v=B9wvTuDC-H0",
+        "spotify_url": "https://open.spotify.com/track/4xWirulal0kGikFE3WSU75",
+        "artist_spotify": "https://open.spotify.com/artist/1Ffb6ejR6Fe5IamqA5oRUF",
+        "artist_youtube": "https://www.youtube.com/@bmaboringname"
       },
       {
         "artist": "MASTER BOOT RECORD",
@@ -21,7 +24,10 @@
         "status": "confirmed",
         "youtube_url": "",
         "youtube_music_url": "https://music.youtube.com/search?q=MASTER+BOOT+RECORD+DEV.NFO",
-        "bandcamp_url": "https://masterbootrecord.bandcamp.com/track/dev-nfo"
+        "spotify_url": "https://open.spotify.com/album/5gDefZjQUjJIn8Zxjeo5Jr",
+        "bandcamp_url": "https://masterbootrecord.bandcamp.com/track/dev-nfo",
+        "artist_spotify": "https://open.spotify.com/artist/77s5NAGQbxu8oLstaqSwHE",
+        "artist_youtube": "https://www.youtube.com/@MasterBootRecord"
       }
     ],
     "maybe": [
@@ -29,9 +35,12 @@
         "artist": "Carpenter Brut",
         "track": "Turbo Killer",
         "genre": "synthwave/dark electronic",
-        "note": "French synthwave with metal energy. Not metal per se, but the aggression and production scream metal-adjacent. Pairs perfectly with MBR — both are electronic acts that hit like a truck.",
+        "note": "French synthwave with metal energy. Not metal per se, but the aggression and production scream metal-adjacent. Pairs perfectly with MBR. The Seth Ickerman video is a sci-fi masterpiece.",
         "youtube_url": "https://www.youtube.com/watch?v=er416Ad3R1g",
-        "youtube_music_url": "https://music.youtube.com/watch?v=er416Ad3R1g"
+        "youtube_music_url": "https://music.youtube.com/watch?v=er416Ad3R1g",
+        "spotify_url": "https://open.spotify.com/track/10qbHF920zH5K8C8IcE5AL",
+        "artist_spotify": "https://open.spotify.com/artist/1l2oLiukA9i5jEtIyNWIEP",
+        "artist_youtube": "https://www.youtube.com/@CarpenterBrut"
       },
       {
         "artist": "Thy Catafalque",
@@ -39,7 +48,10 @@
         "genre": "avant-garde/electronic black metal",
         "note": "Hungarian one-man project mixing folk, classical, electronic, and black metal into something uncategorizable. The kind of 'what genre even IS this' pick Metal Friday thrives on.",
         "youtube_url": "https://www.youtube.com/watch?v=8gPyMR7gMJE",
-        "youtube_music_url": "https://music.youtube.com/search?q=Thy+Catafalque+Szarvas"
+        "youtube_music_url": "https://music.youtube.com/search?q=Thy+Catafalque+Szarvas",
+        "spotify_url": "https://open.spotify.com/track/47OPKbaE3XJrmB4AnSAtO0",
+        "artist_spotify": "https://open.spotify.com/artist/5kq4mFwENMOBQZLYbM1Tqe",
+        "artist_youtube": "https://www.youtube.com/@ThyCatafalque"
       },
       {
         "artist": "Leprous",
@@ -47,18 +59,82 @@
         "genre": "modern prog",
         "note": "Norwegian prog that's accessible without being boring. Clean vocals, atmospheric, technical. Good 'ease the audience in' pick for the prog-skeptical.",
         "youtube_url": "https://www.youtube.com/watch?v=0G9Qd_84YZs",
-        "youtube_music_url": "https://music.youtube.com/search?q=Leprous+The+Price"
+        "youtube_music_url": "https://music.youtube.com/search?q=Leprous+The+Price",
+        "spotify_url": "https://open.spotify.com/track/134I0qT6UrkDjhbI6bx0x3",
+        "artist_spotify": "https://open.spotify.com/artist/4lgrzShsg2FLA89eFxzkaa",
+        "artist_youtube": "https://www.youtube.com/@Leprous"
       }
     ],
     "notes": "Ham-and-egg from Trey's BMTH metalcore/deathcore on 4/3. Bridge to electronic side via Ludens, then go full synth with MBR. Third pick should complete the arc — either go deeper electronic (Carpenter Brut) or swing back toward prog (Leprous/Thy Catafalque)."
   },
   "backlog": [
-    { "artist": "Devin Townsend", "track": "Kingdom", "genre": "progressive", "note": "Prog giant, never featured. Long overdue. 'Kingdom' is a good entry point — epic but accessible." },
-    { "artist": "Porcupine Tree", "track": "Arriving Somewhere but Not Here", "genre": "progressive rock", "note": "Classic prog. Might be too far from metal for Trey's crowd. But this track has teeth." },
-    { "artist": "Animals as Leaders", "track": "CAFO", "genre": "progressive/djent", "note": "Instrumental prog/djent. No vocals to scare anyone. Technical wizardry." },
-    { "artist": "Igorrr", "track": "Very Noise", "genre": "baroque/breakcore/death", "note": "The 'what even IS this' pick. Baroque harpsichord + blast beats + chicken samples." },
-    { "artist": "Perturbator", "track": "She Is Young, She Is Beautiful...", "genre": "dark synthwave", "note": "Same electronic-metal-adjacent lane as MBR and Carpenter Brut." },
-    { "artist": "An Abstract Illusion", "track": "Tear Down This Holy Mountain", "genre": "progressive death", "note": "Prog death + 80s sci-fi synths. New album 'The Sleeping City' coming 2026." }
+    {
+      "artist": "Devin Townsend",
+      "genre": "progressive",
+      "note": "Prog giant, never featured. Long overdue.",
+      "artist_spotify": "https://open.spotify.com/artist/5iShu1aaDBjRFJqp0x9eim",
+      "artist_youtube": "https://www.youtube.com/@devintownsend",
+      "tracks": [
+        { "track": "Kingdom", "youtube_url": "https://www.youtube.com/watch?v=2jZjziohaPc", "youtube_music_url": "https://music.youtube.com/search?q=Devin+Townsend+Kingdom", "spotify_url": "https://open.spotify.com/track/3wCoJ2MONhPWJZoHzJOZAt", "note": "Epic but accessible. Good entry point." },
+        { "track": "Deadhead", "youtube_url": "https://www.youtube.com/watch?v=DrDM6V08wcE", "youtube_music_url": "https://music.youtube.com/search?q=Devin+Townsend+Deadhead", "spotify_url": "https://open.spotify.com/track/3SEHY0s8U1yJMKEGBVgApO", "note": "Heavier. The live version is legendary." },
+        { "track": "Genesis", "youtube_url": "https://www.youtube.com/watch?v=1n7uvokARQ4", "youtube_music_url": "https://music.youtube.com/search?q=Devin+Townsend+Genesis", "spotify_url": "https://open.spotify.com/track/73Mbi2FTCdA3sXGtg3xpMe", "note": "Wall of sound. Quintessential Devy." }
+      ]
+    },
+    {
+      "artist": "Porcupine Tree",
+      "genre": "progressive rock",
+      "note": "Classic prog. Might be too far from metal for Trey's crowd. But the heavier tracks have teeth.",
+      "artist_spotify": "https://open.spotify.com/artist/5NXHXK6hOCotCF8lvGM1I0",
+      "artist_youtube": "https://www.youtube.com/@PorcupineTreeOfficial",
+      "tracks": [
+        { "track": "Arriving Somewhere but Not Here", "youtube_url": "https://www.youtube.com/watch?v=W3lsqUqGTzM", "youtube_music_url": "https://music.youtube.com/search?q=Porcupine+Tree+Arriving+Somewhere", "spotify_url": "https://open.spotify.com/track/6bz2YUk80Z3r4PNsbrWn2H", "note": "12 minutes of building tension. The payoff is worth it." },
+        { "track": "Blackest Eyes", "youtube_url": "https://www.youtube.com/watch?v=Yh9osYZNilU", "youtube_music_url": "https://music.youtube.com/search?q=Porcupine+Tree+Blackest+Eyes", "spotify_url": "https://open.spotify.com/track/3e0GdaVsCIcRM2OhFIliqJ", "note": "More accessible. Almost alt-rock." }
+      ]
+    },
+    {
+      "artist": "Animals as Leaders",
+      "genre": "progressive/djent",
+      "note": "Instrumental prog/djent. No vocals to scare anyone. Technical wizardry.",
+      "artist_spotify": "https://open.spotify.com/artist/65C6Unk7nhg2aCnVuAPMo8",
+      "artist_youtube": "https://www.youtube.com/@AnimalsAsLeaders",
+      "tracks": [
+        { "track": "CAFO", "youtube_url": "https://www.youtube.com/watch?v=NmfzWpp0hMc", "youtube_music_url": "https://music.youtube.com/search?q=Animals+as+Leaders+CAFO", "spotify_url": "https://open.spotify.com/track/1ZfnGTUnha3QHj3KFmub0W", "note": "The one that made everyone's jaw drop." },
+        { "track": "The Brain Dance", "youtube_url": "https://www.youtube.com/watch?v=s4Yb_vDIhBc", "youtube_music_url": "https://music.youtube.com/search?q=Animals+as+Leaders+Brain+Dance", "spotify_url": "https://open.spotify.com/track/4DcYh8J5FE0FpEHFDdH9C0", "note": "More recent. Still absurd." }
+      ]
+    },
+    {
+      "artist": "Igorrr",
+      "genre": "baroque/breakcore/death",
+      "note": "The 'what even IS this' pick. Baroque harpsichord + blast beats + chicken samples.",
+      "artist_spotify": "https://open.spotify.com/artist/0qlWcS66ohOIi0M8JZwPft",
+      "artist_youtube": "https://www.youtube.com/@igaborr",
+      "tracks": [
+        { "track": "Very Noise", "youtube_url": "https://www.youtube.com/watch?v=Osqf4oIFzUo", "youtube_music_url": "https://music.youtube.com/search?q=Igorrr+Very+Noise", "spotify_url": "https://open.spotify.com/track/0SIALpmQBr96Bt8doI4U54", "note": "The video is an experience. Fleshy CG nightmare." },
+        { "track": "Cheval", "youtube_url": "https://www.youtube.com/watch?v=UZzYxGZ7Hmc", "youtube_music_url": "https://music.youtube.com/search?q=Igorrr+Cheval", "spotify_url": "https://open.spotify.com/track/4iNF3YQOkqFMp73JUNTsev", "note": "Opera + metal + accordion. Peak Igorrr." }
+      ]
+    },
+    {
+      "artist": "Perturbator",
+      "genre": "dark synthwave",
+      "note": "Same electronic-metal-adjacent lane as MBR and Carpenter Brut.",
+      "artist_spotify": "https://open.spotify.com/artist/244uLu9lkdw39BJwlul3k8",
+      "artist_youtube": "https://www.youtube.com/@Perturbator",
+      "tracks": [
+        { "track": "She Is Young, She Is Beautiful, She Is Next", "youtube_url": "https://www.youtube.com/watch?v=IGqeyQhBPMI", "youtube_music_url": "https://music.youtube.com/search?q=Perturbator+She+Is+Young", "spotify_url": "https://open.spotify.com/track/2MBJZgztmtwcIsKXXwLxZI", "note": "Giallo score energy. Dangerous Days is the album." },
+        { "track": "Humans Are Such Easy Prey", "youtube_url": "https://www.youtube.com/watch?v=Y8DekFFCE5c", "youtube_music_url": "https://music.youtube.com/search?q=Perturbator+Humans+Easy+Prey", "spotify_url": "https://open.spotify.com/track/2xt9UrO2FG5V6LRKD7gpFB", "note": "Darker. The title says it all." }
+      ]
+    },
+    {
+      "artist": "An Abstract Illusion",
+      "genre": "progressive death",
+      "note": "Prog death + 80s sci-fi synths. Swedish trio. Album 'The Sleeping City' coming 2026.",
+      "artist_spotify": "https://open.spotify.com/artist/0JfSRcLNsQbMZBSvM7c5DP",
+      "artist_youtube": "https://www.youtube.com/@AnAbstractIllusion",
+      "tracks": [
+        { "track": "Tear Down This Holy Mountain", "youtube_url": "https://www.youtube.com/watch?v=2DxS-aRsMYo", "youtube_music_url": "https://music.youtube.com/search?q=An+Abstract+Illusion+Tear+Down", "spotify_url": "https://open.spotify.com/track/43foMIhM2GdCzEKnaOfsn4", "bandcamp_url": "https://anabstractillusion.bandcamp.com/track/tear-down-this-holy-mountain", "note": "From 'Woe'. Atmospheric death with synth layers." },
+        { "track": "In the Heavens Above, You Will Become a Monster", "youtube_url": "https://www.youtube.com/watch?v=qFKKbSNa2jQ", "youtube_music_url": "https://music.youtube.com/search?q=An+Abstract+Illusion+Heavens+Above", "spotify_url": "https://open.spotify.com/track/5tQ2C5YfR72LHCQ3Gnp6ot", "note": "The track title alone is Metal Friday material." }
+      ]
+    }
   ],
   "updated": "2026-04-05"
 }

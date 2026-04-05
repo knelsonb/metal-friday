@@ -2113,25 +2113,57 @@
               `;
             }
             const pLinks = planLinks(p);
+            const pArtistLinks = [];
+            if (p.artist_spotify) pArtistLinks.push(`<a class="track-link" href="${p.artist_spotify}" target="_blank">&#127911; Artist</a>`);
+            if (p.artist_youtube) pArtistLinks.push(`<a class="track-link" href="${p.artist_youtube}" target="_blank">${ytSvg} Channel</a>`);
             return `
               <div class="plan-pick ${p.status || 'open'}">
                 <span class="plan-status ${p.status || 'open'}">${p.status || 'open'}</span>
                 <span class="plan-pick-artist">${escHtml(p.artist)}</span>
+                <span style="color:var(--text);font-size:0.9rem">"${escHtml(p.track)}"</span>
                 <span class="genre-tag">${escHtml(p.genre)}</span>
                 ${pLinks}
+                ${pArtistLinks.length ? `<div class="track-links" style="width:100%">${pArtistLinks.join('')}</div>` : ''}
                 <span class="plan-pick-note">${escHtml(p.note || '')}</span>
               </div>
             `;
           }).join('');
 
-          const backlog = (plan.backlog || []).map(b => `
-            <div class="backlog-item" style="flex-wrap:wrap">
-              <span class="backlog-artist">${escHtml(b.artist)}</span>
-              ${b.track ? `<span style="color:var(--text);font-size:0.85rem">"${escHtml(b.track)}"</span>` : ''}
-              ${b.genre ? `<span class="genre-tag">${escHtml(b.genre)}</span>` : ''}
-              <span class="backlog-note" style="width:100%;margin-top:0.2rem">${escHtml(b.note || '')}</span>
-            </div>
-          `).join('');
+          const backlog = (plan.backlog || []).map(b => {
+            // Artist-level links
+            const artistLinks = [];
+            if (b.artist_spotify) artistLinks.push(`<a class="track-link" href="${b.artist_spotify}" target="_blank">&#127911; Spotify</a>`);
+            if (b.artist_youtube) artistLinks.push(`<a class="track-link" href="${b.artist_youtube}" target="_blank">${ytSvg} Channel</a>`);
+
+            // Track rows
+            const trackRows = (b.tracks || []).map(t => {
+              const tl = planLinks(t);
+              return `
+                <div style="padding:0.5rem 0;border-top:1px solid var(--border);display:flex;flex-wrap:wrap;align-items:baseline;gap:0.5rem">
+                  <span style="font-family:Oswald,sans-serif;font-weight:600;color:var(--text-bright);font-size:0.9rem">"${escHtml(t.track)}"</span>
+                  <span style="font-size:0.75rem;color:var(--text-dim)">${escHtml(t.note || '')}</span>
+                  ${tl}
+                </div>
+              `;
+            }).join('');
+
+            return `
+              <div class="artist-card" style="margin-bottom:0.75rem">
+                <div class="artist-header" onclick="this.closest('.artist-card').classList.toggle('open')">
+                  <div>
+                    <span class="artist-name">${escHtml(b.artist)}</span>
+                    <span class="genre-tag" style="margin-left:0.5rem">${escHtml(b.genre || '')}</span>
+                  </div>
+                  <span class="artist-count">${(b.tracks || []).length} idea${(b.tracks || []).length !== 1 ? 's' : ''}</span>
+                </div>
+                <div class="artist-body" style="padding:0.75rem 1.25rem">
+                  <div style="font-size:0.8rem;color:var(--text-dim);margin-bottom:0.5rem">${escHtml(b.note || '')}</div>
+                  ${artistLinks.length ? `<div class="track-links" style="margin-bottom:0.5rem">${artistLinks.join('')}</div>` : ''}
+                  ${trackRows}
+                </div>
+              </div>
+            `;
+          }).join('');
 
           const maybes = (ed.maybe || []).map(p => {
             const mLinks = planLinks(p);
