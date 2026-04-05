@@ -1306,12 +1306,34 @@
           <span id="admin-status" style="font-size:0.7rem;color:var(--text-dim)"></span>
         </div>
       </div>
+      <div class="planning-section" id="planning-confirmed">
+        <h3 class="planning-section-title">Confirmed — Next Edition</h3>
+        <div id="confirmed-list">Loading...</div>
+        <div id="publish-controls" style="display:none;margin-top:1rem;padding:1rem;background:var(--bg);border:1px solid var(--accent);border-radius:6px">
+          <div style="font-family:Oswald,sans-serif;font-size:1rem;color:var(--accent-glow);margin-bottom:0.75rem">PUBLISH EDITION</div>
+          <div style="display:flex;gap:0.75rem;flex-wrap:wrap;align-items:center">
+            <div class="form-group" style="gap:0.2rem">
+              <label class="form-label">Edition Date</label>
+              <input type="date" class="form-input" id="publish-date" style="font-size:0.85rem;padding:0.4rem 0.6rem">
+            </div>
+            <div class="form-group" style="gap:0.2rem">
+              <label class="form-label">Curator</label>
+              <select class="form-input" id="publish-curator" style="font-size:0.85rem;padding:0.4rem 0.6rem">
+                <option value="trey">trey</option>
+                <option value="keith">keith</option>
+              </select>
+            </div>
+            <button onclick="publishEdition()" class="suggest-btn" style="padding:0.5rem 1.5rem;font-size:0.85rem;margin-top:auto">Publish \m/</button>
+          </div>
+          <div style="font-size:0.7rem;color:var(--text-dim);margin-top:0.5rem">All confirmed tracks publish together as one edition. This adds them to the live archive.</div>
+        </div>
+      </div>
       <div class="planning-section" id="planning-promoted">
-        <h3 class="planning-section-title">Queued for Next Edition</h3>
+        <h3 class="planning-section-title">Queued — Maybe Next Time</h3>
         <div id="promoted-list">Loading...</div>
       </div>
       <div class="planning-section" id="planning-suggestions">
-        <h3 class="planning-section-title">Pending Suggestions</h3>
+        <h3 class="planning-section-title">Inbox — Pending Suggestions</h3>
         <div id="suggestions-list">Loading suggestions...</div>
       </div>
       <div class="planning-section" id="planning-bios"></div>
@@ -2114,6 +2136,7 @@
       setTimeout(() => {
         switchTab('planning');
         loadPlanning();
+        loadConfirmed();
         loadPromoted();
         loadSuggestions();
         window.scrollTo({ top: 0, behavior: 'instant' });
@@ -2308,8 +2331,9 @@
           document.getElementById('admin-status').textContent = 'Unlocked';
           document.getElementById('admin-status').style.color = '#4caf50';
           document.getElementById('admin-key-input').value = '';
-          loadSuggestions();
+          loadConfirmed();
           loadPromoted();
+          loadSuggestions();
         }
       }).catch(() => {
         document.getElementById('admin-status').textContent = 'Connection failed';
@@ -2348,6 +2372,90 @@
       });
     }
 
+    function confirmTrack(id) {
+      adminFetch(`/admin/confirm/${id}`).then(r => {
+        if (r.ok) { showToast('Confirmed for next edition'); loadPromoted(); loadConfirmed(); }
+      });
+    }
+
+    function unconfirmTrack(id) {
+      adminFetch(`/admin/unconfirm/${id}`).then(r => {
+        if (r.ok) { showToast('Moved back to queue'); loadPromoted(); loadConfirmed(); }
+      });
+    }
+
+    function deleteConfirmed(id) {
+      adminFetch(`/admin/confirmed/${id}`, 'DELETE').then(r => {
+        if (r.ok) { showToast('Removed'); loadConfirmed(); }
+      });
+    }
+
+    function publishEdition() {
+      const date = document.getElementById('publish-date').value;
+      const curator = document.getElementById('publish-curator').value;
+      if (!date) { showToast('Pick a date'); return; }
+      if (!confirm(`Publish all confirmed tracks as the ${date} edition by ${curator}? This adds them to the live archive.`)) return;
+
+      fetch(`${WORKER_URL}/admin/publish`, {
+        method: 'POST',
+        headers: { 'X-Admin-Key': getAdminKey(), 'Content-Type': 'application/json' },
+        body: JSON.stringify({ date, curator })
+      })
+        .then(r => r.json())
+        .then(r => {
+          if (r.ok) {
+            showToast(`Published! ${r.tracks} tracks added to ${date} edition`);
+            loadConfirmed();
+          } else {
+            showToast(r.error || 'Publish failed');
+          }
+        });
+    }
+
+    function loadConfirmed() {
+      fetch(`${WORKER_URL}/confirmed`)
+        .then(r => r.json())
+        .then(confirmed => {
+          const container = document.getElementById('confirmed-list');
+          const admin = isAdmin();
+
+          if (!confirmed.length) {
+            container.innerHTML = '<div style="color:var(--text-dim);font-size:0.85rem">No tracks confirmed yet. Promote suggestions, then confirm them here.</div>';
+            document.getElementById('publish-controls').style.display = 'none';
+            return;
+          }
+
+          if (admin) {
+            document.getElementById('publish-controls').style.display = 'block';
+            // Default date to next Friday
+            const d = new Date();
+            d.setDate(d.getDate() + ((5 - d.getDay() + 7) % 7 || 7));
+            document.getElementById('publish-date').value = d.toISOString().split('T')[0];
+          }
+
+          container.innerHTML = confirmed.map(s => `
+            <div class="suggestion-item" style="border-left-color:var(--accent-glow)">
+              <div style="display:flex;gap:0.5rem;align-items:baseline;flex-wrap:wrap">
+                <span class="plan-pick-artist">${escHtml(s.artist)}</span>
+                <span style="color:var(--text);font-size:0.9rem">"${escHtml(s.track)}"</span>
+              </div>
+              ${s.comment ? `<div style="font-size:0.85rem;color:var(--text);margin-top:0.3rem">${escHtml(s.comment)}</div>` : ''}
+              <div class="suggestion-meta">
+                from ${escHtml(s.name)} &middot; confirmed ${new Date(s.confirmed).toLocaleDateString()}
+              </div>
+              ${admin ? `<div style="margin-top:0.5rem;display:flex;gap:0.5rem">
+                <button onclick="unconfirmTrack('${s.id}')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem">Move Back</button>
+                <button onclick="deleteConfirmed('${s.id}')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem;border-color:#c62828;color:#c62828">Delete</button>
+              </div>` : ''}
+            </div>
+          `).join('');
+        })
+        .catch(() => {
+          document.getElementById('confirmed-list').innerHTML =
+            '<div style="color:var(--text-dim);font-size:0.85rem">Could not load confirmed tracks.</div>';
+        });
+    }
+
     function loadPromoted() {
       fetch(`${WORKER_URL}/promoted`)
         .then(r => r.json())
@@ -2369,6 +2477,7 @@
                 from ${escHtml(s.name)} &middot; promoted ${new Date(s.promoted).toLocaleDateString()}
               </div>
               ${admin ? `<div style="margin-top:0.5rem;display:flex;gap:0.5rem">
+                <button onclick="confirmTrack('${s.id}')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem;border-color:var(--accent-glow);color:var(--accent-glow)">Confirm</button>
                 <button onclick="demoteTrack('${s.id}')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem">Move Back</button>
                 <button onclick="deletePromoted('${s.id}')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem;border-color:#c62828;color:#c62828">Delete</button>
               </div>` : ''}
