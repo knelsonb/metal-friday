@@ -1309,7 +1309,7 @@
   </div>
 
   <div class="footer">
-    <span class="horns-small">\m/</span>
+    <span class="horns-small" id="secret-horns-footer" aria-hidden="true" style="cursor:default;touch-action:manipulation;-webkit-user-select:none;user-select:none">\m/</span>
     A tradition since December 16, 2016.<br>
     Trey's baby since 2016. Keith tags in on prog weeks.<br>
     <a href="https://open.spotify.com/user/aldondrea/playlist/2Dil2NaKg2hdrH3hXH7FlN" target="_blank">Spotify Playlist</a>
@@ -1717,7 +1717,7 @@
 
         const appearances = a.dates.size;
         const appearLabel = appearances > 1
-          ? `<span class="artist-appearances">${appearances}x</span>`
+          ? `<span class="artist-appearances">${appearances} editions</span>`
           : '';
 
         const trackRows = a.tracks
@@ -1881,21 +1881,24 @@
     }
 
     // --- WHAT'S NEW (localStorage tracking) ---
-    function getLastVisit() {
-      return localStorage.getItem('mf-last-visit') || '1970-01-01';
+    function getNewCutoff() {
+      // "New" = edition date within the last 8 days
+      const cutoff = new Date();
+      cutoff.setDate(cutoff.getDate() - 8);
+      return cutoff.toISOString().split('T')[0];
     }
 
     function updateLastVisit() {
-      localStorage.setItem('mf-last-visit', new Date().toISOString().split('T')[0]);
+      // no-op — we use date-based "new" now, not visit-based
     }
 
     function countNewEditions() {
-      const lastVisit = getLastVisit();
-      return DATA ? DATA.editions.filter(e => e.date > lastVisit).length : 0;
+      const cutoff = getNewCutoff();
+      return DATA ? DATA.editions.filter(e => e.date > cutoff).length : 0;
     }
 
     function applyNewBadges() {
-      const lastVisit = getLastVisit();
+      const cutoff = getNewCutoff();
       const newCount = countNewEditions();
 
       // Add badge to Archive tab
@@ -1909,10 +1912,7 @@
 
       // Mark new editions visually
       document.querySelectorAll('.edition').forEach(el => {
-        const dateEl = el.querySelector('.edition-date');
-        if (!dateEl) return;
-        // Check via data attribute
-        if (el.dataset.date > lastVisit) {
+        if (el.dataset.date > cutoff) {
           el.classList.add('is-new');
         }
       });
@@ -2048,18 +2048,15 @@
       setTimeout(() => { toast.style.opacity = '0'; }, 3000);
     }
 
-    // --- SECRET ENTRANCE ---
+    // --- SECRET ENTRANCE (works from header and footer horns) ---
     (function() {
-      const el = document.getElementById('secret-horns');
       let taps = [];
       let lastTouchEnd = 0;
 
       function handleTap(e) {
-        // Prevent double-tap zoom on mobile
         e.preventDefault();
         const now = Date.now();
         taps.push(now);
-        // Keep taps within a 2-second window (generous for mobile thumbs)
         taps = taps.filter(t => now - t < 2000);
         if (taps.length >= 6) {
           taps = [];
@@ -2067,21 +2064,21 @@
         }
       }
 
-      // Touch devices: use touchend for instant response (no 300ms click delay)
-      el.addEventListener('touchend', (e) => {
-        e.preventDefault();
-        handleTap(e);
-      }, { passive: false });
+      function attachSecret(el) {
+        if (!el) return;
+        el.addEventListener('touchend', (e) => {
+          e.preventDefault();
+          handleTap(e);
+        }, { passive: false });
+        el.addEventListener('click', (e) => {
+          if (Date.now() - lastTouchEnd < 500) return;
+          handleTap(e);
+        });
+        el.addEventListener('touchend', () => { lastTouchEnd = Date.now(); }, { passive: true });
+      }
 
-      // Desktop: use click
-      el.addEventListener('click', (e) => {
-        // Skip if this was already handled by touchend (prevents double-fire)
-        if (Date.now() - lastTouchEnd < 500) return;
-        handleTap(e);
-      });
-
-      // Track touchend timing to deduplicate
-      el.addEventListener('touchend', () => { lastTouchEnd = Date.now(); }, { passive: true });
+      attachSecret(document.getElementById('secret-horns'));
+      attachSecret(document.getElementById('secret-horns-footer'));
     })();
 
     function openPlanning() {
