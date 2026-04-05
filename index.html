@@ -2159,10 +2159,11 @@
             const recBy = p.rec_by ? `<span class="curator-badge ${p.rec_by}" style="font-size:0.55rem;padding:0.1rem 0.4rem">${p.rec_by === 'sauron' ? 'sauron says' : p.rec_by + ' pick'}</span>${p.rec_by_note ? `<span style="font-size:0.6rem;color:var(--text-dim);font-style:italic"> (${escHtml(p.rec_by_note)})</span>` : ''}` : '';
             return `
               <div class="plan-pick ${p.status || 'open'}">
-                <span class="plan-status ${p.status || 'open'}">${p.status || 'open'}</span>
-                ${recBy}
-                <span class="plan-pick-artist">${escHtml(p.artist)}</span>
-                <span style="color:var(--text);font-size:0.9rem">"${escHtml(p.track)}"</span>
+                <div style="display:flex;gap:0.4rem;align-items:center;flex-wrap:wrap;margin-bottom:0.4rem">
+                  <span class="plan-status ${p.status || 'open'}">${p.status || 'open'}</span>
+                  ${recBy}
+                </div>
+                <div><span class="plan-pick-artist">${escHtml(p.artist)}</span> <span style="color:var(--text);font-size:0.9rem">"${escHtml(p.track)}"</span></div>
                 <span class="genre-tag">${escHtml(p.genre)}</span>
                 ${pLinks}
                 ${pArtistLinks.length ? `<div class="track-links" style="width:100%">${pArtistLinks.join('')}</div>` : ''}
@@ -2219,10 +2220,11 @@
             const mRecBy = p.rec_by ? `<span class="curator-badge ${p.rec_by}" style="font-size:0.55rem;padding:0.1rem 0.4rem">${p.rec_by === 'sauron' ? 'sauron says' : p.rec_by + ' pick'}</span>${p.rec_by_note ? `<span style="font-size:0.6rem;color:var(--text-dim);font-style:italic"> (${escHtml(p.rec_by_note)})</span>` : ''}` : '';
             return `
               <div class="plan-pick open">
-                <span class="plan-status open">maybe</span>
-                ${mRecBy}
-                <span class="plan-pick-artist">${escHtml(p.artist)}</span>
-                ${p.track ? `<span style="color:var(--text);font-size:0.9rem">"${escHtml(p.track)}"</span>` : ''}
+                <div style="display:flex;gap:0.4rem;align-items:center;flex-wrap:wrap;margin-bottom:0.4rem">
+                  <span class="plan-status open">maybe</span>
+                  ${mRecBy}
+                </div>
+                <div><span class="plan-pick-artist">${escHtml(p.artist)}</span> ${p.track ? `<span style="color:var(--text);font-size:0.9rem">"${escHtml(p.track)}"</span>` : ''}</div>
                 <span class="genre-tag">${escHtml(p.genre)}</span>
                 ${mLinks}
                 ${mArtistLinks.length ? `<div class="track-links" style="width:100%">${mArtistLinks.join('')}</div>` : ''}
