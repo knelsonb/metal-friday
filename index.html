@@ -2356,7 +2356,14 @@
 
     function promoteSuggestion(id) {
       adminFetch(`/admin/promote/${id}`).then(r => {
-        if (r.ok) { showToast('Promoted to queue'); loadSuggestions(); loadPromoted(); }
+        if (r.ok) {
+          showToast('Promoted to queue');
+          loadSuggestions();
+          loadPromoted();
+          setTimeout(() => {
+            document.getElementById('planning-promoted').scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 300);
+        }
       });
     }
 
@@ -2374,7 +2381,14 @@
 
     function confirmTrack(id) {
       adminFetch(`/admin/confirm/${id}`).then(r => {
-        if (r.ok) { showToast('Confirmed for next edition'); loadPromoted(); loadConfirmed(); }
+        if (r.ok) {
+          showToast('Confirmed for next edition');
+          loadPromoted();
+          loadConfirmed();
+          setTimeout(() => {
+            document.getElementById('planning-confirmed').scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 300);
+        }
       });
     }
 
