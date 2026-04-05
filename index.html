@@ -1299,6 +1299,17 @@
         <button class="genre-back" onclick="switchTab('archive')" style="font-size:0.75rem">Exit</button>
       </div>
       <div id="planning-content">Loading...</div>
+      <div class="planning-section" id="planning-admin">
+        <div id="admin-gate" style="display:flex;gap:0.5rem;align-items:center;margin-bottom:1.5rem">
+          <input type="password" class="form-input" id="admin-key-input" placeholder="Admin key" style="max-width:250px;font-size:0.8rem;padding:0.5rem 0.75rem">
+          <button onclick="unlockAdmin()" class="filter-btn" style="padding:0.5rem 1rem;font-size:0.7rem">Unlock</button>
+          <span id="admin-status" style="font-size:0.7rem;color:var(--text-dim)"></span>
+        </div>
+      </div>
+      <div class="planning-section" id="planning-promoted">
+        <h3 class="planning-section-title">Queued for Next Edition</h3>
+        <div id="promoted-list">Loading...</div>
+      </div>
       <div class="planning-section" id="planning-suggestions">
         <h3 class="planning-section-title">Pending Suggestions</h3>
         <div id="suggestions-list">Loading suggestions...</div>
@@ -2083,8 +2094,8 @@
     })();
 
     function openPlanning() {
-      const horns = document.getElementById('secret-horns');
-      horns.classList.add('horns-pulse');
+      const horns = document.getElementById('secret-horns') || document.getElementById('secret-horns-footer');
+      if (horns) horns.classList.add('horns-pulse');
 
       // Create and trigger the red sweep overlay
       let overlay = document.getElementById('secret-overlay');
@@ -2103,6 +2114,7 @@
       setTimeout(() => {
         switchTab('planning');
         loadPlanning();
+        loadPromoted();
         loadSuggestions();
         window.scrollTo({ top: 0, behavior: 'instant' });
       }, 500);
@@ -2271,6 +2283,104 @@
 
     const WORKER_URL = 'https://metal-friday-suggestions.metalfriday-api.workers.dev';
 
+    // --- ADMIN ---
+    function getAdminKey() {
+      return sessionStorage.getItem('mf-admin-key') || '';
+    }
+
+    function isAdmin() {
+      return !!getAdminKey();
+    }
+
+    function unlockAdmin() {
+      const key = document.getElementById('admin-key-input').value.trim();
+      if (!key) return;
+      // Test the key with a harmless request
+      fetch(`${WORKER_URL}/admin/test`, {
+        headers: { 'X-Admin-Key': key }
+      }).then(r => {
+        if (r.status === 401) {
+          document.getElementById('admin-status').textContent = 'Wrong key';
+          document.getElementById('admin-status').style.color = '#c62828';
+        } else {
+          // 404 means auth passed but route doesn't exist — key is valid
+          sessionStorage.setItem('mf-admin-key', key);
+          document.getElementById('admin-status').textContent = 'Unlocked';
+          document.getElementById('admin-status').style.color = '#4caf50';
+          document.getElementById('admin-key-input').value = '';
+          loadSuggestions();
+          loadPromoted();
+        }
+      }).catch(() => {
+        document.getElementById('admin-status').textContent = 'Connection failed';
+        document.getElementById('admin-status').style.color = '#c62828';
+      });
+    }
+
+    function adminFetch(path, method = 'POST') {
+      return fetch(`${WORKER_URL}${path}`, {
+        method,
+        headers: { 'X-Admin-Key': getAdminKey() }
+      }).then(r => r.json());
+    }
+
+    function deleteSuggestion(id) {
+      adminFetch(`/admin/suggestion/${id}`, 'DELETE').then(r => {
+        if (r.ok) { showToast('Deleted'); loadSuggestions(); }
+      });
+    }
+
+    function promoteSuggestion(id) {
+      adminFetch(`/admin/promote/${id}`).then(r => {
+        if (r.ok) { showToast('Promoted to queue'); loadSuggestions(); loadPromoted(); }
+      });
+    }
+
+    function demoteTrack(id) {
+      adminFetch(`/admin/demote/${id}`).then(r => {
+        if (r.ok) { showToast('Moved back to suggestions'); loadSuggestions(); loadPromoted(); }
+      });
+    }
+
+    function deletePromoted(id) {
+      adminFetch(`/admin/promoted/${id}`, 'DELETE').then(r => {
+        if (r.ok) { showToast('Deleted from queue'); loadPromoted(); }
+      });
+    }
+
+    function loadPromoted() {
+      fetch(`${WORKER_URL}/promoted`)
+        .then(r => r.json())
+        .then(promoted => {
+          const container = document.getElementById('promoted-list');
+          if (!promoted.length) {
+            container.innerHTML = '<div style="color:var(--text-dim);font-size:0.85rem">Nothing queued yet.</div>';
+            return;
+          }
+          const admin = isAdmin();
+          container.innerHTML = promoted.map(s => `
+            <div class="suggestion-item" style="border-left-color:#4caf50">
+              <div style="display:flex;gap:0.5rem;align-items:baseline;flex-wrap:wrap">
+                <span class="plan-pick-artist">${escHtml(s.artist)}</span>
+                <span style="color:var(--text);font-size:0.9rem">"${escHtml(s.track)}"</span>
+              </div>
+              ${s.comment ? `<div style="font-size:0.85rem;color:var(--text);margin-top:0.3rem">${escHtml(s.comment)}</div>` : ''}
+              <div class="suggestion-meta">
+                from ${escHtml(s.name)} &middot; promoted ${new Date(s.promoted).toLocaleDateString()}
+              </div>
+              ${admin ? `<div style="margin-top:0.5rem;display:flex;gap:0.5rem">
+                <button onclick="demoteTrack('${s.id}')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem">Move Back</button>
+                <button onclick="deletePromoted('${s.id}')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem;border-color:#c62828;color:#c62828">Delete</button>
+              </div>` : ''}
+            </div>
+          `).join('');
+        })
+        .catch(() => {
+          document.getElementById('promoted-list').innerHTML =
+            '<div style="color:var(--text-dim);font-size:0.85rem">Could not load queue.</div>';
+        });
+    }
+
     function loadSuggestions() {
       fetch(`${WORKER_URL}/suggestions`)
         .then(r => r.json())
@@ -2280,6 +2390,7 @@
             container.innerHTML = '<div style="color:var(--text-dim);font-size:0.85rem">No pending suggestions.</div>';
             return;
           }
+          const admin = isAdmin();
           container.innerHTML = suggestions.map(s => `
             <div class="suggestion-item">
               <div style="display:flex;gap:0.5rem;align-items:baseline;flex-wrap:wrap">
@@ -2291,6 +2402,10 @@
               <div class="suggestion-meta">
                 from ${escHtml(s.name)} &middot; ${new Date(s.created).toLocaleDateString()}
               </div>
+              ${admin ? `<div style="margin-top:0.5rem;display:flex;gap:0.5rem">
+                <button onclick="promoteSuggestion('${s.id}')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem;border-color:#4caf50;color:#4caf50">Promote</button>
+                <button onclick="deleteSuggestion('${s.id}')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem;border-color:#c62828;color:#c62828">Delete</button>
+              </div>` : ''}
             </div>
           `).join('');
         })
