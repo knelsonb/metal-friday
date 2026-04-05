@@ -23,6 +23,7 @@
       --tag-bg: #1e1e1e;
       --tag-border: #333;
       --suggest: #e65100;
+      --new-badge: #c62828;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -716,6 +717,122 @@
       margin-bottom: 0.75rem;
     }
 
+    /* --- NEW BADGE --- */
+    .new-badge {
+      display: inline-block;
+      background: var(--new-badge);
+      color: #fff;
+      font-size: 0.6rem;
+      font-weight: 700;
+      padding: 0.1rem 0.4rem;
+      border-radius: 8px;
+      margin-left: 0.4rem;
+      vertical-align: middle;
+      animation: pulse-badge 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-badge {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+
+    .edition.is-new { border-left: 3px solid var(--accent-glow); }
+
+    /* --- SHARE LINK --- */
+    .share-btn {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-family: 'Inter', sans-serif;
+      transition: color 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 0.2rem;
+    }
+
+    .share-btn:hover { color: var(--accent-glow); }
+
+    /* --- STATS CHART --- */
+    .stats-section {
+      max-width: 900px;
+      margin: 1.5rem auto 0;
+      padding: 0 1.5rem;
+    }
+
+    .stats-toggle {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-family: 'Inter', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      transition: color 0.15s;
+      display: block;
+      margin: 0 auto;
+      padding: 0.5rem 1rem;
+    }
+
+    .stats-toggle:hover { color: var(--accent-glow); }
+
+    .genre-chart {
+      display: none;
+      padding: 1rem 0 2rem;
+    }
+
+    .genre-chart.visible { display: block; }
+
+    .chart-bar-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .chart-label {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      min-width: 140px;
+      text-align: right;
+      text-transform: lowercase;
+    }
+
+    .chart-bar-bg {
+      flex: 1;
+      height: 18px;
+      background: var(--bg-card);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .chart-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent-dim), var(--accent-glow));
+      border-radius: 2px;
+      transition: width 0.6s ease-out;
+    }
+
+    .chart-count {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      min-width: 1.5rem;
+    }
+
+    /* --- HIGHLIGHT TARGET --- */
+    .track.highlighted {
+      background: var(--accent-dim);
+      border-left: 3px solid var(--accent-glow);
+      animation: fade-highlight 3s ease-out forwards;
+    }
+
+    @keyframes fade-highlight {
+      0% { background: var(--accent-dim); }
+      100% { background: transparent; border-left-color: transparent; }
+    }
+
     @media (max-width: 600px) {
       .stats-bar { gap: 1rem; }
       .stat-value { font-size: 1.4rem; }
@@ -761,6 +878,11 @@
       <button class="filter-btn" data-filter="all" onclick="setFilter('all')">All</button>
       <button class="filter-btn" data-filter="trey" onclick="setFilter('trey')">Trey</button>
       <button class="filter-btn" data-filter="keith" onclick="setFilter('keith')">Keith</button>
+    </div>
+
+    <div class="stats-section">
+      <button class="stats-toggle" onclick="toggleChart()">Genre Breakdown</button>
+      <div class="genre-chart" id="genre-chart"></div>
     </div>
 
     <div class="search-results" id="search-results" style="display:none"></div>
@@ -1015,11 +1137,13 @@
             links.push(`<a class="track-link" href="${t.youtube_url}" target="_blank" title="Open on YouTube">${ytSvg} YouTube</a>`);
             links.push(`<a class="track-link" href="javascript:void(0)" onclick="toggleEmbed(this, '${videoId}')">${ytSvg} Play</a>`);
           }
+          const slug = trackSlug(t.artist, t.track);
           return `
-            <div class="track">
+            <div class="track" data-slug="${slug}">
               <div class="track-title-row">
                 <span class="track-title">${escHtml(t.track)}</span>
                 <span class="track-artist">${escHtml(t.artist)}</span>
+                <button class="share-btn" onclick="copyTrackLink('${escHtml(t.artist).replace(/'/g,"\\'")}','${escHtml(t.track).replace(/'/g,"\\'")}')">&#128279;</button>
               </div>
               <span class="genre-tag">${escHtml(t.genre)}</span>
               ${links.length ? `<div class="track-links">${links.join('')}</div>` : ''}
@@ -1029,7 +1153,7 @@
         }).join('');
 
         return `
-          <div class="edition ${isFirst ? 'open' : ''}">
+          <div class="edition ${isFirst ? 'open' : ''}" data-date="${ed.date}">
             <div class="edition-header" onclick="toggleEdition(this)">
               <div><div class="edition-date">${formatDate(ed.date)}</div></div>
               <div class="edition-meta">
@@ -1312,6 +1436,139 @@
       document.getElementById('genre-detail').style.display = 'none';
     }
 
+    // --- WHAT'S NEW (localStorage tracking) ---
+    function getLastVisit() {
+      return localStorage.getItem('mf-last-visit') || '1970-01-01';
+    }
+
+    function updateLastVisit() {
+      localStorage.setItem('mf-last-visit', new Date().toISOString().split('T')[0]);
+    }
+
+    function countNewEditions() {
+      const lastVisit = getLastVisit();
+      return DATA ? DATA.editions.filter(e => e.date > lastVisit).length : 0;
+    }
+
+    function applyNewBadges() {
+      const lastVisit = getLastVisit();
+      const newCount = countNewEditions();
+
+      // Add badge to Archive tab
+      const archiveTab = document.querySelector('.nav-tab[onclick="switchTab(\'archive\')"]');
+      const existingBadge = archiveTab.querySelector('.new-badge');
+      if (existingBadge) existingBadge.remove();
+      if (newCount > 0) {
+        archiveTab.insertAdjacentHTML('beforeend',
+          `<span class="new-badge">${newCount} new</span>`);
+      }
+
+      // Mark new editions visually
+      document.querySelectorAll('.edition').forEach(el => {
+        const dateEl = el.querySelector('.edition-date');
+        if (!dateEl) return;
+        // Check via data attribute
+        if (el.dataset.date > lastVisit) {
+          el.classList.add('is-new');
+        }
+      });
+
+      // Update last visit after a short delay (so they see the badges)
+      setTimeout(updateLastVisit, 5000);
+    }
+
+    // --- SHAREABLE TRACK LINKS ---
+    function trackSlug(artist, track) {
+      return (artist + '-' + track).toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60);
+    }
+
+    function copyTrackLink(artist, track) {
+      const slug = trackSlug(artist, track);
+      const url = window.location.origin + window.location.pathname + '#' + slug;
+      navigator.clipboard.writeText(url).then(() => {
+        showToast('Link copied!');
+      }).catch(() => {
+        // Fallback
+        showToast(url);
+      });
+    }
+
+    function handleHashNavigation() {
+      const hash = window.location.hash.slice(1);
+      if (!hash) return;
+
+      // Find matching track
+      const match = allTracks.find(t => trackSlug(t.artist, t.track) === hash);
+      if (!match) return;
+
+      // Switch to archive tab
+      switchTab('archive');
+
+      // Open the edition containing this track
+      setTimeout(() => {
+        const editions = document.querySelectorAll('.edition');
+        editions.forEach(ed => {
+          if (ed.dataset.date === match.date) {
+            ed.classList.add('open');
+            // Find and highlight the specific track
+            setTimeout(() => {
+              const tracks = ed.querySelectorAll('.track');
+              tracks.forEach(tr => {
+                if (tr.dataset.slug === hash) {
+                  tr.classList.add('highlighted');
+                  tr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+              });
+            }, 100);
+          }
+        });
+      }, 200);
+    }
+
+    // --- STATS CHART ---
+    function toggleChart() {
+      document.getElementById('genre-chart').classList.toggle('visible');
+    }
+
+    function renderGenreChart() {
+      // Count top-level genre families
+      const families = {};
+      allTracks.forEach(t => {
+        const g = t.genre.toLowerCase();
+        // Map to broad families
+        let family = g;
+        if (g.includes('death')) family = 'death metal';
+        else if (g.includes('black')) family = 'black metal';
+        else if (g.includes('doom') || g.includes('funeral')) family = 'doom';
+        else if (g.includes('thrash')) family = 'thrash';
+        else if (g.includes('prog') || g === 'progressive') family = 'progressive';
+        else if (g.includes('hardcore') || g.includes('metalcore') || g.includes('deathcore')) family = 'hardcore / -core';
+        else if (g.includes('grind')) family = 'grindcore';
+        else if (g.includes('post') || g.includes('atmospheric')) family = 'post metal';
+        else if (g.includes('sludge') || g.includes('stoner')) family = 'sludge / stoner';
+        else if (g.includes('folk')) family = 'folk metal';
+        else if (g.includes('power') || g.includes('heavy metal') || g.includes('symphonic')) family = 'power / heavy / symphonic';
+        else if (g.includes('rock') || g.includes('electronic') || g.includes('pop') || g.includes('alt')) family = 'rock / electronic / other';
+        else family = 'other';
+
+        families[family] = (families[family] || 0) + 1;
+      });
+
+      const sorted = Object.entries(families).sort((a, b) => b[1] - a[1]);
+      const max = sorted[0]?.[1] || 1;
+
+      document.getElementById('genre-chart').innerHTML = sorted.map(([genre, count]) => `
+        <div class="chart-bar-row">
+          <span class="chart-label">${genre}</span>
+          <div class="chart-bar-bg">
+            <div class="chart-bar-fill" style="width: ${(count / max * 100).toFixed(1)}%"></div>
+          </div>
+          <span class="chart-count">${count}</span>
+        </div>
+      `).join('');
+    }
+
     // --- RANDOM TRACK (shuffle button) ---
     function playRandom() {
       const withVideo = allTracks.filter(t => getVideoId(t.youtube_url));
@@ -1362,8 +1619,13 @@
         renderEditions(data.editions);
         renderArtistIndex('');
         renderGenreCloud();
+        renderGenreChart();
         setFilter('all');
+        applyNewBadges();
+        handleHashNavigation();
       });
+
+    window.addEventListener('hashchange', handleHashNavigation);
   </script>
 
 </body>
