@@ -2136,8 +2136,7 @@
       // Switch tab after the sweep peaks (~500ms)
       setTimeout(() => {
         switchTab('planning');
-        loadPlanning();
-        loadConfirmed();
+        loadConfirmed().then(() => loadPlanning());
         loadPromoted();
         loadSuggestions();
         window.scrollTo({ top: 0, behavior: 'instant' });
@@ -2346,7 +2345,7 @@
           document.getElementById('admin-status').textContent = 'Unlocked';
           document.getElementById('admin-status').style.color = '#4caf50';
           document.getElementById('admin-key-input').value = '';
-          loadConfirmed();
+          loadConfirmed().then(() => loadPlanning());
           loadPromoted();
           loadSuggestions();
         }
@@ -2442,7 +2441,7 @@
     }
 
     function loadConfirmed() {
-      fetch(`${WORKER_URL}/confirmed?t=${Date.now()}`)
+      return fetch(`${WORKER_URL}/confirmed?t=${Date.now()}`)
         .then(r => r.json())
         .then(confirmed => {
           const container = document.getElementById('confirmed-list');
