@@ -557,6 +557,28 @@
       flex-wrap: wrap;
     }
 
+    .artist-rank {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent);
+      min-width: 2rem;
+      text-align: center;
+    }
+
+    .artist-rank.top3 { color: var(--accent-glow); }
+
+    .artist-appearances {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--accent-glow);
+      background: var(--accent-dim);
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+      white-space: nowrap;
+    }
+
     .artist-body {
       display: none;
       padding: 0;
@@ -587,7 +609,19 @@
 
     .at-date {
       font-size: 0.75rem;
+      color: var(--accent-glow);
+      cursor: pointer;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .at-date:hover { color: var(--text-bright); text-decoration: underline; }
+
+    .at-edition-label {
+      font-size: 0.65rem;
       color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
 
     .at-link {
@@ -602,6 +636,19 @@
 
     .at-link:hover { color: var(--text-bright); }
     .at-link svg { width: 12px; height: 12px; fill: currentColor; }
+
+    .sort-controls {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .sort-label {
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
 
     /* --- GENRE CLOUD --- */
     .genre-cloud {
@@ -893,6 +940,11 @@
   <div class="tab-content" id="tab-artists">
     <div class="controls">
       <input type="text" class="search-box" id="artist-search" placeholder="Filter artists...">
+      <div class="sort-controls">
+        <span class="sort-label">Sort:</span>
+        <button class="filter-btn active" data-sort="rank" onclick="setArtistSort('rank')">By Rank</button>
+        <button class="filter-btn" data-sort="az" onclick="setArtistSort('az')">A-Z</button>
+      </div>
     </div>
     <div class="editions" id="artist-index"></div>
   </div>
@@ -1251,17 +1303,69 @@
     });
 
     // --- ARTIST INDEX ---
+    let artistSortMode = 'rank';
+
     function buildArtistIndex() {
       const byArtist = {};
       allTracks.forEach(t => {
         const key = t.artist;
-        if (!byArtist[key]) byArtist[key] = { name: key, tracks: [], genres: new Set() };
+        if (!byArtist[key]) byArtist[key] = { name: key, tracks: [], genres: new Set(), dates: new Set() };
         byArtist[key].tracks.push(t);
         byArtist[key].genres.add(t.genre);
+        byArtist[key].dates.add(t.date);
       });
 
-      return Object.values(byArtist)
-        .sort((a, b) => a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }));
+      const artists = Object.values(byArtist);
+
+      if (artistSortMode === 'rank') {
+        artists.sort((a, b) => b.tracks.length - a.tracks.length || a.name.localeCompare(b.name));
+      } else {
+        artists.sort((a, b) => a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }));
+      }
+
+      // Assign ranks (by appearance count)
+      let rank = 1;
+      let prevCount = -1;
+      artists.forEach((a, i) => {
+        if (a.tracks.length !== prevCount) {
+          rank = i + 1;
+          prevCount = a.tracks.length;
+        }
+        a.rank = rank;
+      });
+
+      return artists;
+    }
+
+    function navigateToEdition(date) {
+      switchTab('archive');
+      // Clear search, reset filter
+      document.getElementById('search').value = '';
+      renderSearchResults('');
+      document.getElementById('search-results').style.display = 'none';
+      document.getElementById('editions').style.display = 'block';
+      renderEditions(DATA.editions);
+
+      setTimeout(() => {
+        const editions = document.querySelectorAll('.edition');
+        editions.forEach(ed => {
+          if (ed.dataset.date === date) {
+            ed.classList.add('open');
+            ed.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            // Flash highlight
+            ed.style.borderColor = 'var(--accent-glow)';
+            setTimeout(() => { ed.style.borderColor = ''; }, 2000);
+          }
+        });
+      }, 150);
+    }
+
+    function setArtistSort(mode) {
+      artistSortMode = mode;
+      document.querySelectorAll('[data-sort]').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.sort === mode);
+      });
+      renderArtistIndex(document.getElementById('artist-search').value.trim());
     }
 
     function renderArtistIndex(filter) {
@@ -1282,36 +1386,55 @@
       let currentLetter = '';
 
       filtered.forEach(a => {
-        const letter = a.name[0].toUpperCase().replace(/[^A-Z]/, '#');
-        if (letter !== currentLetter) {
-          currentLetter = letter;
-          html += `<div class="letter-divider">${letter}</div>`;
+        // Letter dividers only in A-Z mode
+        if (artistSortMode === 'az') {
+          const letter = a.name[0].toUpperCase().replace(/[^A-Z]/, '#');
+          if (letter !== currentLetter) {
+            currentLetter = letter;
+            html += `<div class="letter-divider">${letter}</div>`;
+          }
         }
 
         const genreTags = [...a.genres].slice(0, 3).map(g =>
           `<span class="genre-tag">${escHtml(g)}</span>`
         ).join('');
 
-        const trackRows = a.tracks.map(t => {
-          const videoId = getVideoId(t.youtube_url);
-          const link = videoId
-            ? `<a class="at-link" href="${t.youtube_url}" target="_blank">${ytSvg}</a>`
-            : '';
-          return `
-            <div class="artist-track">
-              <span class="at-track">${escHtml(t.track)}</span>
-              <span class="sr-genre">${escHtml(t.genre)}</span>
-              <span class="at-date">${formatDateShort(t.date)}</span>
-              ${link}
-            </div>
-          `;
-        }).join('');
+        const appearances = a.dates.size;
+        const appearLabel = appearances > 1
+          ? `<span class="artist-appearances">${appearances}x</span>`
+          : '';
+
+        const trackRows = a.tracks
+          .sort((x, y) => y.date.localeCompare(x.date))
+          .map(t => {
+            const videoId = getVideoId(t.youtube_url);
+            const link = videoId
+              ? `<a class="at-link" href="${t.youtube_url}" target="_blank">${ytSvg}</a>`
+              : '';
+            return `
+              <div class="artist-track">
+                <span class="at-track">${escHtml(t.track)}</span>
+                <span class="sr-genre">${escHtml(t.genre)}</span>
+                <a class="at-date" onclick="navigateToEdition('${t.date}')" title="Go to this edition">
+                  <span class="at-edition-label">Edition:</span> ${formatDateShort(t.date)}
+                </a>
+                ${link}
+              </div>
+            `;
+          }).join('');
+
+        const rankClass = a.rank <= 3 ? 'top3' : '';
+        const rankDisplay = artistSortMode === 'rank'
+          ? `<span class="artist-rank ${rankClass}">#${a.rank}</span>`
+          : '';
 
         html += `
           <div class="artist-card">
             <div class="artist-header" onclick="this.closest('.artist-card').classList.toggle('open')">
+              ${rankDisplay}
               <span class="artist-name">${escHtml(a.name)}</span>
               <div class="artist-meta">
+                ${appearLabel}
                 <div class="artist-genres">${genreTags}</div>
                 <span class="artist-count">${a.tracks.length} track${a.tracks.length > 1 ? 's' : ''}</span>
               </div>
