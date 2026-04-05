@@ -2418,6 +2418,16 @@
       });
     }
 
+    function kickToSuggestions(id) {
+      adminFetch(`/admin/kick/${id}`).then(r => {
+        if (r.ok) {
+          showToast('Kicked back to inbox');
+          loadConfirmed().then(() => loadPlanning());
+          loadSuggestions();
+        }
+      });
+    }
+
     function deleteConfirmed(id) {
       adminFetch(`/admin/confirmed/${id}`, 'DELETE').then(r => {
         if (r.ok) { showToast('Removed'); loadConfirmed(); }
@@ -2467,22 +2477,42 @@
             document.getElementById('publish-date').value = d.toISOString().split('T')[0];
           }
 
-          container.innerHTML = confirmed.map(s => `
-            <div class="suggestion-item" style="border-left-color:var(--accent-glow)">
-              <div style="display:flex;gap:0.5rem;align-items:baseline;flex-wrap:wrap">
-                <span class="plan-pick-artist">${escHtml(s.artist)}</span>
-                <span style="color:var(--text);font-size:0.9rem">"${escHtml(s.track)}"</span>
+          container.innerHTML = confirmed.map(s => {
+            // Build links
+            const links = [];
+            const vid = s.youtube_url ? s.youtube_url.match(/(?:v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/) : null;
+            if (s.youtube_url) links.push(`<a class="track-link" href="${s.youtube_url}" target="_blank">${ytSvg} YouTube</a>`);
+            if (s.youtube_music_url) links.push(`<a class="track-link" href="${s.youtube_music_url}" target="_blank">${ytMusicSvg} YT Music</a>`);
+            else if (vid) links.push(`<a class="track-link" href="https://music.youtube.com/watch?v=${vid[1]}" target="_blank">${ytMusicSvg} YT Music</a>`);
+            if (s.spotify_url) links.push(`<a class="track-link" href="${s.spotify_url}" target="_blank" style="color:#1db954">${spotSvg} Spotify</a>`);
+            if (s.bandcamp_url) links.push(`<a class="track-link" href="${s.bandcamp_url}" target="_blank">${bcSvg} Bandcamp</a>`);
+            // Fallback: if link field exists and no other links found
+            if (!links.length && s.link) links.push(`<a class="track-link" href="${s.link}" target="_blank">${ytSvg} Link</a>`);
+
+            const recBadge = s.name ? `<span class="curator-badge ${s.name}" style="font-size:0.55rem;padding:0.1rem 0.4rem">${s.name} pick</span>` : '';
+
+            return `
+              <div class="plan-pick confirmed" style="border-left:3px solid var(--accent-glow)">
+                <div style="display:flex;gap:0.4rem;align-items:center;flex-wrap:wrap;margin-bottom:0.3rem">
+                  ${recBadge}
+                  ${s.genre ? `<span class="genre-tag">${escHtml(s.genre)}</span>` : ''}
+                </div>
+                <div><span class="plan-pick-artist">${escHtml(s.artist)}</span> <span style="color:var(--text);font-size:0.9rem">"${escHtml(s.track)}"</span></div>
+                ${links.length ? `<div class="track-links" style="margin-top:0.4rem">${links.join('')}</div>` : ''}
+                ${s.sauron_note ? `<div style="font-size:0.8rem;color:var(--accent-glow);margin-top:0.4rem;border-left:2px solid var(--accent-dim);padding-left:0.5rem"><span style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-dim)">sauron:</span> ${escHtml(s.sauron_note)}</div>` : ''}
+                ${s.curator_note ? `<div style="font-size:0.8rem;color:var(--text);margin-top:0.3rem;border-left:2px solid var(--keith);padding-left:0.5rem"><span style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-dim)">${escHtml(s.name || 'curator')}:</span> ${escHtml(s.curator_note)}</div>` : ''}
+                ${s.comment && !s.sauron_note ? `<div style="font-size:0.8rem;color:var(--text-dim);margin-top:0.3rem">${escHtml(s.comment)}</div>` : ''}
+                <div class="suggestion-meta">
+                  confirmed ${s.confirmed ? new Date(s.confirmed).toLocaleDateString() : ''}
+                </div>
+                ${admin ? `<div style="margin-top:0.5rem;display:flex;gap:0.5rem;flex-wrap:wrap">
+                  <button onclick="unconfirmTrack('${s.id}')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem">Demote to Queued</button>
+                  <button onclick="kickToSuggestions('${s.id}')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem">Kick to Inbox</button>
+                  <button onclick="deleteConfirmed('${s.id}')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem;border-color:#c62828;color:#c62828">Delete</button>
+                </div>` : ''}
               </div>
-              ${s.comment ? `<div style="font-size:0.85rem;color:var(--text);margin-top:0.3rem">${escHtml(s.comment)}</div>` : ''}
-              <div class="suggestion-meta">
-                from ${escHtml(s.name)} &middot; confirmed ${new Date(s.confirmed).toLocaleDateString()}
-              </div>
-              ${admin ? `<div style="margin-top:0.5rem;display:flex;gap:0.5rem">
-                <button onclick="unconfirmTrack('${s.id}')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem">Move Back</button>
-                <button onclick="deleteConfirmed('${s.id}')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem;border-color:#c62828;color:#c62828">Delete</button>
-              </div>` : ''}
-            </div>
-          `).join('');
+            `;
+          }).join('');
         })
         .catch(() => {
           document.getElementById('confirmed-list').innerHTML =
