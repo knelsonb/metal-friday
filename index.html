@@ -22,6 +22,7 @@
       --keith: #1565c0;
       --tag-bg: #1e1e1e;
       --tag-border: #333;
+      --suggest: #e65100;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -68,6 +69,40 @@
       font-weight: 300;
     }
 
+    /* --- NAV TABS --- */
+    .nav-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-tab {
+      padding: 1rem 2rem;
+      font-size: 0.8rem;
+      font-family: 'Oswald', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--text-dim);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+      background: none;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+    }
+
+    .nav-tab:hover { color: var(--text); }
+    .nav-tab.active {
+      color: var(--accent-glow);
+      border-bottom-color: var(--accent);
+    }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
     .stats-bar {
       display: flex;
       justify-content: center;
@@ -78,9 +113,7 @@
       border-bottom: 1px solid var(--border);
     }
 
-    .stat {
-      text-align: center;
-    }
+    .stat { text-align: center; }
 
     .stat-value {
       font-family: 'Oswald', sans-serif;
@@ -120,13 +153,8 @@
       transition: border-color 0.2s;
     }
 
-    .search-box:focus {
-      border-color: var(--accent);
-    }
-
-    .search-box::placeholder {
-      color: var(--text-dim);
-    }
+    .search-box:focus { border-color: var(--accent); }
+    .search-box::placeholder { color: var(--text-dim); }
 
     .filter-btn {
       padding: 0.75rem 1.25rem;
@@ -148,6 +176,91 @@
       background: var(--accent-dim);
     }
 
+    /* --- SEARCH RESULTS (flat track list) --- */
+    .search-results {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 1.5rem 1rem;
+    }
+
+    .search-results-header {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      padding: 0.5rem 0;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .search-result-item {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      margin-bottom: 0.5rem;
+      background: var(--bg-card);
+      transition: background 0.15s, border-color 0.15s;
+      flex-wrap: wrap;
+    }
+
+    .search-result-item:hover {
+      background: var(--bg-card-hover);
+      border-color: #444;
+    }
+
+    .sr-score {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.75rem;
+      color: var(--accent-glow);
+      min-width: 2rem;
+      text-align: center;
+      opacity: 0.6;
+    }
+
+    .sr-track {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 600;
+      color: var(--text-bright);
+    }
+
+    .sr-artist {
+      color: var(--text);
+      font-size: 0.9rem;
+    }
+
+    .sr-artist::before { content: "by "; color: var(--text-dim); }
+
+    .sr-genre {
+      display: inline-block;
+      font-size: 0.65rem;
+      padding: 0.1rem 0.4rem;
+      background: var(--tag-bg);
+      border: 1px solid var(--tag-border);
+      border-radius: 2px;
+      color: var(--text-dim);
+    }
+
+    .sr-date {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      margin-left: auto;
+    }
+
+    .sr-links {
+      display: flex;
+      gap: 0.5rem;
+      width: 100%;
+      margin-top: 0.25rem;
+    }
+
+    mark {
+      background: var(--accent-dim);
+      color: var(--accent-glow);
+      border-radius: 2px;
+      padding: 0 2px;
+    }
+
     /* --- EDITIONS --- */
     .editions {
       max-width: 900px;
@@ -164,9 +277,7 @@
       transition: border-color 0.2s;
     }
 
-    .edition:hover {
-      border-color: #444;
-    }
+    .edition:hover { border-color: #444; }
 
     .edition-header {
       display: flex;
@@ -201,20 +312,10 @@
       border: 1px solid;
     }
 
-    .curator-badge.trey {
-      color: var(--trey);
-      border-color: var(--trey);
-    }
+    .curator-badge.trey { color: var(--trey); border-color: var(--trey); }
+    .curator-badge.keith { color: var(--keith); border-color: var(--keith); }
 
-    .curator-badge.keith {
-      color: var(--keith);
-      border-color: var(--keith);
-    }
-
-    .track-count {
-      font-size: 0.8rem;
-      color: var(--text-dim);
-    }
+    .track-count { font-size: 0.8rem; color: var(--text-dim); }
 
     .edition-expand {
       color: var(--text-dim);
@@ -222,18 +323,9 @@
       transition: transform 0.2s;
     }
 
-    .edition.open .edition-expand {
-      transform: rotate(180deg);
-    }
-
-    .edition-body {
-      display: none;
-      padding: 0;
-    }
-
-    .edition.open .edition-body {
-      display: block;
-    }
+    .edition.open .edition-expand { transform: rotate(180deg); }
+    .edition-body { display: none; padding: 0; }
+    .edition.open .edition-body { display: block; }
 
     /* --- TRACKS --- */
     .track {
@@ -242,13 +334,8 @@
       transition: background 0.15s;
     }
 
-    .track:last-child {
-      border-bottom: none;
-    }
-
-    .track:hover {
-      background: var(--bg-card-hover);
-    }
+    .track:last-child { border-bottom: none; }
+    .track:hover { background: var(--bg-card-hover); }
 
     .track-title-row {
       display: flex;
@@ -265,15 +352,8 @@
       color: var(--text-bright);
     }
 
-    .track-artist {
-      font-size: 0.95rem;
-      color: var(--text);
-    }
-
-    .track-artist::before {
-      content: "by ";
-      color: var(--text-dim);
-    }
+    .track-artist { font-size: 0.95rem; color: var(--text); }
+    .track-artist::before { content: "by "; color: var(--text-dim); }
 
     .genre-tag {
       display: inline-block;
@@ -306,26 +386,11 @@
       gap: 0.3rem;
     }
 
-    .track-link:hover {
-      color: var(--text-bright);
-    }
+    .track-link:hover { color: var(--text-bright); }
+    .track-link svg { width: 14px; height: 14px; fill: currentColor; }
 
-    .track-link svg {
-      width: 14px;
-      height: 14px;
-      fill: currentColor;
-    }
-
-    /* --- YOUTUBE EMBED --- */
-    .yt-embed {
-      margin-top: 0.75rem;
-      display: none;
-    }
-
-    .yt-embed.visible {
-      display: block;
-    }
-
+    .yt-embed { margin-top: 0.75rem; display: none; }
+    .yt-embed.visible { display: block; }
     .yt-embed iframe {
       width: 100%;
       aspect-ratio: 16/9;
@@ -333,6 +398,94 @@
       border-radius: 4px;
       max-height: 300px;
     }
+
+    /* --- SUGGEST TAB --- */
+    .suggest-container {
+      max-width: 600px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+
+    .suggest-intro {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: var(--text-dim);
+      font-size: 0.9rem;
+    }
+
+    .suggest-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .form-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-dim);
+    }
+
+    .form-input, .form-textarea {
+      padding: 0.75rem 1rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--text);
+      font-size: 0.95rem;
+      font-family: 'Inter', sans-serif;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-input:focus, .form-textarea:focus { border-color: var(--accent); }
+    .form-input::placeholder, .form-textarea::placeholder { color: #555; }
+
+    .form-textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+
+    .suggest-btn {
+      padding: 0.9rem 2rem;
+      background: var(--accent);
+      border: 1px solid var(--accent-glow);
+      border-radius: 4px;
+      color: var(--text-bright);
+      font-family: 'Oswald', sans-serif;
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .suggest-btn:hover {
+      background: var(--accent-glow);
+      color: #000;
+    }
+
+    .suggest-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .suggest-success {
+      text-align: center;
+      padding: 2rem;
+      color: #4caf50;
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.2rem;
+      display: none;
+    }
+
+    .suggest-success.visible { display: block; }
 
     /* --- FOOTER --- */
     .footer {
@@ -343,10 +496,7 @@
       font-size: 0.8rem;
     }
 
-    .footer a {
-      color: var(--accent-glow);
-      text-decoration: none;
-    }
+    .footer a { color: var(--accent-glow); text-decoration: none; }
 
     .footer .horns-small {
       font-size: 1.5rem;
@@ -354,7 +504,6 @@
       margin-bottom: 0.5rem;
     }
 
-    /* --- NO RESULTS --- */
     .no-results {
       text-align: center;
       padding: 4rem 2rem;
@@ -362,13 +511,114 @@
       font-size: 1.1rem;
     }
 
-    /* --- RESPONSIVE --- */
+    /* --- ARTIST INDEX --- */
+    .artist-card {
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--bg-card);
+      margin-bottom: 0.75rem;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+
+    .artist-card:hover { border-color: #444; }
+
+    .artist-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1.25rem;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .artist-name {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-bright);
+    }
+
+    .artist-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .artist-count {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+
+    .artist-genres {
+      display: flex;
+      gap: 0.3rem;
+      flex-wrap: wrap;
+    }
+
+    .artist-body {
+      display: none;
+      padding: 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .artist-card.open .artist-body { display: block; }
+
+    .artist-track {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+      padding: 0.6rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+      transition: background 0.15s;
+    }
+
+    .artist-track:last-child { border-bottom: none; }
+    .artist-track:hover { background: var(--bg-card-hover); }
+
+    .at-track {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 600;
+      color: var(--text-bright);
+      font-size: 0.95rem;
+    }
+
+    .at-date {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+
+    .at-link {
+      font-size: 0.7rem;
+      color: var(--accent-glow);
+      text-decoration: none;
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 0.2rem;
+    }
+
+    .at-link:hover { color: var(--text-bright); }
+    .at-link svg { width: 12px; height: 12px; fill: currentColor; }
+
+    .letter-divider {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--accent);
+      padding: 1.5rem 0 0.5rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 0.75rem;
+    }
+
     @media (max-width: 600px) {
       .stats-bar { gap: 1rem; }
       .stat-value { font-size: 1.4rem; }
       .controls { flex-direction: column; }
       .edition-header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
       .track { padding: 1rem; }
+      .nav-tab { padding: 0.75rem 1rem; font-size: 0.7rem; }
     }
   </style>
 </head>
@@ -378,18 +628,86 @@
     <span class="horns">\m/</span>
     <h1>Metal Friday</h1>
     <p class="tagline">Curated heaviness since 2016</p>
+    <button onclick="playRandom()" style="
+      margin-top: 1.5rem; padding: 0.6rem 1.5rem;
+      background: transparent; border: 1px solid var(--border);
+      border-radius: 4px; color: var(--text-dim); cursor: pointer;
+      font-family: Oswald, sans-serif; font-size: 0.8rem;
+      text-transform: uppercase; letter-spacing: 0.15em;
+      transition: all 0.2s;
+    " onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent-glow)'"
+       onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-dim)'">
+      Shuffle
+    </button>
   </div>
 
-  <div class="stats-bar" id="stats-bar"></div>
-
-  <div class="controls">
-    <input type="text" class="search-box" id="search" placeholder="Search artists, tracks, genres...">
-    <button class="filter-btn" data-filter="all" onclick="setFilter('all')">All</button>
-    <button class="filter-btn" data-filter="trey" onclick="setFilter('trey')">Trey</button>
-    <button class="filter-btn" data-filter="keith" onclick="setFilter('keith')">Keith</button>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="switchTab('archive')">Archive</button>
+    <button class="nav-tab" onclick="switchTab('artists')">Artists</button>
+    <button class="nav-tab" onclick="switchTab('suggest')">Suggest a Track</button>
   </div>
 
-  <div class="editions" id="editions"></div>
+  <!-- ARCHIVE TAB -->
+  <div class="tab-content active" id="tab-archive">
+    <div class="stats-bar" id="stats-bar"></div>
+
+    <div class="controls">
+      <input type="text" class="search-box" id="search" placeholder="Search artists, tracks, genres... (fuzzy matching)">
+      <button class="filter-btn" data-filter="all" onclick="setFilter('all')">All</button>
+      <button class="filter-btn" data-filter="trey" onclick="setFilter('trey')">Trey</button>
+      <button class="filter-btn" data-filter="keith" onclick="setFilter('keith')">Keith</button>
+    </div>
+
+    <div class="search-results" id="search-results" style="display:none"></div>
+    <div class="editions" id="editions"></div>
+  </div>
+
+  <!-- ARTISTS TAB -->
+  <div class="tab-content" id="tab-artists">
+    <div class="controls">
+      <input type="text" class="search-box" id="artist-search" placeholder="Filter artists...">
+    </div>
+    <div class="editions" id="artist-index"></div>
+  </div>
+
+  <!-- SUGGEST TAB -->
+  <div class="tab-content" id="tab-suggest">
+    <div class="suggest-container">
+      <p class="suggest-intro">
+        Got a track that belongs on Metal Friday? Drop it here.<br>
+        Our curators review suggestions for future editions.
+      </p>
+      <form class="suggest-form" id="suggest-form" onsubmit="submitSuggestion(event)">
+        <div class="form-group">
+          <label class="form-label">Artist *</label>
+          <input type="text" class="form-input" id="sg-artist" placeholder="e.g. Meshuggah" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Track *</label>
+          <input type="text" class="form-input" id="sg-track" placeholder="e.g. Bleed" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Why this track?</label>
+          <textarea class="form-textarea" id="sg-comment" placeholder="What makes it Metal Friday material?"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">YouTube or Spotify link</label>
+          <input type="url" class="form-input" id="sg-link" placeholder="https://...">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Your name *</label>
+          <input type="text" class="form-input" id="sg-name" placeholder="Who are you?" required>
+        </div>
+        <button type="submit" class="suggest-btn" id="sg-submit">Submit Suggestion</button>
+      </form>
+      <div class="suggest-success" id="sg-success">
+        Suggestion submitted! \m/<br>
+        <span style="font-size:0.8rem;color:var(--text-dim);font-family:Inter,sans-serif">
+          Our curators will review it for a future edition.
+        </span>
+      </div>
+    </div>
+  </div>
 
   <div class="footer">
     <span class="horns-small">\m/</span>
@@ -400,20 +718,99 @@
 
   <script>
     let DATA = null;
+    let allTracks = [];
     let currentFilter = 'all';
-    let currentSearch = '';
+    let searchTimeout = null;
 
+    const REPO = 'knelsonb/metal-friday';
     const ytSvg = `<svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.9 31.9 0 0 0 0 12a31.9 31.9 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.9 31.9 0 0 0 24 12a31.9 31.9 0 0 0-.5-5.8zM9.5 15.6V8.4L16 12l-6.5 3.6z"/></svg>`;
 
+    // --- FUZZY SEARCH ---
+    function fuzzyScore(query, text) {
+      query = query.toLowerCase();
+      text = text.toLowerCase();
+      if (text === query) return 100;
+      if (text.startsWith(query)) return 90;
+      if (text.includes(query)) return 80;
+
+      // Token matching: split query into words, score each
+      const queryTokens = query.split(/\s+/).filter(Boolean);
+      if (queryTokens.length === 0) return 0;
+
+      let matched = 0;
+      let partialScore = 0;
+      for (const qt of queryTokens) {
+        if (text.includes(qt)) {
+          matched++;
+          partialScore += text.startsWith(qt) ? 15 : 10;
+        } else {
+          // Subsequence match for typos
+          let qi = 0;
+          for (let i = 0; i < text.length && qi < qt.length; i++) {
+            if (text[i] === qt[qi]) qi++;
+          }
+          if (qi === qt.length) {
+            partialScore += 5;
+            matched += 0.5;
+          } else if (qi >= qt.length * 0.7) {
+            partialScore += 3;
+            matched += 0.3;
+          }
+        }
+      }
+
+      const coverage = matched / queryTokens.length;
+      return Math.round(partialScore * coverage);
+    }
+
+    function scoreTrack(query, track) {
+      const artistScore = fuzzyScore(query, track.artist) * 1.2;
+      const trackScore = fuzzyScore(query, track.track) * 1.1;
+      const genreScore = fuzzyScore(query, track.genre) * 0.8;
+      return Math.max(artistScore, trackScore, genreScore);
+    }
+
+    function highlightMatch(text, query) {
+      if (!query) return escHtml(text);
+      const tokens = query.toLowerCase().split(/\s+/).filter(Boolean);
+      let result = escHtml(text);
+      for (const token of tokens) {
+        const regex = new RegExp(`(${token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+        result = result.replace(regex, '<mark>$1</mark>');
+      }
+      return result;
+    }
+
+    function searchTracks(query) {
+      if (!query || query.length < 2) return [];
+      return allTracks
+        .map(t => ({ ...t, score: scoreTrack(query, t) }))
+        .filter(t => t.score > 5)
+        .sort((a, b) => b.score - a.score)
+        .slice(0, 30);
+    }
+
+    // --- RENDER ---
     function formatDate(dateStr) {
       const d = new Date(dateStr + 'T12:00:00');
       return d.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    }
+
+    function formatDateShort(dateStr) {
+      const d = new Date(dateStr + 'T12:00:00');
+      return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
     }
 
     function getVideoId(url) {
       if (!url) return null;
       const m = url.match(/(?:v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
       return m ? m[1] : null;
+    }
+
+    function escHtml(s) {
+      const el = document.createElement('span');
+      el.textContent = s;
+      return el.innerHTML;
     }
 
     function renderStats(stats) {
@@ -425,14 +822,45 @@
       `;
     }
 
-    function matchesSearch(edition) {
-      if (!currentSearch) return true;
-      const q = currentSearch.toLowerCase();
-      return edition.tracks.some(t =>
-        t.artist.toLowerCase().includes(q) ||
-        t.track.toLowerCase().includes(q) ||
-        t.genre.toLowerCase().includes(q)
-      );
+    function renderSearchResults(query) {
+      const container = document.getElementById('search-results');
+      const editionsEl = document.getElementById('editions');
+
+      if (!query || query.length < 2) {
+        container.style.display = 'none';
+        editionsEl.style.display = 'block';
+        renderEditions(DATA.editions);
+        return;
+      }
+
+      const results = searchTracks(query);
+      editionsEl.style.display = 'none';
+      container.style.display = 'block';
+
+      if (results.length === 0) {
+        container.innerHTML = '<div class="no-results">No matches. Try a different search.</div>';
+        return;
+      }
+
+      container.innerHTML = `
+        <div class="search-results-header">${results.length} match${results.length !== 1 ? 'es' : ''}</div>
+        ${results.map(t => {
+          const videoId = getVideoId(t.youtube_url);
+          const links = [];
+          if (videoId) {
+            links.push(`<a class="track-link" href="${t.youtube_url}" target="_blank">${ytSvg} YouTube</a>`);
+          }
+          return `
+            <div class="search-result-item">
+              <span class="sr-track">${highlightMatch(t.track, query)}</span>
+              <span class="sr-artist">${highlightMatch(t.artist, query)}</span>
+              <span class="sr-genre">${highlightMatch(t.genre, query)}</span>
+              <span class="sr-date">${formatDateShort(t.date)}</span>
+              ${links.length ? `<div class="sr-links">${links.join('')}</div>` : ''}
+            </div>
+          `;
+        }).join('')}
+      `;
     }
 
     function matchesFilter(edition) {
@@ -457,10 +885,10 @@
 
     function renderEditions(editions) {
       const container = document.getElementById('editions');
-      const filtered = editions.filter(e => matchesFilter(e) && matchesSearch(e));
+      const filtered = editions.filter(e => matchesFilter(e));
 
       if (filtered.length === 0) {
-        container.innerHTML = '<div class="no-results">No editions match your search.</div>';
+        container.innerHTML = '<div class="no-results">No editions match this filter.</div>';
         return;
       }
 
@@ -473,7 +901,6 @@
             links.push(`<a class="track-link" href="${t.youtube_url}" target="_blank" title="Open on YouTube">${ytSvg} YouTube</a>`);
             links.push(`<a class="track-link" href="javascript:void(0)" onclick="toggleEmbed(this, '${videoId}')">${ytSvg} Play</a>`);
           }
-
           return `
             <div class="track">
               <div class="track-title-row">
@@ -490,9 +917,7 @@
         return `
           <div class="edition ${isFirst ? 'open' : ''}">
             <div class="edition-header" onclick="toggleEdition(this)">
-              <div>
-                <div class="edition-date">${formatDate(ed.date)}</div>
-              </div>
+              <div><div class="edition-date">${formatDate(ed.date)}</div></div>
               <div class="edition-meta">
                 <span class="curator-badge ${ed.curator}">${ed.curator}</span>
                 <span class="track-count">${ed.tracks.length} track${ed.tracks.length > 1 ? 's' : ''}</span>
@@ -505,32 +930,215 @@
       }).join('');
     }
 
-    function escHtml(s) {
-      const el = document.createElement('span');
-      el.textContent = s;
-      return el.innerHTML;
-    }
-
     function setFilter(f) {
       currentFilter = f;
       document.querySelectorAll('.filter-btn').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.filter === f);
       });
-      renderEditions(DATA.editions);
+      // Clear search when changing filters
+      const searchBox = document.getElementById('search');
+      if (searchBox.value) {
+        renderSearchResults(searchBox.value);
+      } else {
+        renderEditions(DATA.editions);
+      }
     }
 
+    // --- TABS ---
+    function switchTab(tab) {
+      document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+      document.querySelector(`.nav-tab[onclick="switchTab('${tab}')"]`).classList.add('active');
+      document.getElementById(`tab-${tab}`).classList.add('active');
+    }
+
+    // --- SUGGESTION FORM ---
+    function submitSuggestion(e) {
+      e.preventDefault();
+      const artist = document.getElementById('sg-artist').value.trim();
+      const track = document.getElementById('sg-track').value.trim();
+      const comment = document.getElementById('sg-comment').value.trim();
+      const link = document.getElementById('sg-link').value.trim();
+      const name = document.getElementById('sg-name').value.trim();
+
+      if (!artist || !track || !name) return;
+
+      const title = `Suggestion: ${artist} - ${track}`;
+      const body = [
+        `**Artist:** ${artist}`,
+        `**Track:** ${track}`,
+        comment ? `**Why:** ${comment}` : '',
+        link ? `**Link:** ${link}` : '',
+        `**Submitted by:** ${name}`,
+        '',
+        '---',
+        '*Submitted via Metal Friday suggestion box*',
+      ].filter(Boolean).join('\n');
+
+      // Open as a GitHub issue (pre-filled)
+      const issueUrl = `https://github.com/${REPO}/issues/new?` + new URLSearchParams({
+        title: title,
+        body: body,
+        labels: 'suggestion',
+      }).toString();
+
+      // Try opening in new tab
+      const win = window.open(issueUrl, '_blank');
+
+      // Also show success state with fallback
+      document.getElementById('suggest-form').style.display = 'none';
+      const successEl = document.getElementById('sg-success');
+      successEl.classList.add('visible');
+
+      if (!win) {
+        // Popup blocked — show the link
+        successEl.innerHTML = `
+          Suggestion ready! \m/<br>
+          <a href="${issueUrl}" target="_blank" style="color:var(--accent-glow);font-size:0.9rem;font-family:Inter,sans-serif">
+            Click here to submit on GitHub
+          </a><br>
+          <span style="font-size:0.75rem;color:var(--text-dim);font-family:Inter,sans-serif">
+            (Or send the details to Keith or Trey directly)
+          </span>
+        `;
+      }
+    }
+
+    // --- SEARCH INPUT ---
     document.getElementById('search').addEventListener('input', (e) => {
-      currentSearch = e.target.value;
-      renderEditions(DATA.editions);
+      clearTimeout(searchTimeout);
+      searchTimeout = setTimeout(() => {
+        renderSearchResults(e.target.value.trim());
+      }, 150);
     });
 
-    // Load data
+    // --- ARTIST INDEX ---
+    function buildArtistIndex() {
+      const byArtist = {};
+      allTracks.forEach(t => {
+        const key = t.artist;
+        if (!byArtist[key]) byArtist[key] = { name: key, tracks: [], genres: new Set() };
+        byArtist[key].tracks.push(t);
+        byArtist[key].genres.add(t.genre);
+      });
+
+      return Object.values(byArtist)
+        .sort((a, b) => a.name.localeCompare(b.name, 'en', { sensitivity: 'base' }));
+    }
+
+    function renderArtistIndex(filter) {
+      const container = document.getElementById('artist-index');
+      const artists = buildArtistIndex();
+      const q = (filter || '').toLowerCase();
+      const filtered = q ? artists.filter(a =>
+        a.name.toLowerCase().includes(q) ||
+        [...a.genres].some(g => g.toLowerCase().includes(q))
+      ) : artists;
+
+      if (filtered.length === 0) {
+        container.innerHTML = '<div class="no-results">No artists match.</div>';
+        return;
+      }
+
+      let html = '';
+      let currentLetter = '';
+
+      filtered.forEach(a => {
+        const letter = a.name[0].toUpperCase().replace(/[^A-Z]/, '#');
+        if (letter !== currentLetter) {
+          currentLetter = letter;
+          html += `<div class="letter-divider">${letter}</div>`;
+        }
+
+        const genreTags = [...a.genres].slice(0, 3).map(g =>
+          `<span class="genre-tag">${escHtml(g)}</span>`
+        ).join('');
+
+        const trackRows = a.tracks.map(t => {
+          const videoId = getVideoId(t.youtube_url);
+          const link = videoId
+            ? `<a class="at-link" href="${t.youtube_url}" target="_blank">${ytSvg}</a>`
+            : '';
+          return `
+            <div class="artist-track">
+              <span class="at-track">${escHtml(t.track)}</span>
+              <span class="sr-genre">${escHtml(t.genre)}</span>
+              <span class="at-date">${formatDateShort(t.date)}</span>
+              ${link}
+            </div>
+          `;
+        }).join('');
+
+        html += `
+          <div class="artist-card">
+            <div class="artist-header" onclick="this.closest('.artist-card').classList.toggle('open')">
+              <span class="artist-name">${escHtml(a.name)}</span>
+              <div class="artist-meta">
+                <div class="artist-genres">${genreTags}</div>
+                <span class="artist-count">${a.tracks.length} track${a.tracks.length > 1 ? 's' : ''}</span>
+              </div>
+            </div>
+            <div class="artist-body">${trackRows}</div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    document.getElementById('artist-search').addEventListener('input', (e) => {
+      renderArtistIndex(e.target.value.trim());
+    });
+
+    // --- RANDOM TRACK (shuffle button) ---
+    function playRandom() {
+      const withVideo = allTracks.filter(t => getVideoId(t.youtube_url));
+      if (withVideo.length === 0) return;
+      const pick = withVideo[Math.floor(Math.random() * withVideo.length)];
+      const videoId = getVideoId(pick.youtube_url);
+
+      // Switch to archive tab, clear search, scroll to top
+      switchTab('archive');
+      document.getElementById('search').value = pick.artist;
+      renderSearchResults(pick.artist);
+
+      // Show a toast-style notification
+      showToast(`${pick.track} by ${pick.artist}`);
+    }
+
+    function showToast(msg) {
+      let toast = document.getElementById('toast');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'toast';
+        toast.style.cssText = `
+          position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%);
+          background: var(--accent); color: #fff; padding: 0.75rem 1.5rem;
+          border-radius: 4px; font-family: Oswald, sans-serif; font-size: 0.95rem;
+          z-index: 999; opacity: 0; transition: opacity 0.3s;
+          text-align: center; max-width: 90vw;
+        `;
+        document.body.appendChild(toast);
+      }
+      toast.textContent = msg;
+      toast.style.opacity = '1';
+      setTimeout(() => { toast.style.opacity = '0'; }, 3000);
+    }
+
+    // --- INIT ---
     fetch('data.json')
       .then(r => r.json())
       .then(data => {
         DATA = data;
+        // Build flat track list for search
+        data.editions.forEach(ed => {
+          ed.tracks.forEach(t => {
+            allTracks.push({ ...t, date: ed.date, curator: ed.curator });
+          });
+        });
         renderStats(data.stats);
         renderEditions(data.editions);
+        renderArtistIndex('');
         setFilter('all');
       });
   </script>
