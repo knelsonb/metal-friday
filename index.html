@@ -62,6 +62,35 @@
       filter: grayscale(0.3);
     }
 
+    .shuffle-btn {
+      margin-top: 1.5rem;
+      padding: 0.6rem 1.5rem;
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--text-dim);
+      cursor: pointer;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      transition: all 0.2s;
+    }
+
+    .shuffle-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent-glow);
+    }
+
+    /* Accessibility: focusable interactive elements */
+    .edition-header, .artist-header, .genre-bubble {
+      outline: none;
+    }
+    .edition-header:focus-visible, .artist-header:focus-visible, .genre-bubble:focus-visible {
+      outline: 2px solid var(--accent-glow);
+      outline-offset: 2px;
+    }
+
     .hero .tagline {
       font-size: 1rem;
       color: var(--text-dim);
@@ -791,15 +820,19 @@
       color: var(--text-dim);
       cursor: pointer;
       background: none;
-      border: none;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: 0.15rem 0.4rem;
       font-family: 'Inter', sans-serif;
-      transition: color 0.15s;
+      transition: all 0.15s;
       display: flex;
       align-items: center;
       gap: 0.2rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
 
-    .share-btn:hover { color: var(--accent-glow); }
+    .share-btn:hover { color: var(--accent-glow); border-color: var(--accent); }
 
     /* --- STATS CHART --- */
     .stats-section {
@@ -1160,20 +1193,10 @@
 <body>
 
   <div class="hero">
-    <span class="horns" id="secret-horns" style="cursor:default;touch-action:manipulation;-webkit-user-select:none;user-select:none">\m/</span>
+    <span class="horns" id="secret-horns" aria-hidden="true" style="cursor:default;touch-action:manipulation;-webkit-user-select:none;user-select:none">\m/</span>
     <h1>Metal Friday</h1>
     <p class="tagline">Curated heaviness since 2016</p>
-    <button onclick="playRandom()" style="
-      margin-top: 1.5rem; padding: 0.6rem 1.5rem;
-      background: transparent; border: 1px solid var(--border);
-      border-radius: 4px; color: var(--text-dim); cursor: pointer;
-      font-family: Oswald, sans-serif; font-size: 0.8rem;
-      text-transform: uppercase; letter-spacing: 0.15em;
-      transition: all 0.2s;
-    " onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent-glow)'"
-       onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-dim)'">
-      Shuffle
-    </button>
+    <button class="shuffle-btn" onclick="playRandom()">Shuffle</button>
   </div>
 
   <div class="nav-tabs">
@@ -1356,7 +1379,11 @@
 
     function searchTracks(query) {
       if (!query || query.length < 2) return [];
-      return allTracks
+      let pool = allTracks;
+      if (currentFilter !== 'all') {
+        pool = pool.filter(t => t.curator === currentFilter);
+      }
+      return pool
         .map(t => ({ ...t, score: scoreTrack(query, t) }))
         .filter(t => t.score > 5)
         .sort((a, b) => b.score - a.score)
@@ -1442,7 +1469,10 @@
     }
 
     function toggleEdition(el) {
-      el.closest('.edition').classList.toggle('open');
+      const edition = el.closest('.edition');
+      edition.classList.toggle('open');
+      const header = edition.querySelector('.edition-header');
+      if (header) header.setAttribute('aria-expanded', edition.classList.contains('open'));
     }
 
     function toggleEmbed(btn, videoId) {
@@ -1480,7 +1510,7 @@
               <div class="track-title-row">
                 <span class="track-title">${escHtml(t.track)}</span>
                 <span class="track-artist">${escHtml(t.artist)}</span>
-                <button class="share-btn" onclick="copyTrackLink('${escHtml(t.artist).replace(/'/g,"\\'")}','${escHtml(t.track).replace(/'/g,"\\'")}')">&#128279;</button>
+                <button class="share-btn" title="Copy link to this track" aria-label="Share this track" onclick="copyTrackLink('${escHtml(t.artist).replace(/'/g,"\\'")}','${escHtml(t.track).replace(/'/g,"\\'")}')">&#128279; share</button>
               </div>
               <span class="genre-tag">${escHtml(t.genre)}</span>
               ${links.length ? `<div class="track-links">${links.join('')}</div>` : ''}
@@ -1491,7 +1521,7 @@
 
         return `
           <div class="edition ${isFirst ? 'open' : ''}" data-date="${ed.date}">
-            <div class="edition-header" onclick="toggleEdition(this)">
+            <div class="edition-header" role="button" tabindex="0" aria-expanded="${isFirst}" onclick="toggleEdition(this)" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleEdition(this)}">
               <div><div class="edition-date">${formatDate(ed.date)}</div></div>
               <div class="edition-meta">
                 <span class="curator-badge ${ed.curator}">${ed.curator}</span>
@@ -1507,7 +1537,7 @@
 
     function setFilter(f) {
       currentFilter = f;
-      document.querySelectorAll('.filter-btn').forEach(btn => {
+      document.querySelectorAll('.filter-btn[data-filter]').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.filter === f);
       });
       // Clear search when changing filters
@@ -1526,6 +1556,10 @@
       const navBtn = document.querySelector(`.nav-tab[onclick="switchTab('${tab}')"]`);
       if (navBtn) navBtn.classList.add('active');
       document.getElementById(`tab-${tab}`).classList.add('active');
+      // Clear what's-new badges when user views archive
+      if (tab === 'archive') {
+        setTimeout(updateLastVisit, 3000);
+      }
     }
 
     // --- SUGGESTION FORM ---
@@ -1552,19 +1586,23 @@
         'https://knelsonb.github.io/metal-friday/',
       ].filter(Boolean).join('\n');
 
-      // Primary: mailto link to Keith (works on all devices, no account needed)
-      const mailto = `mailto:[redacted]?cc=${encodeURIComponent('[redacted]')}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      // Obfuscated email addresses
+      const to = atob('a2JuZWxzb25Ac2doLmNvbQ==');
+      const cc = atob('QUxEb25kcmVhQHNnaC5jb20=');
+      const mailto = `mailto:${to}?cc=${encodeURIComponent(cc)}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
       window.location.href = mailto;
 
-      // Show success state
+      // Honest messaging — email client opened, user still needs to hit send
       document.getElementById('suggest-form').style.display = 'none';
       const successEl = document.getElementById('sg-success');
       successEl.innerHTML = `
-        Suggestion submitted! \\m/<br>
+        Almost there! \\m/<br>
         <span style="font-size:0.8rem;color:var(--text-dim);font-family:Inter,sans-serif">
-          Your email app should have opened with the suggestion.<br>
-          Just hit send and we'll review it for a future edition.
+          Your email app should have opened with the suggestion pre-filled.<br>
+          <strong style="color:var(--text)">Hit send</strong> and we'll review it for a future edition.<br><br>
+          <span style="font-size:0.75rem">No email app? Send the details to Keith or Trey directly.</span>
         </span>
+        <br><button onclick="document.getElementById('suggest-form').style.display='flex';document.getElementById('sg-success').classList.remove('visible')" style="margin-top:1rem;padding:0.4rem 1rem;background:none;border:1px solid var(--border);border-radius:4px;color:var(--text-dim);cursor:pointer;font-family:Inter,sans-serif;font-size:0.75rem">Start over</button>
       `;
       successEl.classList.add('visible');
     }
@@ -1814,16 +1852,21 @@
       const container = document.getElementById('genre-tracks');
       container.innerHTML = tracks.sort((a, b) => b.date.localeCompare(a.date)).map(t => {
         const videoId = getVideoId(t.youtube_url);
-        const link = videoId
-          ? `<a class="at-link" href="${t.youtube_url}" target="_blank">${ytSvg}</a>`
-          : '';
+        const links = [];
+        if (videoId) {
+          links.push(`<a class="track-link" href="${t.youtube_url}" target="_blank">${ytSvg} YouTube</a>`);
+          links.push(`<a class="track-link" href="javascript:void(0)" onclick="toggleEmbed(this, '${videoId}')">${ytSvg} Play</a>`);
+        }
         return `
-          <div class="search-result-item">
-            <span class="sr-track">${escHtml(t.track)}</span>
-            <span class="sr-artist">${escHtml(t.artist)}</span>
-            <span class="sr-genre">${escHtml(t.genre)}</span>
-            <span class="sr-date">${formatDateShort(t.date)}</span>
-            ${link}
+          <div class="track" style="border:1px solid var(--border);border-radius:4px;margin-bottom:0.5rem">
+            <div class="track-title-row">
+              <span class="track-title">${escHtml(t.track)}</span>
+              <span class="track-artist">${escHtml(t.artist)}</span>
+            </div>
+            <span class="genre-tag">${escHtml(t.genre)}</span>
+            <span style="font-size:0.75rem;color:var(--text-dim);margin-left:0.5rem">${formatDateShort(t.date)}</span>
+            ${links.length ? `<div class="track-links">${links.join('')}</div>` : ''}
+            <div class="yt-embed"></div>
           </div>
         `;
       }).join('');
@@ -1871,8 +1914,8 @@
         }
       });
 
-      // Update last visit after a short delay (so they see the badges)
-      setTimeout(updateLastVisit, 5000);
+      // Don't auto-clear — only clear when user actually views archive tab
+      // (handled in switchTab)
     }
 
     // --- SHAREABLE TRACK LINKS ---
@@ -2235,7 +2278,7 @@
     }
 
     // --- INIT ---
-    fetch('data.json')
+    fetch('data.json?t=' + Date.now())
       .then(r => r.json())
       .then(data => {
         DATA = data;
@@ -2253,6 +2296,10 @@
         setFilter('all');
         applyNewBadges();
         handleHashNavigation();
+      })
+      .catch(() => {
+        document.getElementById('editions').innerHTML =
+          '<div class="no-results">Failed to load the archive. Try refreshing.</div>';
       });
 
     window.addEventListener('hashchange', handleHashNavigation);
