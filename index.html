@@ -2073,6 +2073,8 @@
     const ytMusicSvg = `<svg viewBox="0 0 24 24" style="width:12px;height:12px;fill:currentColor"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm-2-5.5l5-2.5-5-2.5v5z"/></svg>`;
     const bcSvg = `<svg viewBox="0 0 24 24" style="width:12px;height:12px;fill:currentColor"><path d="M0 18.75l7.437-13.5H24l-7.438 13.5z"/></svg>`;
 
+    const spotSvg = `<svg viewBox="0 0 24 24" style="width:12px;height:12px;fill:currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm5.5 17.3c-.2.3-.6.4-.9.2-2.5-1.5-5.7-1.9-9.4-1-.4.1-.7-.1-.8-.5-.1-.4.1-.7.5-.8 4.1-.9 7.6-.5 10.4 1.2.3.2.4.6.2.9zm1.5-3.3c-.3.4-.8.5-1.2.3-2.9-1.8-7.2-2.3-10.6-1.3-.4.1-.9-.1-1-.6-.1-.4.1-.9.6-1 3.9-1.2 8.7-.6 12 1.5.3.2.5.7.2 1.1zm.1-3.4c-3.4-2-9.1-2.2-12.4-1.2-.5.2-1-.2-1.2-.7-.2-.5.2-1 .7-1.2 3.8-1.2 10-1 14 1.4.5.3.6.9.3 1.4-.3.4-.9.6-1.4.3z"/></svg>`;
+
     function planLinks(p) {
       const links = [];
       if (p.youtube_url) {
@@ -2080,6 +2082,9 @@
       }
       if (p.youtube_music_url) {
         links.push(`<a class="track-link" href="${p.youtube_music_url}" target="_blank">${ytMusicSvg} YT Music</a>`);
+      }
+      if (p.spotify_url) {
+        links.push(`<a class="track-link" href="${p.spotify_url}" target="_blank" style="color:#1db954">${spotSvg} Spotify</a>`);
       }
       if (p.bandcamp_url) {
         links.push(`<a class="track-link" href="${p.bandcamp_url}" target="_blank">${bcSvg} Bandcamp</a>`);
@@ -2138,16 +2143,18 @@
 
             return `
               <div class="artist-card" style="margin-bottom:0.75rem">
-                <div class="artist-header" onclick="this.closest('.artist-card').classList.toggle('open')">
-                  <div>
+                <div class="artist-header" onclick="this.closest('.artist-card').classList.toggle('open')" style="flex-wrap:wrap">
+                  <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap">
                     <span class="artist-name">${escHtml(b.artist)}</span>
-                    <span class="genre-tag" style="margin-left:0.5rem">${escHtml(b.genre || '')}</span>
+                    <span class="genre-tag">${escHtml(b.genre || '')}</span>
                   </div>
-                  <span class="artist-count">${(b.tracks || []).length} idea${(b.tracks || []).length !== 1 ? 's' : ''}</span>
+                  <div style="display:flex;align-items:center;gap:0.75rem">
+                    ${artistLinks.map(l => l.replace('class="track-link"', 'class="track-link" onclick="event.stopPropagation()"')).join('')}
+                    <span class="artist-count">${(b.tracks || []).length} idea${(b.tracks || []).length !== 1 ? 's' : ''}</span>
+                  </div>
                 </div>
                 <div class="artist-body" style="padding:0.75rem 1.25rem">
-                  <div style="font-size:0.8rem;color:var(--text-dim);margin-bottom:0.5rem">${escHtml(b.note || '')}</div>
-                  ${artistLinks.length ? `<div class="track-links" style="margin-bottom:0.5rem">${artistLinks.join('')}</div>` : ''}
+                  <div style="font-size:0.8rem;color:var(--text-dim);margin-bottom:0.75rem">${escHtml(b.note || '')}</div>
                   ${trackRows}
                 </div>
               </div>
@@ -2156,12 +2163,17 @@
 
           const maybes = (ed.maybe || []).map(p => {
             const mLinks = planLinks(p);
+            const mArtistLinks = [];
+            if (p.artist_spotify) mArtistLinks.push(`<a class="track-link" href="${p.artist_spotify}" target="_blank">&#127911; Artist</a>`);
+            if (p.artist_youtube) mArtistLinks.push(`<a class="track-link" href="${p.artist_youtube}" target="_blank">${ytSvg} Channel</a>`);
             return `
               <div class="plan-pick open">
                 <span class="plan-status open">maybe</span>
                 <span class="plan-pick-artist">${escHtml(p.artist)}</span>
+                ${p.track ? `<span style="color:var(--text);font-size:0.9rem">"${escHtml(p.track)}"</span>` : ''}
                 <span class="genre-tag">${escHtml(p.genre)}</span>
                 ${mLinks}
+                ${mArtistLinks.length ? `<div class="track-links" style="width:100%">${mArtistLinks.join('')}</div>` : ''}
                 <span class="plan-pick-note">${escHtml(p.note || '')}</span>
               </div>
             `;
