@@ -602,6 +602,110 @@
     .at-link:hover { color: var(--text-bright); }
     .at-link svg { width: 12px; height: 12px; fill: currentColor; }
 
+    /* --- GENRE CLOUD --- */
+    .genre-cloud {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+    }
+
+    .genre-bubble {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.5rem 1rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .genre-bubble:hover {
+      border-color: var(--accent);
+      background: var(--accent-dim);
+    }
+
+    .genre-bubble.active {
+      border-color: var(--accent-glow);
+      background: var(--accent);
+      color: var(--text-bright);
+    }
+
+    .genre-bubble-name {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-bright);
+      text-transform: lowercase;
+    }
+
+    .genre-bubble-count {
+      font-size: 0.65rem;
+      color: var(--text-dim);
+      background: var(--tag-bg);
+      padding: 0.1rem 0.35rem;
+      border-radius: 8px;
+      min-width: 1.2rem;
+      text-align: center;
+    }
+
+    .genre-bubble.active .genre-bubble-count {
+      background: rgba(0,0,0,0.3);
+      color: var(--text-bright);
+    }
+
+    .genre-bubble.size-lg { font-size: 1rem; padding: 0.6rem 1.2rem; }
+    .genre-bubble.size-lg .genre-bubble-name { font-size: 1rem; }
+    .genre-bubble.size-xl { font-size: 1.1rem; padding: 0.7rem 1.4rem; }
+    .genre-bubble.size-xl .genre-bubble-name { font-size: 1.15rem; }
+
+    .genre-detail {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 1.5rem 4rem;
+    }
+
+    .genre-detail-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 0;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .genre-detail-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--accent-glow);
+      text-transform: lowercase;
+    }
+
+    .genre-detail-count {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+    }
+
+    .genre-back {
+      font-size: 0.8rem;
+      color: var(--accent-glow);
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      border: none;
+      background: none;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .genre-back:hover { color: var(--text-bright); }
+
     .letter-divider {
       font-family: 'Oswald', sans-serif;
       font-size: 1.6rem;
@@ -644,6 +748,7 @@
   <div class="nav-tabs">
     <button class="nav-tab active" onclick="switchTab('archive')">Archive</button>
     <button class="nav-tab" onclick="switchTab('artists')">Artists</button>
+    <button class="nav-tab" onclick="switchTab('genres')">Genres</button>
     <button class="nav-tab" onclick="switchTab('suggest')">Suggest a Track</button>
   </div>
 
@@ -668,6 +773,15 @@
       <input type="text" class="search-box" id="artist-search" placeholder="Filter artists...">
     </div>
     <div class="editions" id="artist-index"></div>
+  </div>
+
+  <!-- GENRES TAB -->
+  <div class="tab-content" id="tab-genres">
+    <div class="genre-cloud" id="genre-cloud"></div>
+    <div class="genre-detail" id="genre-detail" style="display:none">
+      <div class="genre-detail-header" id="genre-detail-header"></div>
+      <div class="editions" id="genre-tracks"></div>
+    </div>
   </div>
 
   <!-- SUGGEST TAB -->
@@ -1090,6 +1204,114 @@
       renderArtistIndex(e.target.value.trim());
     });
 
+    // --- GENRE CLOUD ---
+    function parseGenreTokens(genre) {
+      // Split compound genres: "death/thrash" -> ["death", "thrash"]
+      // "progressive/melodic death" -> ["progressive", "melodic death"]
+      // "blackened death metal" -> ["blackened death metal", "death metal"]
+      // Keep the full genre as-is too
+      const tokens = new Set();
+      tokens.add(genre);
+
+      // Split on /
+      genre.split('/').forEach(part => {
+        const p = part.trim();
+        if (p) tokens.add(p);
+      });
+
+      // Extract parent genres
+      const parents = [
+        'death metal', 'black metal', 'doom', 'thrash', 'progressive',
+        'hardcore', 'metalcore', 'post metal', 'grindcore', 'sludge',
+        'power', 'folk', 'stoner', 'crossover'
+      ];
+      for (const parent of parents) {
+        if (genre.includes(parent)) tokens.add(parent);
+      }
+      // "death" alone maps to "death metal" cluster
+      if (genre === 'death') tokens.add('death metal');
+      if (genre === 'black') tokens.add('black metal');
+      if (genre === 'doom') tokens.add('doom');
+      if (genre.includes('death') && !genre.includes('death metal')) tokens.add('death metal');
+      if (genre.includes('doom') && genre !== 'doom') tokens.add('doom');
+
+      return tokens;
+    }
+
+    function buildGenreClusters() {
+      const clusters = {};
+      allTracks.forEach(t => {
+        const tokens = parseGenreTokens(t.genre);
+        tokens.forEach(token => {
+          if (!clusters[token]) clusters[token] = [];
+          // Avoid double-counting
+          if (!clusters[token].some(x => x.artist === t.artist && x.track === t.track)) {
+            clusters[token].push(t);
+          }
+        });
+      });
+      return clusters;
+    }
+
+    function renderGenreCloud() {
+      const clusters = buildGenreClusters();
+      const sorted = Object.entries(clusters)
+        .filter(([_, tracks]) => tracks.length >= 2)
+        .sort((a, b) => b[1].length - a[1].length);
+
+      const maxCount = sorted[0]?.[1].length || 1;
+
+      document.getElementById('genre-cloud').innerHTML = sorted.map(([genre, tracks]) => {
+        const ratio = tracks.length / maxCount;
+        const sizeClass = ratio > 0.5 ? 'size-xl' : ratio > 0.25 ? 'size-lg' : '';
+        return `
+          <div class="genre-bubble ${sizeClass}" onclick="showGenreDetail('${escHtml(genre).replace(/'/g, "\\'")}')">
+            <span class="genre-bubble-name">${escHtml(genre)}</span>
+            <span class="genre-bubble-count">${tracks.length}</span>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function showGenreDetail(genre) {
+      const clusters = buildGenreClusters();
+      const tracks = clusters[genre] || [];
+
+      document.getElementById('genre-cloud').style.display = 'none';
+      const detail = document.getElementById('genre-detail');
+      detail.style.display = 'block';
+
+      document.getElementById('genre-detail-header').innerHTML = `
+        <div>
+          <div class="genre-detail-title">${escHtml(genre)}</div>
+          <div class="genre-detail-count">${tracks.length} track${tracks.length !== 1 ? 's' : ''}</div>
+        </div>
+        <button class="genre-back" onclick="hideGenreDetail()">All Genres</button>
+      `;
+
+      const container = document.getElementById('genre-tracks');
+      container.innerHTML = tracks.sort((a, b) => b.date.localeCompare(a.date)).map(t => {
+        const videoId = getVideoId(t.youtube_url);
+        const link = videoId
+          ? `<a class="at-link" href="${t.youtube_url}" target="_blank">${ytSvg}</a>`
+          : '';
+        return `
+          <div class="search-result-item">
+            <span class="sr-track">${escHtml(t.track)}</span>
+            <span class="sr-artist">${escHtml(t.artist)}</span>
+            <span class="sr-genre">${escHtml(t.genre)}</span>
+            <span class="sr-date">${formatDateShort(t.date)}</span>
+            ${link}
+          </div>
+        `;
+      }).join('');
+    }
+
+    function hideGenreDetail() {
+      document.getElementById('genre-cloud').style.display = 'flex';
+      document.getElementById('genre-detail').style.display = 'none';
+    }
+
     // --- RANDOM TRACK (shuffle button) ---
     function playRandom() {
       const withVideo = allTracks.filter(t => getVideoId(t.youtube_url));
@@ -1139,6 +1361,7 @@
         renderStats(data.stats);
         renderEditions(data.editions);
         renderArtistIndex('');
+        renderGenreCloud();
         setFilter('all');
       });
   </script>
