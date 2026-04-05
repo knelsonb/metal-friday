@@ -2081,6 +2081,23 @@
       }, 1500);
     }
 
+    const ytMusicSvg = `<svg viewBox="0 0 24 24" style="width:12px;height:12px;fill:currentColor"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm-2-5.5l5-2.5-5-2.5v5z"/></svg>`;
+    const bcSvg = `<svg viewBox="0 0 24 24" style="width:12px;height:12px;fill:currentColor"><path d="M0 18.75l7.437-13.5H24l-7.438 13.5z"/></svg>`;
+
+    function planLinks(p) {
+      const links = [];
+      if (p.youtube_url) {
+        links.push(`<a class="track-link" href="${p.youtube_url}" target="_blank">${ytSvg} YouTube</a>`);
+      }
+      if (p.youtube_music_url) {
+        links.push(`<a class="track-link" href="${p.youtube_music_url}" target="_blank">${ytMusicSvg} YT Music</a>`);
+      }
+      if (p.bandcamp_url) {
+        links.push(`<a class="track-link" href="${p.bandcamp_url}" target="_blank">${bcSvg} Bandcamp</a>`);
+      }
+      return links.length ? `<div class="track-links" style="width:100%">${links.join('')}</div>` : '';
+    }
+
     function loadPlanning() {
       fetch('planning.json?t=' + Date.now())
         .then(r => r.json())
@@ -2095,31 +2112,39 @@
                 </div>
               `;
             }
+            const pLinks = planLinks(p);
             return `
               <div class="plan-pick ${p.status || 'open'}">
                 <span class="plan-status ${p.status || 'open'}">${p.status || 'open'}</span>
                 <span class="plan-pick-artist">${escHtml(p.artist)}</span>
                 <span class="genre-tag">${escHtml(p.genre)}</span>
+                ${pLinks}
                 <span class="plan-pick-note">${escHtml(p.note || '')}</span>
               </div>
             `;
           }).join('');
 
           const backlog = (plan.backlog || []).map(b => `
-            <div class="backlog-item">
+            <div class="backlog-item" style="flex-wrap:wrap">
               <span class="backlog-artist">${escHtml(b.artist)}</span>
-              <span class="backlog-note">${escHtml(b.note || '')}</span>
+              ${b.track ? `<span style="color:var(--text);font-size:0.85rem">"${escHtml(b.track)}"</span>` : ''}
+              ${b.genre ? `<span class="genre-tag">${escHtml(b.genre)}</span>` : ''}
+              <span class="backlog-note" style="width:100%;margin-top:0.2rem">${escHtml(b.note || '')}</span>
             </div>
           `).join('');
 
-          const maybes = (ed.maybe || []).map(p => `
-            <div class="plan-pick open">
-              <span class="plan-status open">maybe</span>
-              <span class="plan-pick-artist">${escHtml(p.artist)}</span>
-              <span class="genre-tag">${escHtml(p.genre)}</span>
-              <span class="plan-pick-note">${escHtml(p.note || '')}</span>
-            </div>
-          `).join('');
+          const maybes = (ed.maybe || []).map(p => {
+            const mLinks = planLinks(p);
+            return `
+              <div class="plan-pick open">
+                <span class="plan-status open">maybe</span>
+                <span class="plan-pick-artist">${escHtml(p.artist)}</span>
+                <span class="genre-tag">${escHtml(p.genre)}</span>
+                ${mLinks}
+                <span class="plan-pick-note">${escHtml(p.note || '')}</span>
+              </div>
+            `;
+          }).join('');
 
           document.getElementById('planning-content').innerHTML = `
             <div class="plan-edition-header">

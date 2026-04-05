@@ -9,14 +9,19 @@
         "track": "Ludens",
         "genre": "electronic rock/metalcore",
         "note": "Death Stranding soundtrack. BMTH 4th appearance — lean into the genre evolution angle. Bridges from Trey's metalcore picks last week.",
-        "status": "confirmed"
+        "status": "confirmed",
+        "youtube_url": "https://www.youtube.com/watch?v=B9wvTuDC-H0",
+        "youtube_music_url": "https://music.youtube.com/watch?v=B9wvTuDC-H0"
       },
       {
         "artist": "MASTER BOOT RECORD",
         "track": "DEV.NFO",
         "genre": "chiptune metal",
         "note": "A 486DX processor making avant-garde metal with DOS-era naming conventions. New to the archive.",
-        "status": "confirmed"
+        "status": "confirmed",
+        "youtube_url": "",
+        "youtube_music_url": "https://music.youtube.com/search?q=MASTER+BOOT+RECORD+DEV.NFO",
+        "bandcamp_url": "https://masterbootrecord.bandcamp.com/track/dev-nfo"
       }
     ],
     "maybe": [
@@ -24,30 +29,36 @@
         "artist": "Carpenter Brut",
         "track": "Turbo Killer",
         "genre": "synthwave/dark electronic",
-        "note": "French synthwave with metal energy. Not metal per se, but the aggression and production scream metal-adjacent. Pairs perfectly with MBR — both are electronic acts that hit like a truck."
+        "note": "French synthwave with metal energy. Not metal per se, but the aggression and production scream metal-adjacent. Pairs perfectly with MBR — both are electronic acts that hit like a truck.",
+        "youtube_url": "https://www.youtube.com/watch?v=er416Ad3R1g",
+        "youtube_music_url": "https://music.youtube.com/watch?v=er416Ad3R1g"
       },
       {
         "artist": "Thy Catafalque",
         "track": "Szarvas",
         "genre": "avant-garde/electronic black metal",
-        "note": "Hungarian one-man project mixing folk, classical, electronic, and black metal into something uncategorizable. The kind of 'what genre even IS this' pick Metal Friday thrives on."
+        "note": "Hungarian one-man project mixing folk, classical, electronic, and black metal into something uncategorizable. The kind of 'what genre even IS this' pick Metal Friday thrives on.",
+        "youtube_url": "https://www.youtube.com/watch?v=8gPyMR7gMJE",
+        "youtube_music_url": "https://music.youtube.com/search?q=Thy+Catafalque+Szarvas"
       },
       {
         "artist": "Leprous",
         "track": "The Price",
         "genre": "modern prog",
-        "note": "Norwegian prog that's accessible without being boring. Clean vocals, atmospheric, technical. Good 'ease the audience in' pick for the prog-skeptical."
+        "note": "Norwegian prog that's accessible without being boring. Clean vocals, atmospheric, technical. Good 'ease the audience in' pick for the prog-skeptical.",
+        "youtube_url": "https://www.youtube.com/watch?v=0G9Qd_84YZs",
+        "youtube_music_url": "https://music.youtube.com/search?q=Leprous+The+Price"
       }
     ],
     "notes": "Ham-and-egg from Trey's BMTH metalcore/deathcore on 4/3. Bridge to electronic side via Ludens, then go full synth with MBR. Third pick should complete the arc — either go deeper electronic (Carpenter Brut) or swing back toward prog (Leprous/Thy Catafalque)."
   },
   "backlog": [
-    { "artist": "Devin Townsend", "note": "Prog giant, never featured. Long overdue." },
-    { "artist": "Porcupine Tree", "note": "Classic prog. Might be too far from metal for Trey's crowd." },
-    { "artist": "Animals as Leaders", "note": "Instrumental prog/djent. No vocals to scare anyone." },
-    { "artist": "Igorrr", "note": "Baroque/breakcore/death metal. The 'what even IS this' pick." },
-    { "artist": "Perturbator", "note": "Dark synthwave. Same electronic-metal-adjacent lane as MBR and Carpenter Brut." },
-    { "artist": "An Abstract Illusion", "note": "Prog death + 80s sci-fi synths. New album 'The Sleeping City' coming 2026." }
+    { "artist": "Devin Townsend", "track": "Kingdom", "genre": "progressive", "note": "Prog giant, never featured. Long overdue. 'Kingdom' is a good entry point — epic but accessible." },
+    { "artist": "Porcupine Tree", "track": "Arriving Somewhere but Not Here", "genre": "progressive rock", "note": "Classic prog. Might be too far from metal for Trey's crowd. But this track has teeth." },
+    { "artist": "Animals as Leaders", "track": "CAFO", "genre": "progressive/djent", "note": "Instrumental prog/djent. No vocals to scare anyone. Technical wizardry." },
+    { "artist": "Igorrr", "track": "Very Noise", "genre": "baroque/breakcore/death", "note": "The 'what even IS this' pick. Baroque harpsichord + blast beats + chicken samples." },
+    { "artist": "Perturbator", "track": "She Is Young, She Is Beautiful...", "genre": "dark synthwave", "note": "Same electronic-metal-adjacent lane as MBR and Carpenter Brut." },
+    { "artist": "An Abstract Illusion", "track": "Tear Down This Holy Mountain", "genre": "progressive death", "note": "Prog death + 80s sci-fi synths. New album 'The Sleeping City' coming 2026." }
   ],
   "updated": "2026-04-05"
 }
