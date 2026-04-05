@@ -2156,7 +2156,7 @@
             const pArtistLinks = [];
             if (p.artist_spotify) pArtistLinks.push(`<a class="track-link" href="${p.artist_spotify}" target="_blank">&#127911; Artist</a>`);
             if (p.artist_youtube) pArtistLinks.push(`<a class="track-link" href="${p.artist_youtube}" target="_blank">${ytSvg} Channel</a>`);
-            const recBy = p.rec_by ? `<span class="curator-badge ${p.rec_by}" style="font-size:0.55rem;padding:0.1rem 0.4rem">${p.rec_by}</span>` : '';
+            const recBy = p.rec_by ? `<span class="curator-badge ${p.rec_by}" style="font-size:0.55rem;padding:0.1rem 0.4rem">${p.rec_by === 'sauron' ? 'sauron says' : p.rec_by + ' pick'}</span>${p.rec_by_note ? `<span style="font-size:0.6rem;color:var(--text-dim);font-style:italic"> (${escHtml(p.rec_by_note)})</span>` : ''}` : '';
             return `
               <div class="plan-pick ${p.status || 'open'}">
                 <span class="plan-status ${p.status || 'open'}">${p.status || 'open'}</span>
@@ -2189,7 +2189,7 @@
               `;
             }).join('');
 
-            const bRecBy = b.rec_by ? `<span class="curator-badge ${b.rec_by}" style="font-size:0.55rem;padding:0.1rem 0.4rem">${b.rec_by}</span>` : '';
+            const bRecBy = b.rec_by ? `<span class="curator-badge ${b.rec_by}" style="font-size:0.55rem;padding:0.1rem 0.4rem">${b.rec_by === 'sauron' ? 'sauron says' : b.rec_by + ' pick'}</span>${b.rec_by_note ? `<span style="font-size:0.6rem;color:var(--text-dim);font-style:italic"> (${escHtml(b.rec_by_note)})</span>` : ''}` : '';
             return `
               <div class="artist-card" style="margin-bottom:0.75rem">
                 <div class="artist-header" onclick="this.closest('.artist-card').classList.toggle('open')" style="flex-wrap:wrap">
@@ -2216,7 +2216,7 @@
             const mArtistLinks = [];
             if (p.artist_spotify) mArtistLinks.push(`<a class="track-link" href="${p.artist_spotify}" target="_blank">&#127911; Artist</a>`);
             if (p.artist_youtube) mArtistLinks.push(`<a class="track-link" href="${p.artist_youtube}" target="_blank">${ytSvg} Channel</a>`);
-            const mRecBy = p.rec_by ? `<span class="curator-badge ${p.rec_by || 'sauron'}" style="font-size:0.55rem;padding:0.1rem 0.4rem">${p.rec_by}</span>` : '';
+            const mRecBy = p.rec_by ? `<span class="curator-badge ${p.rec_by}" style="font-size:0.55rem;padding:0.1rem 0.4rem">${p.rec_by === 'sauron' ? 'sauron says' : p.rec_by + ' pick'}</span>${p.rec_by_note ? `<span style="font-size:0.6rem;color:var(--text-dim);font-style:italic"> (${escHtml(p.rec_by_note)})</span>` : ''}` : '';
             return `
               <div class="plan-pick open">
                 <span class="plan-status open">maybe</span>

@@ -37,13 +37,14 @@
         "artist": "Carpenter Brut",
         "track": "Turbo Killer",
         "genre": "synthwave/dark electronic",
-        "note": "French. Synthwave with metal aggression. Not metal by the rules, but the rules don't know what to do with this. Pairs with MBR — both electronic acts that hit like riffs. The Seth Ickerman video is a sci-fi short film with a soundtrack attached.",
+        "note": "French. Synthwave with metal aggression. Not metal by the rules, but the rules don't know what to do with this. Pairs with MBR — both electronic, both heavy as hell. The Seth Ickerman video is a sci-fi short film with a soundtrack attached.",
         "rec_by": "sauron",
         "youtube_url": "https://www.youtube.com/watch?v=er416Ad3R1g",
         "youtube_music_url": "https://music.youtube.com/watch?v=er416Ad3R1g",
         "spotify_url": "https://open.spotify.com/track/10qbHF920zH5K8C8IcE5AL",
         "artist_spotify": "https://open.spotify.com/artist/1l2oLiukA9i5jEtIyNWIEP",
-        "artist_youtube": "https://www.youtube.com/@CarpenterBrut"
+        "artist_youtube": "https://www.youtube.com/@CarpenterBrut",
+        "rec_by_note": "keith lane"
       },
       {
         "artist": "Thy Catafalque",
@@ -55,19 +56,21 @@
         "youtube_music_url": "https://music.youtube.com/search?q=Thy+Catafalque+Szarvas",
         "spotify_url": "https://open.spotify.com/track/47OPKbaE3XJrmB4AnSAtO0",
         "artist_spotify": "https://open.spotify.com/artist/5kq4mFwENMOBQZLYbM1Tqe",
-        "artist_youtube": "https://www.youtube.com/@ThyCatafalque"
+        "artist_youtube": "https://www.youtube.com/@ThyCatafalque",
+        "rec_by_note": "either — has black metal in there"
       },
       {
         "artist": "Leprous",
         "track": "The Price",
         "genre": "modern prog",
         "note": "Norwegian prog. Clean vocals, atmospheric, technical. The 'ease them in' pick for people who think prog means 20-minute keyboard solos. It doesn't. Not here.",
-        "rec_by": "keith",
+        "rec_by": "sauron",
         "youtube_url": "https://www.youtube.com/watch?v=0G9Qd_84YZs",
         "youtube_music_url": "https://music.youtube.com/search?q=Leprous+The+Price",
         "spotify_url": "https://open.spotify.com/track/134I0qT6UrkDjhbI6bx0x3",
         "artist_spotify": "https://open.spotify.com/artist/4lgrzShsg2FLA89eFxzkaa",
-        "artist_youtube": "https://www.youtube.com/@Leprous"
+        "artist_youtube": "https://www.youtube.com/@Leprous",
+        "rec_by_note": "keith lane"
       }
     ],
     "notes": "Trey's 4/3 edition had two BMTH tracks (metalcore/deathcore) and Magnolia Park (nu-metal/pop-punk). Keith picks up the BMTH thread via Ludens — same band, electronic side. MBR is the wildcard: chiptune metal, zero precedent in the archive. Third pick should complete the arc. Carpenter Brut goes deeper electronic. Leprous swings back to prog. Thy Catafalque does both and neither."
@@ -77,26 +80,58 @@
       "artist": "Devin Townsend",
       "genre": "progressive",
       "note": "87 albums. Bald. Unhinged. Never featured. Overdue by about 5 years.",
-      "rec_by": "keith",
+      "rec_by": "sauron",
       "artist_spotify": "https://open.spotify.com/artist/5iShu1aaDBjRFJqp0x9eim",
       "artist_youtube": "https://www.youtube.com/@devintownsend",
       "tracks": [
-        { "track": "Kingdom", "youtube_url": "https://www.youtube.com/watch?v=2jZjziohaPc", "youtube_music_url": "https://music.youtube.com/search?q=Devin+Townsend+Kingdom", "spotify_url": "https://open.spotify.com/track/3wCoJ2MONhPWJZoHzJOZAt", "note": "Entry point. Epic but doesn't lose you." },
-        { "track": "Deadhead", "youtube_url": "https://www.youtube.com/watch?v=DrDM6V08wcE", "youtube_music_url": "https://music.youtube.com/search?q=Devin+Townsend+Deadhead", "spotify_url": "https://open.spotify.com/track/3SEHY0s8U1yJMKEGBVgApO", "note": "Heavier. The live version is legendary. Use that one." },
-        { "track": "Genesis", "youtube_url": "https://www.youtube.com/watch?v=1n7uvokARQ4", "youtube_music_url": "https://music.youtube.com/search?q=Devin+Townsend+Genesis", "spotify_url": "https://open.spotify.com/track/73Mbi2FTCdA3sXGtg3xpMe", "note": "Wall of sound. Quintessential Devy. Bring earplugs." }
-      ]
+        {
+          "track": "Kingdom",
+          "youtube_url": "https://www.youtube.com/watch?v=2jZjziohaPc",
+          "youtube_music_url": "https://music.youtube.com/search?q=Devin+Townsend+Kingdom",
+          "spotify_url": "https://open.spotify.com/track/3wCoJ2MONhPWJZoHzJOZAt",
+          "note": "Entry point. Epic but doesn't lose you."
+        },
+        {
+          "track": "Deadhead",
+          "youtube_url": "https://www.youtube.com/watch?v=DrDM6V08wcE",
+          "youtube_music_url": "https://music.youtube.com/search?q=Devin+Townsend+Deadhead",
+          "spotify_url": "https://open.spotify.com/track/3SEHY0s8U1yJMKEGBVgApO",
+          "note": "Heavier. The live version is legendary. Use that one."
+        },
+        {
+          "track": "Genesis",
+          "youtube_url": "https://www.youtube.com/watch?v=1n7uvokARQ4",
+          "youtube_music_url": "https://music.youtube.com/search?q=Devin+Townsend+Genesis",
+          "spotify_url": "https://open.spotify.com/track/73Mbi2FTCdA3sXGtg3xpMe",
+          "note": "Wall of sound. Quintessential Devy. Bring earplugs."
+        }
+      ],
+      "rec_by_note": "keith lane"
     },
     {
       "artist": "Porcupine Tree",
       "genre": "progressive rock",
       "note": "Steven Wilson's main project. Classic prog with teeth when it wants them. Might be too clean for Trey's crowd. Test with the heavier cuts first.",
-      "rec_by": "keith",
+      "rec_by": "sauron",
       "artist_spotify": "https://open.spotify.com/artist/5NXHXK6hOCotCF8lvGM1I0",
       "artist_youtube": "https://www.youtube.com/@PorcupineTreeOfficial",
       "tracks": [
-        { "track": "Arriving Somewhere but Not Here", "youtube_url": "https://www.youtube.com/watch?v=W3lsqUqGTzM", "youtube_music_url": "https://music.youtube.com/search?q=Porcupine+Tree+Arriving+Somewhere", "spotify_url": "https://open.spotify.com/track/6bz2YUk80Z3r4PNsbrWn2H", "note": "12 minutes. Builds slow. Pays off HARD." },
-        { "track": "Blackest Eyes", "youtube_url": "https://www.youtube.com/watch?v=Yh9osYZNilU", "youtube_music_url": "https://music.youtube.com/search?q=Porcupine+Tree+Blackest+Eyes", "spotify_url": "https://open.spotify.com/track/3e0GdaVsCIcRM2OhFIliqJ", "note": "Shorter. Almost alt-rock. Good gateway." }
-      ]
+        {
+          "track": "Arriving Somewhere but Not Here",
+          "youtube_url": "https://www.youtube.com/watch?v=W3lsqUqGTzM",
+          "youtube_music_url": "https://music.youtube.com/search?q=Porcupine+Tree+Arriving+Somewhere",
+          "spotify_url": "https://open.spotify.com/track/6bz2YUk80Z3r4PNsbrWn2H",
+          "note": "12 minutes. Builds slow. Pays off HARD."
+        },
+        {
+          "track": "Blackest Eyes",
+          "youtube_url": "https://www.youtube.com/watch?v=Yh9osYZNilU",
+          "youtube_music_url": "https://music.youtube.com/search?q=Porcupine+Tree+Blackest+Eyes",
+          "spotify_url": "https://open.spotify.com/track/3e0GdaVsCIcRM2OhFIliqJ",
+          "note": "Shorter. Almost alt-rock. Good gateway."
+        }
+      ],
+      "rec_by_note": "keith lane"
     },
     {
       "artist": "Animals as Leaders",
@@ -106,9 +141,22 @@
       "artist_spotify": "https://open.spotify.com/artist/65C6Unk7nhg2aCnVuAPMo8",
       "artist_youtube": "https://www.youtube.com/@AnimalsAsLeaders",
       "tracks": [
-        { "track": "CAFO", "youtube_url": "https://www.youtube.com/watch?v=NmfzWpp0hMc", "youtube_music_url": "https://music.youtube.com/search?q=Animals+as+Leaders+CAFO", "spotify_url": "https://open.spotify.com/track/1ZfnGTUnha3QHj3KFmub0W", "note": "The jaw-dropper. Made djent a word people had to deal with." },
-        { "track": "The Brain Dance", "youtube_url": "https://www.youtube.com/watch?v=s4Yb_vDIhBc", "youtube_music_url": "https://music.youtube.com/search?q=Animals+as+Leaders+Brain+Dance", "spotify_url": "https://open.spotify.com/track/4DcYh8J5FE0FpEHFDdH9C0", "note": "Newer. Still absurd. Biomechanics researchers should study this." }
-      ]
+        {
+          "track": "CAFO",
+          "youtube_url": "https://www.youtube.com/watch?v=NmfzWpp0hMc",
+          "youtube_music_url": "https://music.youtube.com/search?q=Animals+as+Leaders+CAFO",
+          "spotify_url": "https://open.spotify.com/track/1ZfnGTUnha3QHj3KFmub0W",
+          "note": "The jaw-dropper. Made djent a word people had to deal with."
+        },
+        {
+          "track": "The Brain Dance",
+          "youtube_url": "https://www.youtube.com/watch?v=s4Yb_vDIhBc",
+          "youtube_music_url": "https://music.youtube.com/search?q=Animals+as+Leaders+Brain+Dance",
+          "spotify_url": "https://open.spotify.com/track/4DcYh8J5FE0FpEHFDdH9C0",
+          "note": "Newer. Still absurd. Biomechanics researchers should study this."
+        }
+      ],
+      "rec_by_note": "either — genre-defying"
     },
     {
       "artist": "Igorrr",
@@ -118,9 +166,22 @@
       "artist_spotify": "https://open.spotify.com/artist/0qlWcS66ohOIi0M8JZwPft",
       "artist_youtube": "https://www.youtube.com/@igaborr",
       "tracks": [
-        { "track": "Very Noise", "youtube_url": "https://www.youtube.com/watch?v=Osqf4oIFzUo", "youtube_music_url": "https://music.youtube.com/search?q=Igorrr+Very+Noise", "spotify_url": "https://open.spotify.com/track/0SIALpmQBr96Bt8doI4U54", "note": "The video is a fleshy CG nightmare. The music is worse. (Compliment.)" },
-        { "track": "Cheval", "youtube_url": "https://www.youtube.com/watch?v=UZzYxGZ7Hmc", "youtube_music_url": "https://music.youtube.com/search?q=Igorrr+Cheval", "spotify_url": "https://open.spotify.com/track/4iNF3YQOkqFMp73JUNTsev", "note": "Opera + metal + accordion. Peak Igorrr. No further questions." }
-      ]
+        {
+          "track": "Very Noise",
+          "youtube_url": "https://www.youtube.com/watch?v=Osqf4oIFzUo",
+          "youtube_music_url": "https://music.youtube.com/search?q=Igorrr+Very+Noise",
+          "spotify_url": "https://open.spotify.com/track/0SIALpmQBr96Bt8doI4U54",
+          "note": "The video is a fleshy CG nightmare. The music is worse. (Compliment.)"
+        },
+        {
+          "track": "Cheval",
+          "youtube_url": "https://www.youtube.com/watch?v=UZzYxGZ7Hmc",
+          "youtube_music_url": "https://music.youtube.com/search?q=Igorrr+Cheval",
+          "spotify_url": "https://open.spotify.com/track/4iNF3YQOkqFMp73JUNTsev",
+          "note": "Opera + metal + accordion. Peak Igorrr. No further questions."
+        }
+      ],
+      "rec_by_note": "either — genre-defying"
     },
     {
       "artist": "Perturbator",
@@ -130,9 +191,22 @@
       "artist_spotify": "https://open.spotify.com/artist/244uLu9lkdw39BJwlul3k8",
       "artist_youtube": "https://www.youtube.com/@Perturbator",
       "tracks": [
-        { "track": "She Is Young, She Is Beautiful, She Is Next", "youtube_url": "https://www.youtube.com/watch?v=IGqeyQhBPMI", "youtube_music_url": "https://music.youtube.com/search?q=Perturbator+She+Is+Young", "spotify_url": "https://open.spotify.com/track/2MBJZgztmtwcIsKXXwLxZI", "note": "The title says enough. Dangerous Days is the album. Start here." },
-        { "track": "Humans Are Such Easy Prey", "youtube_url": "https://www.youtube.com/watch?v=Y8DekFFCE5c", "youtube_music_url": "https://music.youtube.com/search?q=Perturbator+Humans+Easy+Prey", "spotify_url": "https://open.spotify.com/track/2xt9UrO2FG5V6LRKD7gpFB", "note": "Darker. Meaner. Title checks out." }
-      ]
+        {
+          "track": "She Is Young, She Is Beautiful, She Is Next",
+          "youtube_url": "https://www.youtube.com/watch?v=IGqeyQhBPMI",
+          "youtube_music_url": "https://music.youtube.com/search?q=Perturbator+She+Is+Young",
+          "spotify_url": "https://open.spotify.com/track/2MBJZgztmtwcIsKXXwLxZI",
+          "note": "The title says enough. Dangerous Days is the album. Start here."
+        },
+        {
+          "track": "Humans Are Such Easy Prey",
+          "youtube_url": "https://www.youtube.com/watch?v=Y8DekFFCE5c",
+          "youtube_music_url": "https://music.youtube.com/search?q=Perturbator+Humans+Easy+Prey",
+          "spotify_url": "https://open.spotify.com/track/2xt9UrO2FG5V6LRKD7gpFB",
+          "note": "Darker. Meaner. Title checks out."
+        }
+      ],
+      "rec_by_note": "keith lane"
     },
     {
       "artist": "An Abstract Illusion",
@@ -142,9 +216,23 @@
       "artist_spotify": "https://open.spotify.com/artist/0JfSRcLNsQbMZBSvM7c5DP",
       "artist_youtube": "https://www.youtube.com/@AnAbstractIllusion",
       "tracks": [
-        { "track": "Tear Down This Holy Mountain", "youtube_url": "https://www.youtube.com/watch?v=2DxS-aRsMYo", "youtube_music_url": "https://music.youtube.com/search?q=An+Abstract+Illusion+Tear+Down", "spotify_url": "https://open.spotify.com/track/43foMIhM2GdCzEKnaOfsn4", "bandcamp_url": "https://anabstractillusion.bandcamp.com/track/tear-down-this-holy-mountain", "note": "From 'Woe'. Death metal with atmosphere you can drown in." },
-        { "track": "In the Heavens Above, You Will Become a Monster", "youtube_url": "https://www.youtube.com/watch?v=qFKKbSNa2jQ", "youtube_music_url": "https://music.youtube.com/search?q=An+Abstract+Illusion+Heavens+Above", "spotify_url": "https://open.spotify.com/track/5tQ2C5YfR72LHCQ3Gnp6ot", "note": "The track title alone earns a spot." }
-      ]
+        {
+          "track": "Tear Down This Holy Mountain",
+          "youtube_url": "https://www.youtube.com/watch?v=2DxS-aRsMYo",
+          "youtube_music_url": "https://music.youtube.com/search?q=An+Abstract+Illusion+Tear+Down",
+          "spotify_url": "https://open.spotify.com/track/43foMIhM2GdCzEKnaOfsn4",
+          "bandcamp_url": "https://anabstractillusion.bandcamp.com/track/tear-down-this-holy-mountain",
+          "note": "From 'Woe'. Death metal with atmosphere you can drown in."
+        },
+        {
+          "track": "In the Heavens Above, You Will Become a Monster",
+          "youtube_url": "https://www.youtube.com/watch?v=qFKKbSNa2jQ",
+          "youtube_music_url": "https://music.youtube.com/search?q=An+Abstract+Illusion+Heavens+Above",
+          "spotify_url": "https://open.spotify.com/track/5tQ2C5YfR72LHCQ3Gnp6ot",
+          "note": "The track title alone earns a spot."
+        }
+      ],
+      "rec_by_note": "keith lane"
     },
     {
       "artist": "Heilung",
@@ -154,33 +242,72 @@
       "artist_spotify": "https://open.spotify.com/artist/1PjKAVbKtMEVMmYSLrJkMj",
       "artist_youtube": "https://www.youtube.com/@Heilung",
       "tracks": [
-        { "track": "Krigsgaldr", "youtube_url": "https://www.youtube.com/watch?v=K7ZqZVunCb4", "youtube_music_url": "https://music.youtube.com/search?q=Heilung+Krigsgaldr", "spotify_url": "https://open.spotify.com/track/5rwJPCZDjhFGadFUZiaPji", "note": "Starts quiet. Does not stay quiet." },
-        { "track": "In Maidjan", "youtube_url": "https://www.youtube.com/watch?v=kmWTZ3KfnXE", "youtube_music_url": "https://music.youtube.com/search?q=Heilung+In+Maidjan", "spotify_url": "https://open.spotify.com/track/1PmYLHCZMHb3jb5D5F1VYj", "note": "Live from Lifa. 3000 people chanting. It's fine. Everything is fine." }
-      ]
+        {
+          "track": "Krigsgaldr",
+          "youtube_url": "https://www.youtube.com/watch?v=K7ZqZVunCb4",
+          "youtube_music_url": "https://music.youtube.com/search?q=Heilung+Krigsgaldr",
+          "spotify_url": "https://open.spotify.com/track/5rwJPCZDjhFGadFUZiaPji",
+          "note": "Starts quiet. Does not stay quiet."
+        },
+        {
+          "track": "In Maidjan",
+          "youtube_url": "https://www.youtube.com/watch?v=kmWTZ3KfnXE",
+          "youtube_music_url": "https://music.youtube.com/search?q=Heilung+In+Maidjan",
+          "spotify_url": "https://open.spotify.com/track/1PmYLHCZMHb3jb5D5F1VYj",
+          "note": "Live from Lifa. 3000 people chanting. It's fine. Everything is fine."
+        }
+      ],
+      "rec_by_note": "either — genre-defying"
     },
     {
       "artist": "Polyphia",
       "genre": "progressive/instrumental",
       "note": "Four guys speedrunning music theory. Time signatures change faster than you can count them. Not metal by genre. Metal by density of notes per second.",
-      "rec_by": "keith",
+      "rec_by": "sauron",
       "artist_spotify": "https://open.spotify.com/artist/4vGrte8FDu062Ntj0RsPiZ",
       "artist_youtube": "https://www.youtube.com/@Polyphia",
       "tracks": [
-        { "track": "G.O.A.T.", "youtube_url": "https://www.youtube.com/watch?v=9_gkpYoRjgI", "youtube_music_url": "https://music.youtube.com/search?q=Polyphia+GOAT", "spotify_url": "https://open.spotify.com/track/64GQBY5qVYRzRaOiSXafjI", "note": "200M views. Tim Henson's right hand defies biology." },
-        { "track": "Playing God", "youtube_url": "https://www.youtube.com/watch?v=Z5NoQg8LdDk", "youtube_music_url": "https://music.youtube.com/search?q=Polyphia+Playing+God", "spotify_url": "https://open.spotify.com/track/7KFOGKMFRETBgrRJhAariB", "note": "Flamenco section lasts just long enough to fool you into thinking they calmed down. They didn't." }
-      ]
+        {
+          "track": "G.O.A.T.",
+          "youtube_url": "https://www.youtube.com/watch?v=9_gkpYoRjgI",
+          "youtube_music_url": "https://music.youtube.com/search?q=Polyphia+GOAT",
+          "spotify_url": "https://open.spotify.com/track/64GQBY5qVYRzRaOiSXafjI",
+          "note": "200M views. Tim Henson's right hand defies biology."
+        },
+        {
+          "track": "Playing God",
+          "youtube_url": "https://www.youtube.com/watch?v=Z5NoQg8LdDk",
+          "youtube_music_url": "https://music.youtube.com/search?q=Polyphia+Playing+God",
+          "spotify_url": "https://open.spotify.com/track/7KFOGKMFRETBgrRJhAariB",
+          "note": "Flamenco section lasts just long enough to fool you into thinking they calmed down. They didn't."
+        }
+      ],
+      "rec_by_note": "keith lane"
     },
     {
       "artist": "Jinjer",
       "genre": "progressive metalcore",
       "note": "Ukrainian. Vocalist switches from clean to a growl that registers on seismographs. No warning. Like stepping on a Lego made of freight train.",
-      "rec_by": "trey",
+      "rec_by": "sauron",
       "artist_spotify": "https://open.spotify.com/artist/4qw09SNnTjCAVNxrFGKIHY",
       "artist_youtube": "https://www.youtube.com/@JinjerOfficial",
       "tracks": [
-        { "track": "Pisces", "youtube_url": "https://www.youtube.com/watch?v=SQNtGoM3FVo", "youtube_music_url": "https://music.youtube.com/search?q=Jinjer+Pisces", "spotify_url": "https://open.spotify.com/track/3MODES4TNtygekLl145Oi3", "note": "The live session that broke the internet. 59M views. The vocal switch at 1:08 has ended careers." },
-        { "track": "Judgement (& Punishment)", "youtube_url": "https://www.youtube.com/watch?v=FnITsKnGMgQ", "youtube_music_url": "https://music.youtube.com/search?q=Jinjer+Judgement", "spotify_url": "https://open.spotify.com/track/4rJdKTYEhX7q6JVSz5LQPA", "note": "The groove at 2:30. Legally classified as a weapon in several jurisdictions." }
-      ]
+        {
+          "track": "Pisces",
+          "youtube_url": "https://www.youtube.com/watch?v=SQNtGoM3FVo",
+          "youtube_music_url": "https://music.youtube.com/search?q=Jinjer+Pisces",
+          "spotify_url": "https://open.spotify.com/track/3MODES4TNtygekLl145Oi3",
+          "note": "The live session that broke the internet. 59M views. The vocal switch at 1:08 has ended careers."
+        },
+        {
+          "track": "Judgement (& Punishment)",
+          "youtube_url": "https://www.youtube.com/watch?v=FnITsKnGMgQ",
+          "youtube_music_url": "https://music.youtube.com/search?q=Jinjer+Judgement",
+          "spotify_url": "https://open.spotify.com/track/4rJdKTYEhX7q6JVSz5LQPA",
+          "note": "The groove at 2:30. Legally classified as a weapon in several jurisdictions."
+        }
+      ],
+      "rec_by_note": "trey lane"
     },
     {
       "artist": "Rivers of Nihil",
@@ -190,69 +317,147 @@
       "artist_spotify": "https://open.spotify.com/artist/1cS2VBBEkwKhjKCnJh4awS",
       "artist_youtube": "https://www.youtube.com/@RiversofNihil",
       "tracks": [
-        { "track": "The Silent Life", "youtube_url": "https://www.youtube.com/watch?v=3LBGiMmVKk0", "youtube_music_url": "https://music.youtube.com/search?q=Rivers+of+Nihil+Silent+Life", "spotify_url": "https://open.spotify.com/track/5xYHPu3e3WFqZ9B5B5QrYP", "note": "The saxophone solo that gave death metal forums an identity crisis." },
-        { "track": "Clean", "youtube_url": "https://www.youtube.com/watch?v=bHSmSBYjFro", "youtube_music_url": "https://music.youtube.com/search?q=Rivers+of+Nihil+Clean", "spotify_url": "https://open.spotify.com/track/1q9K4f8bUYPmSkuHLKFHNl", "note": "New album. Still has sax. Still works." }
-      ]
+        {
+          "track": "The Silent Life",
+          "youtube_url": "https://www.youtube.com/watch?v=3LBGiMmVKk0",
+          "youtube_music_url": "https://music.youtube.com/search?q=Rivers+of+Nihil+Silent+Life",
+          "spotify_url": "https://open.spotify.com/track/5xYHPu3e3WFqZ9B5B5QrYP",
+          "note": "The saxophone solo that gave death metal forums an identity crisis."
+        },
+        {
+          "track": "Clean",
+          "youtube_url": "https://www.youtube.com/watch?v=bHSmSBYjFro",
+          "youtube_music_url": "https://music.youtube.com/search?q=Rivers+of+Nihil+Clean",
+          "spotify_url": "https://open.spotify.com/track/1q9K4f8bUYPmSkuHLKFHNl",
+          "note": "New album. Still has sax. Still works."
+        }
+      ],
+      "rec_by_note": "trey lane (repeat — needs justification)"
     },
     {
       "artist": "Tesseract",
       "genre": "djent/atmospheric",
       "note": "Meshuggah's polyrhythmic guitar tone wrapped in ambient reverb. Math metal you can fall asleep to. Compliment or insult — depends on your caffeine level.",
-      "rec_by": "keith",
+      "rec_by": "sauron",
       "artist_spotify": "https://open.spotify.com/artist/23ytwhG1pzX6DIVWRWvW1r",
       "artist_youtube": "https://www.youtube.com/@tesseractband",
       "tracks": [
-        { "track": "Altered State", "youtube_url": "https://www.youtube.com/watch?v=JCKfVbOiDqo", "youtube_music_url": "https://music.youtube.com/search?q=Tesseract+Altered+State", "spotify_url": "https://open.spotify.com/track/6BynhdoI5TXj0xwwc16oGr", "note": "Whole album is one piece. This is where the time signature stops pretending." },
-        { "track": "Luminary", "youtube_url": "https://www.youtube.com/watch?v=OufMjY3mMos", "youtube_music_url": "https://music.youtube.com/search?q=Tesseract+Luminary", "spotify_url": "https://open.spotify.com/track/0CIY3ZHTAX91Oqj6XPlCpS", "note": "Genuinely beautiful vocal melody. Feels illegal in djent." }
-      ]
+        {
+          "track": "Altered State",
+          "youtube_url": "https://www.youtube.com/watch?v=JCKfVbOiDqo",
+          "youtube_music_url": "https://music.youtube.com/search?q=Tesseract+Altered+State",
+          "spotify_url": "https://open.spotify.com/track/6BynhdoI5TXj0xwwc16oGr",
+          "note": "Whole album is one piece. This is where the time signature stops pretending."
+        },
+        {
+          "track": "Luminary",
+          "youtube_url": "https://www.youtube.com/watch?v=OufMjY3mMos",
+          "youtube_music_url": "https://music.youtube.com/search?q=Tesseract+Luminary",
+          "spotify_url": "https://open.spotify.com/track/0CIY3ZHTAX91Oqj6XPlCpS",
+          "note": "Genuinely beautiful vocal melody. Feels illegal in djent."
+        }
+      ],
+      "rec_by_note": "keith lane"
     },
     {
       "artist": "Opeth",
       "genre": "progressive death / prog rock",
       "note": "Started death metal. Pivoted to 70s prog rock. Alienated exactly half their fanbase per album. The Wikipedia genre edit wars have more casualties than most border disputes.",
-      "rec_by": "keith",
+      "rec_by": "sauron",
       "artist_spotify": "https://open.spotify.com/artist/0ybFZ2Ab08V8hueghSXm6E",
       "artist_youtube": "https://www.youtube.com/@Opeth",
       "tracks": [
-        { "track": "Ghost of Perdition", "youtube_url": "https://www.youtube.com/watch?v=MDBykpSXsSE", "youtube_music_url": "https://music.youtube.com/search?q=Opeth+Ghost+of+Perdition", "spotify_url": "https://open.spotify.com/track/3TVN3MiZiGiPnJWjzGxppl", "note": "Death era masterpiece. 10 minutes of mood swings a psychiatrist would flag." },
-        { "track": "Sorceress", "youtube_url": "https://www.youtube.com/watch?v=lEMKzPuOMvU", "youtube_music_url": "https://music.youtube.com/search?q=Opeth+Sorceress", "spotify_url": "https://open.spotify.com/track/4pqmG8F2cUQdz3qQYU4JWV", "note": "Prog rock era. No screaming. Trey will hate it. That's the point." }
-      ]
+        {
+          "track": "Ghost of Perdition",
+          "youtube_url": "https://www.youtube.com/watch?v=MDBykpSXsSE",
+          "youtube_music_url": "https://music.youtube.com/search?q=Opeth+Ghost+of+Perdition",
+          "spotify_url": "https://open.spotify.com/track/3TVN3MiZiGiPnJWjzGxppl",
+          "note": "Death era masterpiece. 10 minutes of mood swings a psychiatrist would flag."
+        },
+        {
+          "track": "Sorceress",
+          "youtube_url": "https://www.youtube.com/watch?v=lEMKzPuOMvU",
+          "youtube_music_url": "https://music.youtube.com/search?q=Opeth+Sorceress",
+          "spotify_url": "https://open.spotify.com/track/4pqmG8F2cUQdz3qQYU4JWV",
+          "note": "Prog rock era. No screaming. Trey will hate it. That's the point."
+        }
+      ],
+      "rec_by_note": "keith lane"
     },
     {
       "artist": "Gojira",
       "genre": "progressive death / groove",
       "note": "French. Environmental death metal. Songs about whales and deforestation that somehow weigh more than a collapsing building. The pick-scrape harmonic on 'Flying Whales' delivers approximately 4.7 gigajoules of emotional energy per listen. [citation needed]",
-      "rec_by": "trey",
+      "rec_by": "sauron",
       "artist_spotify": "https://open.spotify.com/artist/0GDGKpJFhVpcjIGF8N6Ewt",
       "artist_youtube": "https://www.youtube.com/@Gojira",
       "tracks": [
-        { "track": "Flying Whales", "youtube_url": "https://www.youtube.com/watch?v=_-XaaTqOICU", "youtube_music_url": "https://music.youtube.com/search?q=Gojira+Flying+Whales", "spotify_url": "https://open.spotify.com/track/0VaX7mMvPVNIz2bPFaeb0G", "note": "The intro sounds like a 40,000-ton whale breaching through a wall of distortion pedals." },
-        { "track": "Stranded", "youtube_url": "https://www.youtube.com/watch?v=FNdC_3LR2AI", "youtube_music_url": "https://music.youtube.com/search?q=Gojira+Stranded", "spotify_url": "https://open.spotify.com/track/01qFMimVLaNkOVJaFEMXBn", "note": "Most accessible track. Gateway drug." }
-      ]
+        {
+          "track": "Flying Whales",
+          "youtube_url": "https://www.youtube.com/watch?v=_-XaaTqOICU",
+          "youtube_music_url": "https://music.youtube.com/search?q=Gojira+Flying+Whales",
+          "spotify_url": "https://open.spotify.com/track/0VaX7mMvPVNIz2bPFaeb0G",
+          "note": "The intro sounds like a 40,000-ton whale breaching through a wall of distortion pedals."
+        },
+        {
+          "track": "Stranded",
+          "youtube_url": "https://www.youtube.com/watch?v=FNdC_3LR2AI",
+          "youtube_music_url": "https://music.youtube.com/search?q=Gojira+Stranded",
+          "spotify_url": "https://open.spotify.com/track/01qFMimVLaNkOVJaFEMXBn",
+          "note": "Most accessible track. Gateway drug."
+        }
+      ],
+      "rec_by_note": "trey lane"
     },
     {
       "artist": "Between the Buried and Me",
       "genre": "progressive death / everything",
       "note": "Genre boundaries? Wrecking ball. One song: death metal, jazz fusion, country, 8-bit chiptune, circus music. In that order. Transitions with the confidence of someone who never considered whether this was a good idea.",
-      "rec_by": "trey",
+      "rec_by": "sauron",
       "artist_spotify": "https://open.spotify.com/artist/6hR0GABaXcFi8HwiRDuFzj",
       "artist_youtube": "https://www.youtube.com/@BTBAMofficial",
       "tracks": [
-        { "track": "Selkies: The Endless Obsession", "youtube_url": "https://www.youtube.com/watch?v=19UZd_DKs2Q", "youtube_music_url": "https://music.youtube.com/search?q=Between+the+Buried+and+Me+Selkies", "spotify_url": "https://open.spotify.com/track/6CPW0H1dqalHIvFwqORPVq", "note": "The guitar solo at the end is what a music theory PhD sounds like when it's angry." },
-        { "track": "White Walls", "youtube_url": "https://www.youtube.com/watch?v=FNdRh2un5eg", "youtube_music_url": "https://music.youtube.com/search?q=Between+Buried+Me+White+Walls", "spotify_url": "https://open.spotify.com/track/3Y1oJn5IZfqwEVsBbrGzjP", "note": "14 minutes. At least 7 genres. Last 3 minutes are the most triumphant thing in metal." }
-      ]
+        {
+          "track": "Selkies: The Endless Obsession",
+          "youtube_url": "https://www.youtube.com/watch?v=19UZd_DKs2Q",
+          "youtube_music_url": "https://music.youtube.com/search?q=Between+the+Buried+and+Me+Selkies",
+          "spotify_url": "https://open.spotify.com/track/6CPW0H1dqalHIvFwqORPVq",
+          "note": "The guitar solo at the end is what a music theory PhD sounds like when it's angry."
+        },
+        {
+          "track": "White Walls",
+          "youtube_url": "https://www.youtube.com/watch?v=FNdRh2un5eg",
+          "youtube_music_url": "https://music.youtube.com/search?q=Between+Buried+Me+White+Walls",
+          "spotify_url": "https://open.spotify.com/track/3Y1oJn5IZfqwEVsBbrGzjP",
+          "note": "14 minutes. At least 7 genres. Last 3 minutes are the most triumphant thing in metal."
+        }
+      ],
+      "rec_by_note": "trey lane"
     },
     {
       "artist": "Deftones",
       "genre": "alternative metal / shoegaze",
       "note": "Crushingly heavy and hauntingly beautiful in the same bar. Chino Moreno seduces you while Stephen Carpenter's guitar collapses your ribcage. The tension between those two impulses is the whole band.",
-      "rec_by": "keith",
+      "rec_by": "sauron",
       "artist_spotify": "https://open.spotify.com/artist/40Yq4wzEz9hu0VaHinpHmJ",
       "artist_youtube": "https://www.youtube.com/@daboratorio",
       "tracks": [
-        { "track": "Digital Bath", "youtube_url": "https://www.youtube.com/watch?v=9tmPBuSpmWI", "youtube_music_url": "https://music.youtube.com/search?q=Deftones+Digital+Bath", "spotify_url": "https://open.spotify.com/track/2qJMwIaEUItaHJYquCF8UX", "note": "The title is a murder euphemism. The song is gorgeous. Both are true." },
-        { "track": "Rosemary", "youtube_url": "https://www.youtube.com/watch?v=6Gk3bPIVf6I", "youtube_music_url": "https://music.youtube.com/search?q=Deftones+Rosemary", "spotify_url": "https://open.spotify.com/track/68rh5M8OU0i4d0MaHFdbwM", "note": "Koi No Yokan. Shoegaze at maximum. Sounds like drowning in something warm." }
-      ]
+        {
+          "track": "Digital Bath",
+          "youtube_url": "https://www.youtube.com/watch?v=9tmPBuSpmWI",
+          "youtube_music_url": "https://music.youtube.com/search?q=Deftones+Digital+Bath",
+          "spotify_url": "https://open.spotify.com/track/2qJMwIaEUItaHJYquCF8UX",
+          "note": "The title is a murder euphemism. The song is gorgeous. Both are true."
+        },
+        {
+          "track": "Rosemary",
+          "youtube_url": "https://www.youtube.com/watch?v=6Gk3bPIVf6I",
+          "youtube_music_url": "https://music.youtube.com/search?q=Deftones+Rosemary",
+          "spotify_url": "https://open.spotify.com/track/68rh5M8OU0i4d0MaHFdbwM",
+          "note": "Koi No Yokan. Shoegaze at maximum. Sounds like drowning in something warm."
+        }
+      ],
+      "rec_by_note": "keith lane"
     },
     {
       "artist": "Dvne",
@@ -262,9 +467,22 @@
       "artist_spotify": "https://open.spotify.com/artist/1MrUkGFe8cdjrp4nRDq7zT",
       "artist_youtube": "https://www.youtube.com/@DVNEband",
       "tracks": [
-        { "track": "Towers", "youtube_url": "https://www.youtube.com/watch?v=eFqwEFr5bU0", "youtube_music_url": "https://music.youtube.com/search?q=Dvne+Towers", "spotify_url": "https://open.spotify.com/track/3e4WcOuJAbreVJnzSmqmZF", "note": "Heavy, atmospheric, heavier. Standard sludge arc, flawless execution." },
-        { "track": "Omega Severer", "youtube_url": "https://www.youtube.com/watch?v=hMM8xOHjpHw", "youtube_music_url": "https://music.youtube.com/search?q=Dvne+Omega+Severer", "spotify_url": "https://open.spotify.com/track/0hHNhCJ6U7bFxoVSXyZDqT", "note": "From Etemen Anki. The riff at 3:40 has the gravitational pull of a small moon." }
-      ]
+        {
+          "track": "Towers",
+          "youtube_url": "https://www.youtube.com/watch?v=eFqwEFr5bU0",
+          "youtube_music_url": "https://music.youtube.com/search?q=Dvne+Towers",
+          "spotify_url": "https://open.spotify.com/track/3e4WcOuJAbreVJnzSmqmZF",
+          "note": "Heavy, atmospheric, heavier. Standard sludge arc, flawless execution."
+        },
+        {
+          "track": "Omega Severer",
+          "youtube_url": "https://www.youtube.com/watch?v=hMM8xOHjpHw",
+          "youtube_music_url": "https://music.youtube.com/search?q=Dvne+Omega+Severer",
+          "spotify_url": "https://open.spotify.com/track/0hHNhCJ6U7bFxoVSXyZDqT",
+          "note": "From Etemen Anki. The riff at 3:40 has the gravitational pull of a small moon."
+        }
+      ],
+      "rec_by_note": "either — genre-defying"
     }
   ],
   "bios": {
