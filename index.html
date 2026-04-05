@@ -1539,45 +1539,34 @@
 
       if (!artist || !track || !name) return;
 
-      const title = `Suggestion: ${artist} - ${track}`;
+      const subject = `Metal Friday Suggestion: ${artist} - ${track}`;
       const body = [
-        `**Artist:** ${artist}`,
-        `**Track:** ${track}`,
-        comment ? `**Why:** ${comment}` : '',
-        link ? `**Link:** ${link}` : '',
-        `**Submitted by:** ${name}`,
+        `Artist: ${artist}`,
+        `Track: ${track}`,
+        comment ? `Why: ${comment}` : '',
+        link ? `Link: ${link}` : '',
+        `Submitted by: ${name}`,
         '',
         '---',
-        '*Submitted via Metal Friday suggestion box*',
+        'Submitted via Metal Friday suggestion box',
+        'https://knelsonb.github.io/metal-friday/',
       ].filter(Boolean).join('\n');
 
-      // Open as a GitHub issue (pre-filled)
-      const issueUrl = `https://github.com/${REPO}/issues/new?` + new URLSearchParams({
-        title: title,
-        body: body,
-        labels: 'suggestion',
-      }).toString();
+      // Primary: mailto link to Keith (works on all devices, no account needed)
+      const mailto = `mailto:[redacted]?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.location.href = mailto;
 
-      // Try opening in new tab
-      const win = window.open(issueUrl, '_blank');
-
-      // Also show success state with fallback
+      // Show success state
       document.getElementById('suggest-form').style.display = 'none';
       const successEl = document.getElementById('sg-success');
+      successEl.innerHTML = `
+        Suggestion submitted! \\m/<br>
+        <span style="font-size:0.8rem;color:var(--text-dim);font-family:Inter,sans-serif">
+          Your email app should have opened with the suggestion.<br>
+          Just hit send and we'll review it for a future edition.
+        </span>
+      `;
       successEl.classList.add('visible');
-
-      if (!win) {
-        // Popup blocked — show the link
-        successEl.innerHTML = `
-          Suggestion ready! \m/<br>
-          <a href="${issueUrl}" target="_blank" style="color:var(--accent-glow);font-size:0.9rem;font-family:Inter,sans-serif">
-            Click here to submit on GitHub
-          </a><br>
-          <span style="font-size:0.75rem;color:var(--text-dim);font-family:Inter,sans-serif">
-            (Or send the details to Keith or Trey directly)
-          </span>
-        `;
-      }
     }
 
     // --- SEARCH INPUT ---
