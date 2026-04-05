@@ -886,7 +886,65 @@
       .controls { flex-direction: column; }
       .edition-header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
       .track { padding: 1rem; }
-      .nav-tab { padding: 0.75rem 1rem; font-size: 0.7rem; }
+      .nav-tab { padding: 0.75rem 0.75rem; font-size: 0.65rem; }
+
+      /* Artist cards: stack vertically on mobile */
+      .artist-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.4rem;
+        padding: 0.75rem 1rem;
+      }
+
+      .artist-name { font-size: 1rem; }
+
+      .artist-meta {
+        width: 100%;
+        justify-content: flex-start;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+      }
+
+      .artist-rank {
+        font-size: 0.85rem;
+        min-width: 1.5rem;
+        position: absolute;
+        right: 0.75rem;
+        top: 0.75rem;
+      }
+
+      .artist-card { position: relative; }
+
+      .artist-genres { flex-wrap: wrap; }
+
+      .artist-track {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.3rem;
+        padding: 0.5rem 1rem;
+      }
+
+      .at-link { margin-left: 0; }
+
+      /* Search results */
+      .search-result-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.3rem;
+      }
+
+      .sr-date { margin-left: 0; }
+
+      /* Sort controls inline */
+      .sort-controls { width: 100%; justify-content: flex-start; }
+
+      /* Genre cloud */
+      .genre-cloud { gap: 0.35rem; }
+      .genre-bubble { padding: 0.35rem 0.75rem; }
+      .genre-bubble-name { font-size: 0.75rem; }
+
+      /* Chart */
+      .chart-label { min-width: 90px; font-size: 0.65rem; }
     }
   </style>
 </head>
