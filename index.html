@@ -2133,9 +2133,15 @@
       void overlay.offsetWidth;
       overlay.classList.add('active');
 
-      // Switch tab after the sweep peaks (~500ms)
+      // Switch tab after the sweep peaks (~500ms), force-reload everything
       setTimeout(() => {
         switchTab('planning');
+        // Clear all sections to show fresh loading state
+        document.getElementById('confirmed-list').innerHTML = 'Loading...';
+        document.getElementById('promoted-list').innerHTML = 'Loading...';
+        document.getElementById('suggestions-list').innerHTML = 'Loading...';
+        document.getElementById('planning-content').innerHTML = 'Loading...';
+        // Reload all data
         loadConfirmed().then(() => loadPlanning());
         loadPromoted();
         loadSuggestions();
