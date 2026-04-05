@@ -1553,7 +1553,7 @@
       ].filter(Boolean).join('\n');
 
       // Primary: mailto link to Keith (works on all devices, no account needed)
-      const mailto = `mailto:[redacted]?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      const mailto = `mailto:[redacted]?cc=${encodeURIComponent('[redacted]')}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
       window.location.href = mailto;
 
       // Show success state
