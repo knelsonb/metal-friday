@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Metal Friday</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --bg-card: #141414;
+      --bg-card-hover: #1a1a1a;
+      --border: #2a2a2a;
+      --text: #e0e0e0;
+      --text-dim: #888;
+      --text-bright: #fff;
+      --accent: #c62828;
+      --accent-glow: #ff5252;
+      --accent-dim: #7f1d1d;
+      --trey: #c62828;
+      --keith: #1565c0;
+      --tag-bg: #1e1e1e;
+      --tag-border: #333;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', -apple-system, sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* --- HEADER --- */
+    .hero {
+      text-align: center;
+      padding: 4rem 2rem 3rem;
+      background: linear-gradient(180deg, #1a0000 0%, var(--bg) 100%);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero h1 {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--text-bright);
+      text-shadow: 0 0 40px rgba(198, 40, 40, 0.4);
+      margin-bottom: 0.25rem;
+    }
+
+    .hero .horns {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      display: block;
+      margin-bottom: 1rem;
+      filter: grayscale(0.3);
+    }
+
+    .hero .tagline {
+      font-size: 1rem;
+      color: var(--text-dim);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      font-weight: 300;
+    }
+
+    .stats-bar {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      padding: 1.5rem 2rem;
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--accent-glow);
+    }
+
+    .stat-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--text-dim);
+    }
+
+    /* --- CONTROLS --- */
+    .controls {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .search-box {
+      flex: 1;
+      min-width: 200px;
+      padding: 0.75rem 1rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--text);
+      font-size: 0.95rem;
+      font-family: 'Inter', sans-serif;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .search-box:focus {
+      border-color: var(--accent);
+    }
+
+    .search-box::placeholder {
+      color: var(--text-dim);
+    }
+
+    .filter-btn {
+      padding: 0.75rem 1.25rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--text-dim);
+      font-size: 0.8rem;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      transition: all 0.2s;
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      border-color: var(--accent);
+      color: var(--accent-glow);
+      background: var(--accent-dim);
+    }
+
+    /* --- EDITIONS --- */
+    .editions {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 1.5rem 4rem;
+    }
+
+    .edition {
+      margin-bottom: 2rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--bg-card);
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+
+    .edition:hover {
+      border-color: #444;
+    }
+
+    .edition-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .edition-date {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text-bright);
+    }
+
+    .edition-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .curator-badge {
+      font-size: 0.7rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0.2rem 0.6rem;
+      border-radius: 3px;
+      border: 1px solid;
+    }
+
+    .curator-badge.trey {
+      color: var(--trey);
+      border-color: var(--trey);
+    }
+
+    .curator-badge.keith {
+      color: var(--keith);
+      border-color: var(--keith);
+    }
+
+    .track-count {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+    }
+
+    .edition-expand {
+      color: var(--text-dim);
+      font-size: 1.2rem;
+      transition: transform 0.2s;
+    }
+
+    .edition.open .edition-expand {
+      transform: rotate(180deg);
+    }
+
+    .edition-body {
+      display: none;
+      padding: 0;
+    }
+
+    .edition.open .edition-body {
+      display: block;
+    }
+
+    /* --- TRACKS --- */
+    .track {
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+
+    .track:last-child {
+      border-bottom: none;
+    }
+
+    .track:hover {
+      background: var(--bg-card-hover);
+    }
+
+    .track-title-row {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.4rem;
+    }
+
+    .track-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-bright);
+    }
+
+    .track-artist {
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+
+    .track-artist::before {
+      content: "by ";
+      color: var(--text-dim);
+    }
+
+    .genre-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      padding: 0.15rem 0.5rem;
+      background: var(--tag-bg);
+      border: 1px solid var(--tag-border);
+      border-radius: 2px;
+      color: var(--text-dim);
+      text-transform: lowercase;
+      letter-spacing: 0.05em;
+      margin-top: 0.3rem;
+    }
+
+    .track-links {
+      margin-top: 0.5rem;
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .track-link {
+      font-size: 0.75rem;
+      color: var(--accent-glow);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      transition: color 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .track-link:hover {
+      color: var(--text-bright);
+    }
+
+    .track-link svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+    }
+
+    /* --- YOUTUBE EMBED --- */
+    .yt-embed {
+      margin-top: 0.75rem;
+      display: none;
+    }
+
+    .yt-embed.visible {
+      display: block;
+    }
+
+    .yt-embed iframe {
+      width: 100%;
+      aspect-ratio: 16/9;
+      border: none;
+      border-radius: 4px;
+      max-height: 300px;
+    }
+
+    /* --- FOOTER --- */
+    .footer {
+      text-align: center;
+      padding: 3rem 2rem;
+      border-top: 1px solid var(--border);
+      color: var(--text-dim);
+      font-size: 0.8rem;
+    }
+
+    .footer a {
+      color: var(--accent-glow);
+      text-decoration: none;
+    }
+
+    .footer .horns-small {
+      font-size: 1.5rem;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    /* --- NO RESULTS --- */
+    .no-results {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: var(--text-dim);
+      font-size: 1.1rem;
+    }
+
+    /* --- RESPONSIVE --- */
+    @media (max-width: 600px) {
+      .stats-bar { gap: 1rem; }
+      .stat-value { font-size: 1.4rem; }
+      .controls { flex-direction: column; }
+      .edition-header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+      .track { padding: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="hero">
+    <span class="horns">\m/</span>
+    <h1>Metal Friday</h1>
+    <p class="tagline">Curated heaviness since 2016</p>
+  </div>
+
+  <div class="stats-bar" id="stats-bar"></div>
+
+  <div class="controls">
+    <input type="text" class="search-box" id="search" placeholder="Search artists, tracks, genres...">
+    <button class="filter-btn" data-filter="all" onclick="setFilter('all')">All</button>
+    <button class="filter-btn" data-filter="trey" onclick="setFilter('trey')">Trey</button>
+    <button class="filter-btn" data-filter="keith" onclick="setFilter('keith')">Keith</button>
+  </div>
+
+  <div class="editions" id="editions"></div>
+
+  <div class="footer">
+    <span class="horns-small">\m/</span>
+    A tradition since December 16, 2016.<br>
+    Founded by Trey . Continued by Keith .<br>
+    <a href="https://open.spotify.com/user/aldondrea/playlist/2Dil2NaKg2hdrH3hXH7FlN" target="_blank">Spotify Playlist</a>
+  </div>
+
+  <script>
+    let DATA = null;
+    let currentFilter = 'all';
+    let currentSearch = '';
+
+    const ytSvg = `<svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.9 31.9 0 0 0 0 12a31.9 31.9 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.9 31.9 0 0 0 24 12a31.9 31.9 0 0 0-.5-5.8zM9.5 15.6V8.4L16 12l-6.5 3.6z"/></svg>`;
+
+    function formatDate(dateStr) {
+      const d = new Date(dateStr + 'T12:00:00');
+      return d.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+    }
+
+    function getVideoId(url) {
+      if (!url) return null;
+      const m = url.match(/(?:v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+      return m ? m[1] : null;
+    }
+
+    function renderStats(stats) {
+      document.getElementById('stats-bar').innerHTML = `
+        <div class="stat"><div class="stat-value">${stats.total_tracks}</div><div class="stat-label">Tracks</div></div>
+        <div class="stat"><div class="stat-value">${stats.unique_artists}</div><div class="stat-label">Artists</div></div>
+        <div class="stat"><div class="stat-value">${stats.total_editions}</div><div class="stat-label">Editions</div></div>
+        <div class="stat"><div class="stat-value">${Math.ceil((new Date() - new Date('2016-12-16')) / (365.25 * 86400000))}</div><div class="stat-label">Years</div></div>
+      `;
+    }
+
+    function matchesSearch(edition) {
+      if (!currentSearch) return true;
+      const q = currentSearch.toLowerCase();
+      return edition.tracks.some(t =>
+        t.artist.toLowerCase().includes(q) ||
+        t.track.toLowerCase().includes(q) ||
+        t.genre.toLowerCase().includes(q)
+      );
+    }
+
+    function matchesFilter(edition) {
+      if (currentFilter === 'all') return true;
+      return edition.curator === currentFilter;
+    }
+
+    function toggleEdition(el) {
+      el.closest('.edition').classList.toggle('open');
+    }
+
+    function toggleEmbed(btn, videoId) {
+      const container = btn.closest('.track').querySelector('.yt-embed');
+      if (container.classList.contains('visible')) {
+        container.classList.remove('visible');
+        container.innerHTML = '';
+      } else {
+        container.classList.add('visible');
+        container.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?rel=0" allowfullscreen loading="lazy"></iframe>`;
+      }
+    }
+
+    function renderEditions(editions) {
+      const container = document.getElementById('editions');
+      const filtered = editions.filter(e => matchesFilter(e) && matchesSearch(e));
+
+      if (filtered.length === 0) {
+        container.innerHTML = '<div class="no-results">No editions match your search.</div>';
+        return;
+      }
+
+      container.innerHTML = filtered.map((ed, i) => {
+        const isFirst = i < 3;
+        const tracks = ed.tracks.map(t => {
+          const videoId = getVideoId(t.youtube_url);
+          const links = [];
+          if (videoId) {
+            links.push(`<a class="track-link" href="${t.youtube_url}" target="_blank" title="Open on YouTube">${ytSvg} YouTube</a>`);
+            links.push(`<a class="track-link" href="javascript:void(0)" onclick="toggleEmbed(this, '${videoId}')">${ytSvg} Play</a>`);
+          }
+
+          return `
+            <div class="track">
+              <div class="track-title-row">
+                <span class="track-title">${escHtml(t.track)}</span>
+                <span class="track-artist">${escHtml(t.artist)}</span>
+              </div>
+              <span class="genre-tag">${escHtml(t.genre)}</span>
+              ${links.length ? `<div class="track-links">${links.join('')}</div>` : ''}
+              <div class="yt-embed"></div>
+            </div>
+          `;
+        }).join('');
+
+        return `
+          <div class="edition ${isFirst ? 'open' : ''}">
+            <div class="edition-header" onclick="toggleEdition(this)">
+              <div>
+                <div class="edition-date">${formatDate(ed.date)}</div>
+              </div>
+              <div class="edition-meta">
+                <span class="curator-badge ${ed.curator}">${ed.curator}</span>
+                <span class="track-count">${ed.tracks.length} track${ed.tracks.length > 1 ? 's' : ''}</span>
+                <span class="edition-expand">&#9660;</span>
+              </div>
+            </div>
+            <div class="edition-body">${tracks}</div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function escHtml(s) {
+      const el = document.createElement('span');
+      el.textContent = s;
+      return el.innerHTML;
+    }
+
+    function setFilter(f) {
+      currentFilter = f;
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.filter === f);
+      });
+      renderEditions(DATA.editions);
+    }
+
+    document.getElementById('search').addEventListener('input', (e) => {
+      currentSearch = e.target.value;
+      renderEditions(DATA.editions);
+    });
+
+    // Load data
+    fetch('data.json')
+      .then(r => r.json())
+      .then(data => {
+        DATA = data;
+        renderStats(data.stats);
+        renderEditions(data.editions);
+        setFilter('all');
+      });
+  </script>
+
+</body>
+</html>
