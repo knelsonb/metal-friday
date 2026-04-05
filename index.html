@@ -1307,7 +1307,6 @@
       </div>
       <div class="planning-section" id="planning-confirmed">
         <h3 class="planning-section-title">Confirmed</h3>
-        <!-- Edition header injected here by loadPlanning() -->
         <div id="confirmed-list">Loading...</div>
         <div id="publish-controls" style="display:none;margin-top:1rem;padding:1rem;background:var(--bg);border:1px solid var(--accent);border-radius:6px">
           <div style="font-family:Oswald,sans-serif;font-size:1rem;color:var(--accent-glow);margin-bottom:0.75rem">PUBLISH EDITION</div>
@@ -2142,9 +2141,10 @@
         document.getElementById('suggestions-list').innerHTML = 'Loading...';
         document.getElementById('planning-content').innerHTML = 'Loading...';
         // Reload all data
-        loadConfirmed().then(() => loadPlanning());
+        loadConfirmed();
         loadPromoted();
         loadSuggestions();
+        loadPlanning();
         window.scrollTo({ top: 0, behavior: 'instant' });
       }, 500);
 
@@ -2272,28 +2272,17 @@
             `;
           }).join('');
 
-          // Inject picks into the confirmed section (after dynamic pipeline items)
-          const confirmedContainer = document.getElementById('confirmed-list');
-          if (picks) {
-            confirmedContainer.insertAdjacentHTML('beforeend', picks);
-          }
+          // Picks are now in the Worker KV pipeline — no static injection needed
 
-          // Edition header goes above confirmed
-          const confirmedSection = document.getElementById('planning-confirmed');
-          const existingEdHeader = document.getElementById('edition-header-static');
-          if (existingEdHeader) existingEdHeader.remove();
-          confirmedSection.insertAdjacentHTML('afterbegin', `
-            <div id="edition-header-static">
-              <div class="plan-edition-header">
-                <span class="plan-date">${formatDate(ed.date)} &mdash; <span class="curator-badge ${ed.curator}">${ed.curator}</span></span>
-              </div>
-              <div class="plan-theme">${escHtml(ed.theme || '')}</div>
-              ${ed.notes ? `<div class="plan-notes">${escHtml(ed.notes)}</div>` : ''}
-            </div>
-          `);
+          // Edition context (date, theme, notes) — not injected into confirmed
 
-          // Sauron's picks + backlog stay in planning-content
+          // Edition context + Sauron's picks + backlog
           document.getElementById('planning-content').innerHTML = `
+            <div class="plan-edition-header">
+              <span class="plan-date">${formatDate(ed.date)} &mdash; <span class="curator-badge ${ed.curator}">${ed.curator}</span></span>
+            </div>
+            <div class="plan-theme">${escHtml(ed.theme || '')}</div>
+            ${ed.notes ? `<div class="plan-notes">${escHtml(ed.notes)}</div>` : ''}
             ${maybes ? `
               <div class="planning-section-title" style="margin-top:1.5rem">Sauron's Picks</div>
               ${maybes}
