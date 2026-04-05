@@ -2427,7 +2427,7 @@
     }
 
     function loadConfirmed() {
-      fetch(`${WORKER_URL}/confirmed`)
+      fetch(`${WORKER_URL}/confirmed?t=${Date.now()}`)
         .then(r => r.json())
         .then(confirmed => {
           const container = document.getElementById('confirmed-list');
@@ -2471,7 +2471,7 @@
     }
 
     function loadPromoted() {
-      fetch(`${WORKER_URL}/promoted`)
+      fetch(`${WORKER_URL}/promoted?t=${Date.now()}`)
         .then(r => r.json())
         .then(promoted => {
           const container = document.getElementById('promoted-list');
@@ -2505,7 +2505,7 @@
     }
 
     function loadSuggestions() {
-      fetch(`${WORKER_URL}/suggestions`)
+      fetch(`${WORKER_URL}/suggestions?t=${Date.now()}`)
         .then(r => r.json())
         .then(suggestions => {
           const container = document.getElementById('suggestions-list');
