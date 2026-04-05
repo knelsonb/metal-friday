@@ -868,6 +868,163 @@
       min-width: 1.5rem;
     }
 
+    /* --- PLANNING (secret) --- */
+    .planning-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem 4rem;
+    }
+
+    .planning-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 2rem;
+    }
+
+    .planning-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--accent-glow);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .planning-subtitle {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      margin-top: 0.2rem;
+    }
+
+    .planning-section {
+      margin-top: 2.5rem;
+    }
+
+    .planning-section-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.1rem;
+      color: var(--text-bright);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 1rem;
+    }
+
+    .plan-edition-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .plan-date {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--text-bright);
+    }
+
+    .plan-theme {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      font-style: italic;
+      max-width: 500px;
+    }
+
+    .plan-notes {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      padding: 0.75rem 1rem;
+      background: var(--bg-card);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 4px 4px 0;
+      margin-bottom: 1.5rem;
+    }
+
+    .plan-pick {
+      padding: 1rem 1.25rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .plan-pick.confirmed { border-left: 3px solid #4caf50; }
+    .plan-pick.open { border-left: 3px solid var(--suggest); }
+
+    .plan-status {
+      font-size: 0.6rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0.15rem 0.5rem;
+      border-radius: 3px;
+    }
+
+    .plan-status.confirmed { background: #1b5e20; color: #81c784; }
+    .plan-status.open { background: #4e2600; color: #ffb74d; }
+
+    .plan-pick-artist {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 600;
+      font-size: 1.05rem;
+      color: var(--text-bright);
+    }
+
+    .plan-pick-note {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      width: 100%;
+    }
+
+    .backlog-item {
+      padding: 0.6rem 1rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      margin-bottom: 0.4rem;
+      display: flex;
+      gap: 1rem;
+      align-items: baseline;
+    }
+
+    .backlog-artist {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 600;
+      color: var(--text-bright);
+      min-width: 120px;
+    }
+
+    .backlog-note {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+    }
+
+    .suggestion-item {
+      padding: 1rem 1.25rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      margin-bottom: 0.75rem;
+      border-left: 3px solid var(--suggest);
+    }
+
+    .suggestion-meta {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      margin-top: 0.4rem;
+    }
+
     /* --- HIGHLIGHT TARGET --- */
     .track.highlighted {
       background: var(--accent-dim);
@@ -951,7 +1108,7 @@
 <body>
 
   <div class="hero">
-    <span class="horns">\m/</span>
+    <span class="horns" id="secret-horns" style="cursor:default">\m/</span>
     <h1>Metal Friday</h1>
     <p class="tagline">Curated heaviness since 2016</p>
     <button onclick="playRandom()" style="
@@ -1051,6 +1208,24 @@
         <span style="font-size:0.8rem;color:var(--text-dim);font-family:Inter,sans-serif">
           Our curators will review it for a future edition.
         </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PLANNING TAB (hidden from nav, accessed via secret) -->
+  <div class="tab-content" id="tab-planning">
+    <div class="planning-container" id="planning-container">
+      <div class="planning-header">
+        <div>
+          <h2 class="planning-title">The War Room</h2>
+          <p class="planning-subtitle">Next edition planning</p>
+        </div>
+        <button class="genre-back" onclick="switchTab('archive')" style="font-size:0.75rem">Exit</button>
+      </div>
+      <div id="planning-content">Loading...</div>
+      <div class="planning-section" id="planning-suggestions">
+        <h3 class="planning-section-title">Pending Suggestions</h3>
+        <div id="suggestions-list">Loading suggestions...</div>
       </div>
     </div>
   </div>
@@ -1783,6 +1958,124 @@
       toast.textContent = msg;
       toast.style.opacity = '1';
       setTimeout(() => { toast.style.opacity = '0'; }, 3000);
+    }
+
+    // --- SECRET ENTRANCE ---
+    (function() {
+      const el = document.getElementById('secret-horns');
+      let clicks = [];
+      el.addEventListener('click', () => {
+        const now = Date.now();
+        clicks.push(now);
+        // Keep only clicks within the last 1.5 seconds
+        clicks = clicks.filter(t => now - t < 1500);
+        if (clicks.length >= 6) {
+          clicks = [];
+          openPlanning();
+        }
+      });
+    })();
+
+    function openPlanning() {
+      switchTab('planning');
+      loadPlanning();
+      loadSuggestions();
+      showToast('Welcome to the War Room');
+    }
+
+    function loadPlanning() {
+      fetch('planning.json?t=' + Date.now())
+        .then(r => r.json())
+        .then(plan => {
+          const ed = plan.next_edition;
+          const picks = (ed.picks || []).map(p => {
+            if (!p.artist && !p.track) {
+              return `
+                <div class="plan-pick open">
+                  <span class="plan-status open">open slot</span>
+                  <span class="plan-pick-note">${escHtml(p.note || 'Need a pick for this slot')}</span>
+                </div>
+              `;
+            }
+            return `
+              <div class="plan-pick ${p.status || 'open'}">
+                <span class="plan-status ${p.status || 'open'}">${p.status || 'open'}</span>
+                <span class="plan-pick-artist">${escHtml(p.artist)}</span>
+                <span class="genre-tag">${escHtml(p.genre)}</span>
+                <span class="plan-pick-note">${escHtml(p.note || '')}</span>
+              </div>
+            `;
+          }).join('');
+
+          const backlog = (plan.backlog || []).map(b => `
+            <div class="backlog-item">
+              <span class="backlog-artist">${escHtml(b.artist)}</span>
+              <span class="backlog-note">${escHtml(b.note || '')}</span>
+            </div>
+          `).join('');
+
+          const maybes = (ed.maybe || []).map(p => `
+            <div class="plan-pick open">
+              <span class="plan-status open">maybe</span>
+              <span class="plan-pick-artist">${escHtml(p.artist)}</span>
+              <span class="genre-tag">${escHtml(p.genre)}</span>
+              <span class="plan-pick-note">${escHtml(p.note || '')}</span>
+            </div>
+          `).join('');
+
+          document.getElementById('planning-content').innerHTML = `
+            <div class="plan-edition-header">
+              <span class="plan-date">${formatDate(ed.date)} &mdash; <span class="curator-badge ${ed.curator}">${ed.curator}</span></span>
+            </div>
+            <div class="plan-theme">${escHtml(ed.theme || '')}</div>
+            ${ed.notes ? `<div class="plan-notes">${escHtml(ed.notes)}</div>` : ''}
+            <div class="planning-section-title" style="margin-top:1rem">Confirmed</div>
+            ${picks}
+            ${maybes ? `
+              <div class="planning-section-title" style="margin-top:1.5rem">??? Third Pick Options</div>
+              ${maybes}
+            ` : ''}
+            ${backlog ? `
+              <div class="planning-section">
+                <h3 class="planning-section-title">Backlog</h3>
+                ${backlog}
+              </div>
+            ` : ''}
+            <div style="font-size:0.7rem;color:var(--text-dim);margin-top:1.5rem">
+              Last updated: ${plan.updated || 'unknown'}
+            </div>
+          `;
+        })
+        .catch(() => {
+          document.getElementById('planning-content').innerHTML =
+            '<div class="no-results">No planning data found.</div>';
+        });
+    }
+
+    function loadSuggestions() {
+      fetch(`https://api.github.com/repos/${REPO}/issues?labels=suggestion&state=open&per_page=20`)
+        .then(r => r.json())
+        .then(issues => {
+          const container = document.getElementById('suggestions-list');
+          if (!issues.length || issues.message) {
+            container.innerHTML = '<div style="color:var(--text-dim);font-size:0.85rem">No pending suggestions.</div>';
+            return;
+          }
+          container.innerHTML = issues.map(issue => `
+            <div class="suggestion-item">
+              <div class="plan-pick-artist">${escHtml(issue.title.replace('Suggestion: ', ''))}</div>
+              <div style="font-size:0.85rem;color:var(--text);margin-top:0.3rem">${escHtml((issue.body || '').slice(0, 200))}</div>
+              <div class="suggestion-meta">
+                Submitted ${new Date(issue.created_at).toLocaleDateString()} &middot;
+                <a href="${issue.html_url}" target="_blank" style="color:var(--accent-glow)">View on GitHub</a>
+              </div>
+            </div>
+          `).join('');
+        })
+        .catch(() => {
+          document.getElementById('suggestions-list').innerHTML =
+            '<div style="color:var(--text-dim);font-size:0.85rem">Could not load suggestions.</div>';
+        });
     }
 
     // --- INIT ---

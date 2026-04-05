@@ -1,0 +1,53 @@
+{
+  "next_edition": {
+    "date": "2026-04-10",
+    "curator": "keith",
+    "theme": "BMTH bridge — electronic/prog segue from Trey's metalcore picks",
+    "picks": [
+      {
+        "artist": "Bring Me the Horizon",
+        "track": "Ludens",
+        "genre": "electronic rock/metalcore",
+        "note": "Death Stranding soundtrack. BMTH 4th appearance — lean into the genre evolution angle. Bridges from Trey's metalcore picks last week.",
+        "status": "confirmed"
+      },
+      {
+        "artist": "MASTER BOOT RECORD",
+        "track": "DEV.NFO",
+        "genre": "chiptune metal",
+        "note": "A 486DX processor making avant-garde metal with DOS-era naming conventions. New to the archive.",
+        "status": "confirmed"
+      }
+    ],
+    "maybe": [
+      {
+        "artist": "Carpenter Brut",
+        "track": "Turbo Killer",
+        "genre": "synthwave/dark electronic",
+        "note": "French synthwave with metal energy. Not metal per se, but the aggression and production scream metal-adjacent. Pairs perfectly with MBR — both are electronic acts that hit like a truck."
+      },
+      {
+        "artist": "Thy Catafalque",
+        "track": "Szarvas",
+        "genre": "avant-garde/electronic black metal",
+        "note": "Hungarian one-man project mixing folk, classical, electronic, and black metal into something uncategorizable. The kind of 'what genre even IS this' pick Metal Friday thrives on."
+      },
+      {
+        "artist": "Leprous",
+        "track": "The Price",
+        "genre": "modern prog",
+        "note": "Norwegian prog that's accessible without being boring. Clean vocals, atmospheric, technical. Good 'ease the audience in' pick for the prog-skeptical."
+      }
+    ],
+    "notes": "Ham-and-egg from Trey's BMTH metalcore/deathcore on 4/3. Bridge to electronic side via Ludens, then go full synth with MBR. Third pick should complete the arc — either go deeper electronic (Carpenter Brut) or swing back toward prog (Leprous/Thy Catafalque)."
+  },
+  "backlog": [
+    { "artist": "Devin Townsend", "note": "Prog giant, never featured. Long overdue." },
+    { "artist": "Porcupine Tree", "note": "Classic prog. Might be too far from metal for Trey's crowd." },
+    { "artist": "Animals as Leaders", "note": "Instrumental prog/djent. No vocals to scare anyone." },
+    { "artist": "Igorrr", "note": "Baroque/breakcore/death metal. The 'what even IS this' pick." },
+    { "artist": "Perturbator", "note": "Dark synthwave. Same electronic-metal-adjacent lane as MBR and Carpenter Brut." },
+    { "artist": "An Abstract Illusion", "note": "Prog death + 80s sci-fi synths. New album 'The Sleeping City' coming 2026." }
+  ],
+  "updated": "2026-04-05"
+}
