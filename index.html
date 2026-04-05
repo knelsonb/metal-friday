@@ -1108,7 +1108,7 @@
 <body>
 
   <div class="hero">
-    <span class="horns" id="secret-horns" style="cursor:default">\m/</span>
+    <span class="horns" id="secret-horns" style="cursor:default;touch-action:manipulation;-webkit-user-select:none;user-select:none">\m/</span>
     <h1>Metal Friday</h1>
     <p class="tagline">Curated heaviness since 2016</p>
     <button onclick="playRandom()" style="
@@ -1963,17 +1963,37 @@
     // --- SECRET ENTRANCE ---
     (function() {
       const el = document.getElementById('secret-horns');
-      let clicks = [];
-      el.addEventListener('click', () => {
+      let taps = [];
+      let lastTouchEnd = 0;
+
+      function handleTap(e) {
+        // Prevent double-tap zoom on mobile
+        e.preventDefault();
         const now = Date.now();
-        clicks.push(now);
-        // Keep only clicks within the last 1.5 seconds
-        clicks = clicks.filter(t => now - t < 1500);
-        if (clicks.length >= 6) {
-          clicks = [];
+        taps.push(now);
+        // Keep taps within a 2-second window (generous for mobile thumbs)
+        taps = taps.filter(t => now - t < 2000);
+        if (taps.length >= 6) {
+          taps = [];
           openPlanning();
         }
+      }
+
+      // Touch devices: use touchend for instant response (no 300ms click delay)
+      el.addEventListener('touchend', (e) => {
+        e.preventDefault();
+        handleTap(e);
+      }, { passive: false });
+
+      // Desktop: use click
+      el.addEventListener('click', (e) => {
+        // Skip if this was already handled by touchend (prevents double-fire)
+        if (Date.now() - lastTouchEnd < 500) return;
+        handleTap(e);
       });
+
+      // Track touchend timing to deduplicate
+      el.addEventListener('touchend', () => { lastTouchEnd = Date.now(); }, { passive: true });
     })();
 
     function openPlanning() {
