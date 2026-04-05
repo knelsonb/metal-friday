@@ -1576,37 +1576,39 @@
 
       if (!artist || !track || !name) return;
 
-      const subject = `Metal Friday Suggestion: ${artist} - ${track}`;
-      const body = [
-        `Artist: ${artist}`,
-        `Track: ${track}`,
-        comment ? `Why: ${comment}` : '',
-        link ? `Link: ${link}` : '',
-        `Submitted by: ${name}`,
-        '',
-        '---',
-        'Submitted via Metal Friday suggestion box',
-        'https://knelsonb.github.io/metal-friday/',
-      ].filter(Boolean).join('\n');
+      const btn = document.getElementById('sg-submit');
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
 
-      // Obfuscated email addresses
-      const to = atob('a2JuZWxzb25Ac2doLmNvbQ==');
-      const cc = atob('QUxEb25kcmVhQHNnaC5jb20=');
-      const mailto = `mailto:${to}?cc=${encodeURIComponent(cc)}&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      window.location.href = mailto;
-
-      // Honest messaging — email client opened, user still needs to hit send
-      document.getElementById('suggest-form').style.display = 'none';
-      const successEl = document.getElementById('sg-success');
-      successEl.innerHTML = `
-        Almost there! \\m/<br>
-        <span style="font-size:0.8rem;color:var(--text-dim);font-family:Inter,sans-serif">
-          Your email app should have opened with the suggestion pre-filled.<br>
-          <strong style="color:var(--text)">Hit send</strong> and we'll review it for a future edition.<br><br>
-          <span style="font-size:0.75rem">No email app? Send the details to Keith or Trey directly.</span>
-        </span>
-        <br><button onclick="document.getElementById('suggest-form').style.display='flex';document.getElementById('sg-success').classList.remove('visible')" style="margin-top:1rem;padding:0.4rem 1rem;background:none;border:1px solid var(--border);border-radius:4px;color:var(--text-dim);cursor:pointer;font-family:Inter,sans-serif;font-size:0.75rem">Start over</button>
-      `;
+      fetch(`${WORKER_URL}/suggest`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ artist, track, comment, link, name }),
+      })
+        .then(r => r.json())
+        .then(result => {
+          if (result.ok) {
+            document.getElementById('suggest-form').style.display = 'none';
+            const successEl = document.getElementById('sg-success');
+            successEl.innerHTML = `
+              Suggestion received! \\m/<br>
+              <span style="font-size:0.8rem;color:var(--text-dim);font-family:Inter,sans-serif">
+                Keith and Trey will review it for a future edition.
+              </span>
+              <br><button onclick="document.getElementById('suggest-form').style.display='flex';document.getElementById('suggest-form').reset();document.getElementById('sg-success').classList.remove('visible');document.getElementById('sg-submit').disabled=false;document.getElementById('sg-submit').textContent='Submit Suggestion'" style="margin-top:1rem;padding:0.4rem 1rem;background:none;border:1px solid var(--border);border-radius:4px;color:var(--text-dim);cursor:pointer;font-family:Inter,sans-serif;font-size:0.75rem">Suggest another</button>
+            `;
+            successEl.classList.add('visible');
+          } else {
+            btn.disabled = false;
+            btn.textContent = 'Submit Suggestion';
+            showToast('Something went wrong. Try again.');
+          }
+        })
+        .catch(() => {
+          btn.disabled = false;
+          btn.textContent = 'Submit Suggestion';
+          showToast('Could not reach the server. Try again later.');
+        });
       successEl.classList.add('visible');
     }
 
@@ -2268,22 +2270,27 @@
         });
     }
 
+    const WORKER_URL = 'https://metal-friday-suggestions.metalfriday-api.workers.dev';
+
     function loadSuggestions() {
-      fetch(`https://api.github.com/repos/${REPO}/issues?labels=suggestion&state=open&per_page=20`)
+      fetch(`${WORKER_URL}/suggestions`)
         .then(r => r.json())
-        .then(issues => {
+        .then(suggestions => {
           const container = document.getElementById('suggestions-list');
-          if (!issues.length || issues.message) {
+          if (!suggestions.length) {
             container.innerHTML = '<div style="color:var(--text-dim);font-size:0.85rem">No pending suggestions.</div>';
             return;
           }
-          container.innerHTML = issues.map(issue => `
+          container.innerHTML = suggestions.map(s => `
             <div class="suggestion-item">
-              <div class="plan-pick-artist">${escHtml(issue.title.replace('Suggestion: ', ''))}</div>
-              <div style="font-size:0.85rem;color:var(--text);margin-top:0.3rem">${escHtml((issue.body || '').slice(0, 200))}</div>
+              <div style="display:flex;gap:0.5rem;align-items:baseline;flex-wrap:wrap">
+                <span class="plan-pick-artist">${escHtml(s.artist)}</span>
+                <span style="color:var(--text);font-size:0.9rem">"${escHtml(s.track)}"</span>
+              </div>
+              ${s.comment ? `<div style="font-size:0.85rem;color:var(--text);margin-top:0.3rem">${escHtml(s.comment)}</div>` : ''}
+              ${s.link ? `<div class="track-links" style="margin-top:0.3rem"><a class="track-link" href="${escHtml(s.link)}" target="_blank">${ytSvg} Link</a></div>` : ''}
               <div class="suggestion-meta">
-                Submitted ${new Date(issue.created_at).toLocaleDateString()} &middot;
-                <a href="${issue.html_url}" target="_blank" style="color:var(--accent-glow)">View on GitHub</a>
+                from ${escHtml(s.name)} &middot; ${new Date(s.created).toLocaleDateString()}
               </div>
             </div>
           `).join('');
