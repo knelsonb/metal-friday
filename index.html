@@ -1196,7 +1196,7 @@
   <div class="hero">
     <span class="horns" id="secret-horns" aria-hidden="true" style="cursor:default;touch-action:manipulation;-webkit-user-select:none;user-select:none">\m/</span>
     <h1>Metal Friday</h1>
-    <p class="tagline">Curated heaviness since 2016</p>
+    <p class="tagline" id="tagline">Curated heaviness since 2016</p>
     <button class="shuffle-btn" onclick="playRandom()">Shuffle</button>
   </div>
 
@@ -2587,6 +2587,31 @@
             '<div style="color:var(--text-dim);font-size:0.85rem">Could not load suggestions.</div>';
         });
     }
+
+    // --- TAGLINE ROTATION (changes every Sunday at 00:01) ---
+    function loadTagline() {
+      fetch('quotes.json?t=' + Math.floor(Date.now() / 86400000))
+        .then(r => r.json())
+        .then(quotes => {
+          // Weeks 1-2 (through April 19, 2026): override
+          const now = new Date();
+          const override_end = new Date('2026-04-20T00:00:00');
+          if (now < override_end) {
+            document.getElementById('tagline').textContent = 'Better uptime than Milo';
+            return;
+          }
+          // After that: rotate weekly starting from April 20
+          const epoch = new Date('2026-04-20T00:01:00');
+          const msPerWeek = 7 * 24 * 60 * 60 * 1000;
+          const weekIndex = Math.floor((now - epoch) / msPerWeek);
+          const index = ((weekIndex % quotes.length) + quotes.length) % quotes.length;
+          document.getElementById('tagline').textContent = quotes[index];
+        })
+        .catch(() => {
+          document.getElementById('tagline').textContent = 'Curated heaviness since 2016';
+        });
+    }
+    loadTagline();
 
     // --- INIT ---
     fetch('data.json?t=' + Date.now())
