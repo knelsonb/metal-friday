@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Metal Friday</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a0a0a'/%3E%3Ctext x='16' y='24' text-anchor='middle' font-size='22' fill='%23c62828'%3E%F0%9F%A4%98%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
@@ -1490,6 +1491,7 @@
           if (t.spotify_url) links.push(`<a class="track-link" href="${t.spotify_url}" target="_blank" style="color:#1db954">${spotSvg} Spotify</a>`);
           if (t.bandcamp_url) links.push(`<a class="track-link" href="${t.bandcamp_url}" target="_blank">${bcSvg} Bandcamp</a>`);
           if (t.soundcloud_url) links.push(`<a class="track-link" href="${t.soundcloud_url}" target="_blank" style="color:#ff5500">${scSvg} SoundCloud</a>`);
+          if (t.tidal_url) links.push(`<a class="track-link" href="${t.tidal_url}" target="_blank" style="color:#00ffff">${tidalSvg} Tidal</a>`);
           return `
             <div class="search-result-item">
               <span class="sr-track">${highlightMatch(t.track, query)}</span>
@@ -1548,6 +1550,7 @@
           if (t.spotify_url) links.push(`<a class="track-link" href="${t.spotify_url}" target="_blank" style="color:#1db954">${spotSvg} Spotify</a>`);
           if (t.bandcamp_url) links.push(`<a class="track-link" href="${t.bandcamp_url}" target="_blank">${bcSvg} Bandcamp</a>`);
           if (t.soundcloud_url) links.push(`<a class="track-link" href="${t.soundcloud_url}" target="_blank" style="color:#ff5500">${scSvg} SoundCloud</a>`);
+          if (t.tidal_url) links.push(`<a class="track-link" href="${t.tidal_url}" target="_blank" style="color:#00ffff">${tidalSvg} Tidal</a>`);
           const slug = trackSlug(t.artist, t.track);
           return `
             <div class="track" data-slug="${slug}">
@@ -1907,6 +1910,7 @@
         if (t.spotify_url) links.push(`<a class="track-link" href="${t.spotify_url}" target="_blank" style="color:#1db954">${spotSvg} Spotify</a>`);
         if (t.bandcamp_url) links.push(`<a class="track-link" href="${t.bandcamp_url}" target="_blank">${bcSvg} Bandcamp</a>`);
           if (t.soundcloud_url) links.push(`<a class="track-link" href="${t.soundcloud_url}" target="_blank" style="color:#ff5500">${scSvg} SoundCloud</a>`);
+          if (t.tidal_url) links.push(`<a class="track-link" href="${t.tidal_url}" target="_blank" style="color:#00ffff">${tidalSvg} Tidal</a>`);
         return `
           <div class="track" style="border:1px solid var(--border);border-radius:4px;margin-bottom:0.5rem">
             <div class="track-title-row">
@@ -2169,6 +2173,7 @@
     }
 
     const ytMusicSvg = `<svg viewBox="0 0 24 24" style="width:12px;height:12px;fill:currentColor"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm-2-5.5l5-2.5-5-2.5v5z"/></svg>`;
+    const tidalSvg = `<svg viewBox="0 0 24 24" style="width:12px;height:12px;fill:currentColor"><path d="M12.012 3.992L8.008 7.996 4.004 3.992 0 7.996l4.004 4.004L8.008 8l4.004 4-4.004 4.004 4.004 4.004 4.004-4.004-4.004-4.004L16.016 8l-4.004-4.004zm4.004 0l4.004 4.004L24.024 3.992 20.02 0z"/></svg>`;
     const bcSvg = `<svg viewBox="0 0 24 24" style="width:12px;height:12px;fill:currentColor"><path d="M0 18.75l7.437-13.5H24l-7.438 13.5z"/></svg>`;
 
     const spotSvg = `<svg viewBox="0 0 24 24" style="width:12px;height:12px;fill:currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm5.5 17.3c-.2.3-.6.4-.9.2-2.5-1.5-5.7-1.9-9.4-1-.4.1-.7-.1-.8-.5-.1-.4.1-.7.5-.8 4.1-.9 7.6-.5 10.4 1.2.3.2.4.6.2.9zm1.5-3.3c-.3.4-.8.5-1.2.3-2.9-1.8-7.2-2.3-10.6-1.3-.4.1-.9-.1-1-.6-.1-.4.1-.9.6-1 3.9-1.2 8.7-.6 12 1.5.3.2.5.7.2 1.1zm.1-3.4c-3.4-2-9.1-2.2-12.4-1.2-.5.2-1-.2-1.2-.7-.2-.5.2-1 .7-1.2 3.8-1.2 10-1 14 1.4.5.3.6.9.3 1.4-.3.4-.9.6-1.4.3z"/></svg>`;
@@ -2191,6 +2196,9 @@
       }
       if (p.soundcloud_url) {
         links.push(`<a class="track-link" href="${p.soundcloud_url}" target="_blank" style="color:#ff5500">${scSvg} SoundCloud</a>`);
+      }
+      if (p.tidal_url) {
+        links.push(`<a class="track-link" href="${p.tidal_url}" target="_blank" style="color:#00ffff">${tidalSvg} Tidal</a>`);
       }
       return links.length ? `<div class="track-links" style="width:100%">${links.join('')}</div>` : '';
     }
@@ -2571,6 +2579,7 @@
             if (s.spotify_url) links.push(`<a class="track-link" href="${s.spotify_url}" target="_blank" style="color:#1db954">${spotSvg} Spotify</a>`);
             if (s.bandcamp_url) links.push(`<a class="track-link" href="${s.bandcamp_url}" target="_blank">${bcSvg} Bandcamp</a>`);
             if (s.soundcloud_url) links.push(`<a class="track-link" href="${s.soundcloud_url}" target="_blank" style="color:#ff5500">${scSvg} SoundCloud</a>`);
+            if (s.tidal_url) links.push(`<a class="track-link" href="${s.tidal_url}" target="_blank" style="color:#00ffff">${tidalSvg} Tidal</a>`);
             if (!links.length && s.link) links.push(`<a class="track-link" href="${s.link}" target="_blank">${ytSvg} Link</a>`);
 
             const recBadge = s.name ? `<span class="curator-badge ${s.name}" style="font-size:0.55rem;padding:0.1rem 0.4rem">${s.name} pick</span>` : '';
