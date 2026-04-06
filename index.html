@@ -2225,6 +2225,10 @@
                   <span style="font-family:Oswald,sans-serif;font-weight:600;color:var(--text-bright);font-size:0.9rem">"${escHtml(t.track)}"</span>
                   <span style="font-size:0.75rem;color:var(--text-dim)">${escHtml(t.note || '')}</span>
                   ${tl}
+                  ${isAdmin() ? `<div style="margin-top:0.3rem;display:flex;gap:0.5rem">
+                    <button onclick="addToPipeline('${escHtml(b.artist).replace(/'/g,"\\\\'")}','${escHtml(t.track).replace(/'/g,"\\\\'")}','${escHtml(b.genre||"").replace(/'/g,"\\\\'")}','${escHtml(t.note||"").replace(/'/g,"\\\\'")}','promoted')" class="filter-btn" style="padding:0.2rem 0.5rem;font-size:0.55rem">Queue</button>
+                    <button onclick="addToPipeline('${escHtml(b.artist).replace(/'/g,"\\\\'")}','${escHtml(t.track).replace(/'/g,"\\\\'")}','${escHtml(b.genre||"").replace(/'/g,"\\\\'")}','${escHtml(t.note||"").replace(/'/g,"\\\\'")}','confirmed')" class="filter-btn" style="padding:0.2rem 0.5rem;font-size:0.55rem;border-color:var(--accent-glow);color:var(--accent-glow)">Confirm</button>
+                  </div>` : ''}
                 </div>
               `;
             }).join('');
@@ -2268,6 +2272,10 @@
                 ${mLinks}
                 ${mArtistLinks.length ? `<div class="track-links" style="width:100%">${mArtistLinks.join('')}</div>` : ''}
                 <span class="plan-pick-note">${escHtml(p.note || '')}</span>
+                ${isAdmin() ? `<div style="margin-top:0.5rem;display:flex;gap:0.5rem;flex-wrap:wrap">
+                  <button onclick="addToPipeline('${escHtml(p.artist).replace(/'/g,"\\'")}','${escHtml(p.track).replace(/'/g,"\\'")}','${escHtml(p.genre||"").replace(/'/g,"\\'")}','${escHtml(p.note||"").replace(/'/g,"\\'")}','confirmed')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem;border-color:var(--accent-glow);color:var(--accent-glow)">Add to Confirmed</button>
+                  <button onclick="addToPipeline('${escHtml(p.artist).replace(/'/g,"\\'")}','${escHtml(p.track).replace(/'/g,"\\'")}','${escHtml(p.genre||"").replace(/'/g,"\\'")}','${escHtml(p.note||"").replace(/'/g,"\\'")}','promoted')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem">Add to Queued</button>
+                </div>` : ''}
               </div>
             `;
           }).join('');
@@ -2405,6 +2413,33 @@
       adminFetch(`/admin/unconfirm/${id}`).then(r => {
         if (r.ok) { showToast('Moved back to queue'); loadPromoted(); loadConfirmed(); }
       });
+    }
+
+    function addToPipeline(artist, track, genre, note, target) {
+      const data = { artist, track, genre, comment: note, link: '', name: 'sauron' };
+      fetch(`${WORKER_URL}/suggest`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      })
+        .then(r => r.json())
+        .then(r => {
+          if (!r.ok) { showToast('Failed to add'); return; }
+          const id = r.id;
+          // Auto-promote
+          adminFetch(`/admin/promote/${id}`).then(() => {
+            if (target === 'confirmed') {
+              adminFetch(`/admin/confirm/${id}`).then(() => {
+                showToast(`${artist} added to confirmed`);
+                loadConfirmed();
+              });
+            } else {
+              showToast(`${artist} added to queue`);
+              loadPromoted();
+            }
+          });
+        })
+        .catch(() => showToast('Failed to add'));
     }
 
     function kickToSuggestions(id) {
