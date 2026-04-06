@@ -9,21 +9,24 @@
           "track": "Top 10 staTues tHat CriEd bloOd",
           "genre": "metalcore/alt-metal",
           "youtube_url": "https://www.youtube.com/watch?v=gMbh2YIFxGk",
-          "spotify_url": "https://open.spotify.com/track/7g4hIeYVk3h5qQXb9RLeXP"
+          "spotify_url": "https://open.spotify.com/track/7g4hIeYVk3h5qQXb9RLeXP",
+          "bandcamp_url": ""
         },
         {
           "artist": "Bring Me the Horizon",
           "track": "Kool-Aid",
           "genre": "metalcore/deathcore",
           "youtube_url": "https://www.youtube.com/watch?v=3SSELaVWirQ",
-          "spotify_url": "https://open.spotify.com/track/0hpWmAB3L0OJ3VBeMkOQUu"
+          "spotify_url": "https://open.spotify.com/track/0hpWmAB3L0OJ3VBeMkOQUu",
+          "bandcamp_url": ""
         },
         {
           "artist": "Magnolia Park",
           "track": "WORSHIP",
           "genre": "nu-metal/pop-punk",
           "youtube_url": "https://www.youtube.com/watch?v=bPKFJ09fXYE",
-          "spotify_url": "https://open.spotify.com/track/6DDZyvRWHWjPoaVJMTkvsp"
+          "spotify_url": "https://open.spotify.com/track/6DDZyvRWHWjPoaVJMTkvsp",
+          "bandcamp_url": ""
         }
       ]
     },
@@ -36,21 +39,24 @@
           "track": "Forsaken",
           "genre": "progressive metal",
           "youtube_url": "https://www.youtube.com/watch?v=dRBP1rpE5y8",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": ""
         },
         {
           "artist": "Spiritbox",
           "track": "Tsunami Sea",
           "genre": "metalcore (atmospheric)",
           "youtube_url": "https://www.youtube.com/watch?v=hsKtH4gp6Vk",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": ""
         },
         {
           "artist": "Wobbler",
           "track": "From Silence to Somewhere",
           "genre": "modern prog (psychedelic jam)",
           "youtube_url": "https://www.youtube.com/watch?v=2k2OzIG-0Zg",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": ""
         }
       ]
     },
@@ -63,21 +69,24 @@
           "track": "The Dance of Eternity",
           "genre": "prog metal",
           "youtube_url": "https://www.youtube.com/watch?v=8Ik9qECIWgc",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": ""
         },
         {
           "artist": "Haken",
           "track": "Pareidolia",
           "genre": "modern prog",
           "youtube_url": "https://www.youtube.com/watch?v=kr_gROZmTtA",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": ""
         },
         {
           "artist": "Tool",
           "track": "Pneuma",
           "genre": "alt prog rock/metal",
           "youtube_url": "https://www.youtube.com/watch?v=FssULNGSZIA",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": ""
         }
       ]
     },
@@ -90,21 +99,24 @@
           "track": "The World Breaks Everyone",
           "genre": "metalcore",
           "youtube_url": "https://www.youtube.com/watch?v=gVIVaUe_czM",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": ""
         },
         {
           "artist": "Inhuman Condition",
           "track": "Where Pain is Infinity",
           "genre": "death metal",
           "youtube_url": "https://www.youtube.com/watch?v=9vCQ0KPAg20",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": ""
         },
         {
           "artist": "She Said Destroy",
           "track": "Greed Witches",
           "genre": "progressive",
           "youtube_url": "https://www.youtube.com/watch?v=eAlhlcagSWY",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": ""
         }
       ]
     },
@@ -117,21 +129,24 @@
           "track": "The Ones Who Own the Dark",
           "genre": "spooky rock\u2019n\u2019roll",
           "youtube_url": "https://www.youtube.com/watch?v=1TvmboTfDP8",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": ""
         },
         {
           "artist": "Bridge Burner",
           "track": "Disempath",
           "genre": "grind",
           "youtube_url": "https://www.youtube.com/watch?v=2q64D-Gfido",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": ""
         },
         {
           "artist": "Enforced",
           "track": "UXO",
           "genre": "crossover",
           "youtube_url": "https://www.youtube.com/watch?v=J1loT9DadlI",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": ""
         }
       ]
     },
@@ -144,28 +159,32 @@
           "track": "Self",
           "genre": "grindcore",
           "youtube_url": "",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": ""
         },
         {
           "artist": "Draconian",
           "track": "Claw Marks on the Throne",
           "genre": "doom",
           "youtube_url": "https://www.youtube.com/watch?v=j4VglgQfYbg",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": ""
         },
         {
           "artist": "Frozen Soul",
           "track": "Merciless",
           "genre": "death metal",
           "youtube_url": "https://www.youtube.com/watch?v=Xa2CfdKL9nc",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": ""
         },
         {
           "artist": "Mora Prokaza",
           "track": "I\u2019m Not Yours",
           "genre": "black metal/trap",
           "youtube_url": "https://www.youtube.com/watch?v=ajcYGV09fqk",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": ""
         }
       ]
     },
@@ -178,21 +197,24 @@
           "track": "Feeding the Death Machine",
           "genre": "extreme",
           "youtube_url": "https://www.youtube.com/watch?v=2AW9CFiTdt0",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": ""
         },
         {
           "artist": "Dunwich",
           "track": "Mouth of Darkness",
           "genre": "rock/gothic",
           "youtube_url": "https://www.youtube.com/watch?v=yZh6BSW19CQ",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": ""
         },
         {
           "artist": "Primitive Warfare",
           "track": "Nomadic Evolution",
           "genre": "war metal",
           "youtube_url": "https://www.youtube.com/watch?v=EOXxXS2iLNc",
-          "spotify_url": "https://open.spotify.com/track/6o9ktGk54Vrsqg7TflRzaA"
+          "spotify_url": "https://open.spotify.com/track/6o9ktGk54Vrsqg7TflRzaA",
+          "bandcamp_url": "https://primitivewarfare.bandcamp.com/track/nomadic-evolution"
         }
       ]
     },
@@ -205,21 +227,24 @@
           "track": "World Tomb",
           "genre": "hardcore",
           "youtube_url": "https://www.youtube.com/watch?v=S0MV__MQdQM",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": "https://concretehc.bandcamp.com/album/free-us-from-existence"
         },
         {
           "artist": "Umbra Vitae",
           "track": "Blood Blossom",
           "genre": "death metal",
           "youtube_url": "https://www.youtube.com/watch?v=u-m7DcNXTqU",
-          "spotify_url": "https://open.spotify.com/track/3f6S3aMYxU0nbZugtcsVKn"
+          "spotify_url": "https://open.spotify.com/track/3f6S3aMYxU0nbZugtcsVKn",
+          "bandcamp_url": "https://umbravitae.bandcamp.com/track/blood-blossom"
         },
         {
           "artist": "Unleash the Archers",
           "track": "Abyss",
           "genre": "heavy metal",
           "youtube_url": "https://www.youtube.com/watch?v=1bGmjnkDTTI",
-          "spotify_url": "https://open.spotify.com/track/2dm5txVoqHEW40k2DhnqOO"
+          "spotify_url": "https://open.spotify.com/track/2dm5txVoqHEW40k2DhnqOO",
+          "bandcamp_url": "https://unleashthearchers.bandcamp.com/album/abyss"
         }
       ]
     },
@@ -232,21 +257,24 @@
           "track": "To the Flame",
           "genre": "doom",
           "youtube_url": "https://www.youtube.com/watch?v=Ba9stEjAXYk",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": "https://nightfell.bandcamp.com/track/to-the-flame"
         },
         {
           "artist": "Obscene",
           "track": "They Delight in Extinction",
           "genre": "death metal",
           "youtube_url": "https://www.youtube.com/watch?v=tN-Y0y5jepQ",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": "https://obscenedeathmetal.bandcamp.com/album/the-inhabitable-dark"
         },
         {
           "artist": "Skeleton",
           "track": "Mark of Death",
           "genre": "crust punk?",
           "youtube_url": "https://www.youtube.com/watch?v=1Ze34LkerNw",
-          "spotify_url": "https://open.spotify.com/track/77Dq3QgMv74Y5Lh4m0lkPD"
+          "spotify_url": "https://open.spotify.com/track/77Dq3QgMv74Y5Lh4m0lkPD",
+          "bandcamp_url": "https://listen.20buckspin.com/track/mark-of-death"
         }
       ]
     },
@@ -259,14 +287,16 @@
           "track": "Sulphuric Upheaval",
           "genre": "death metal",
           "youtube_url": "https://www.youtube.com/watch?v=BcnAj-Vgfi0",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": "https://concretewinds.bandcamp.com/track/sulphuric-upheaval"
         },
         {
           "artist": "Exhumed",
           "track": "Rot Your Brain",
           "genre": "death metal",
           "youtube_url": "https://www.youtube.com/watch?v=xyaPy-Ug6dA",
-          "spotify_url": "https://open.spotify.com/track/0ST4XRd3RzIVeO6ZYkmglP"
+          "spotify_url": "https://open.spotify.com/track/0ST4XRd3RzIVeO6ZYkmglP",
+          "bandcamp_url": "https://exhumed.bandcamp.com/track/exhumed-rot-your-brain"
         }
       ]
     },
@@ -279,21 +309,24 @@
           "track": "Charnel Rift",
           "genre": "death metal",
           "youtube_url": "https://www.youtube.com/watch?v=nOuL1S2rKkA",
-          "spotify_url": "https://open.spotify.com/track/06vtGCMD4CkNVrifT9ZaB7"
+          "spotify_url": "https://open.spotify.com/track/06vtGCMD4CkNVrifT9ZaB7",
+          "bandcamp_url": "https://blackcurse-svr.bandcamp.com/track/charnel-rift"
         },
         {
           "artist": "Cauldron Black Ram",
           "track": "Stones Break Bones",
           "genre": "death/thrash",
           "youtube_url": "https://www.youtube.com/watch?v=b4SDdWLx2YE",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": "https://20buckspin.bandcamp.com/album/slaver"
         },
         {
           "artist": "Paradise Lost",
           "track": "Forsaken",
           "genre": "doom",
           "youtube_url": "https://www.youtube.com/watch?v=SY4ENmfWj6Y",
-          "spotify_url": "https://open.spotify.com/track/597cB30V41M5bALmduU3YP"
+          "spotify_url": "https://open.spotify.com/track/597cB30V41M5bALmduU3YP",
+          "bandcamp_url": "https://paradiselostofficial.bandcamp.com/track/forsaken"
         }
       ]
     },
@@ -306,21 +339,24 @@
           "track": "Withering Strands",
           "genre": "melodic death metal",
           "youtube_url": "https://www.youtube.com/watch?v=UtVIfd3AKwI",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": ""
         },
         {
           "artist": "Konvent",
           "track": "The Eye",
           "genre": "doom",
           "youtube_url": "https://www.youtube.com/watch?v=YogXrUtyYoU",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": "https://konvent666.bandcamp.com/track/the-eye"
         },
         {
           "artist": "Plague",
           "track": "Pandemic",
           "genre": "death metal",
           "youtube_url": "https://www.youtube.com/watch?v=tZ5GFLiZh6Y",
-          "spotify_url": "https://open.spotify.com/album/0u934ElljYYWNif8V6ysuz"
+          "spotify_url": "https://open.spotify.com/album/0u934ElljYYWNif8V6ysuz",
+          "bandcamp_url": "https://plague-gr.bandcamp.com/album/portraits-of-mind"
         }
       ]
     },
@@ -333,21 +369,24 @@
           "track": "Impaled Upon the Gates",
           "genre": "thrash",
           "youtube_url": "https://www.youtube.com/watch?v=gRPU6CpruU4",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": "https://highcommandsl.bandcamp.com/album/beyond-the-wall-of-desolation"
         },
         {
           "artist": "Immortal Bird",
           "track": "Avolition",
           "genre": "blackened death",
           "youtube_url": "https://www.youtube.com/watch?v=B5USISZpK-Q",
-          "spotify_url": "https://open.spotify.com/track/4ykbjRKHB13eZAdYvIETBT"
+          "spotify_url": "https://open.spotify.com/track/4ykbjRKHB13eZAdYvIETBT",
+          "bandcamp_url": "https://20buckspin.bandcamp.com/track/avolition"
         },
         {
           "artist": "In Mourning",
           "track": "Black Storm",
           "genre": "progressive/melodic death",
           "youtube_url": "https://www.youtube.com/watch?v=pHmV7zHYf0w",
-          "spotify_url": "https://open.spotify.com/track/1vdTI9mhM8OLRjzItcUYUM"
+          "spotify_url": "https://open.spotify.com/track/1vdTI9mhM8OLRjzItcUYUM",
+          "bandcamp_url": "https://agoniarecords.bandcamp.com/track/black-storm"
         }
       ]
     },
@@ -360,14 +399,16 @@
           "track": "1132",
           "genre": "death/thrash",
           "youtube_url": "https://www.youtube.com/watch?v=9ZRgAMWO5No",
-          "spotify_url": "https://open.spotify.com/album/2rJnUV48MZuQ22AdfgoAYq"
+          "spotify_url": "https://open.spotify.com/album/2rJnUV48MZuQ22AdfgoAYq",
+          "bandcamp_url": "https://noisem.bandcamp.com/album/blossoming-decay"
         },
         {
           "artist": "Red Death",
           "track": "Ravage",
           "genre": "thrash/crossover",
           "youtube_url": "https://www.youtube.com/watch?v=Z8UkAqBVr28",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": ""
         }
       ]
     },
@@ -380,7 +421,8 @@
           "track": "Awakening from the Dream of Existence to the Multidimensional Nature of Our Reality (Mirror of the Soul)",
           "genre": "death metal",
           "youtube_url": "https://www.youtube.com/watch?v=1DmiEPUmvrI",
-          "spotify_url": "https://open.spotify.com/track/4AKW96xhn1G4eZJRz9hhaN"
+          "spotify_url": "https://open.spotify.com/track/4AKW96xhn1G4eZJRz9hhaN",
+          "bandcamp_url": "https://darkdescentrecords.bandcamp.com/track/awakening-from-the-dream-of-existence-to-the-multidimensional-nature-of-our-reality-mirror-of-the-soul"
         }
       ]
     },
@@ -393,28 +435,32 @@
           "track": "Sapphire",
           "genre": "post metal",
           "youtube_url": "https://www.youtube.com/watch?v=QXGXTldAJ2Q",
-          "spotify_url": "https://open.spotify.com/track/1rJl94O48b2PXQUYjzEWqR"
+          "spotify_url": "https://open.spotify.com/track/1rJl94O48b2PXQUYjzEWqR",
+          "bandcamp_url": ""
         },
         {
           "artist": "Crypt Sermon",
           "track": "Our Reverend\u2019s Grave",
           "genre": "doom/heavy metal",
           "youtube_url": "https://www.youtube.com/watch?v=ZPfvZ7fHeNo",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": ""
         },
         {
           "artist": "Howling Giant",
           "track": "The River Guide",
           "genre": "psychedelic/stoner/doom",
           "youtube_url": "https://www.youtube.com/watch?v=DxZxdZ5kV9I",
-          "spotify_url": "https://open.spotify.com/track/1hF6hYEySJPPBZ4NbrU4hO"
+          "spotify_url": "https://open.spotify.com/track/1hF6hYEySJPPBZ4NbrU4hO",
+          "bandcamp_url": "https://howlinggiant.bandcamp.com/track/the-river-guide"
         },
         {
           "artist": "Taphos",
           "track": "Thrive in Upheaval",
           "genre": "death metal",
           "youtube_url": "https://www.youtube.com/watch?v=43lfylzQCJI",
-          "spotify_url": "https://open.spotify.com/track/4JT0xYYOCsxx3rjDucwnPu"
+          "spotify_url": "https://open.spotify.com/track/4JT0xYYOCsxx3rjDucwnPu",
+          "bandcamp_url": "https://taphos.bandcamp.com/track/thrive-in-upheaval"
         }
       ]
     },
@@ -427,21 +473,24 @@
           "track": "Boiled Over",
           "genre": "death metal",
           "youtube_url": "https://www.youtube.com/watch?v=LcpIfvVS2sQ",
-          "spotify_url": "https://open.spotify.com/track/2KZVSALVW4y0wJUpTsAEsV"
+          "spotify_url": "https://open.spotify.com/track/2KZVSALVW4y0wJUpTsAEsV",
+          "bandcamp_url": "https://gatecreeper.bandcamp.com/track/boiled-over"
         },
         {
           "artist": "Khemmis",
           "track": "Hunted",
           "genre": "sludge/doom",
           "youtube_url": "https://www.youtube.com/watch?v=3ePcP1TiqXw",
-          "spotify_url": "https://open.spotify.com/track/1cJtz8FzyQQBhMBxaTUtcP"
+          "spotify_url": "https://open.spotify.com/track/1cJtz8FzyQQBhMBxaTUtcP",
+          "bandcamp_url": "https://khemmis.bandcamp.com/album/hunted"
         },
         {
           "artist": "Mortal Wound",
           "track": "Burning Sulphur",
           "genre": "death metal",
           "youtube_url": "https://www.youtube.com/watch?v=ovYsCR5bj6w",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": "https://mortalwound.bandcamp.com/track/burning-sulphur"
         }
       ]
     },
@@ -454,28 +503,32 @@
           "track": "Where the Light Lets Itself In",
           "genre": "too many influences to list",
           "youtube_url": "https://www.youtube.com/watch?v=HGw09K4PsZ4",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": "https://byfireandsword.bandcamp.com/track/where-the-light-lets-itself-in-2"
         },
         {
           "artist": "No/Mas",
           "track": "Last Laugh",
           "genre": "death/grind",
           "youtube_url": "https://www.youtube.com/watch?v=dpTesXKVaR8",
-          "spotify_url": "https://open.spotify.com/track/2vMEJAR3wAFW4CuthdOGJq"
+          "spotify_url": "https://open.spotify.com/track/2vMEJAR3wAFW4CuthdOGJq",
+          "bandcamp_url": "https://hpgd.bandcamp.com/album/last-laugh"
         },
         {
           "artist": "Vitriol",
           "track": "A Gentle Gift",
           "genre": "death metal",
           "youtube_url": "https://www.youtube.com/watch?v=llG-4F_uw_Q",
-          "spotify_url": "https://open.spotify.com/track/5YbwSA880fvKFv4PkkaIxn"
+          "spotify_url": "https://open.spotify.com/track/5YbwSA880fvKFv4PkkaIxn",
+          "bandcamp_url": "https://vitriolwarfare.bandcamp.com/album/to-bathe-from-the-throat-of-cowardice-24-bit-hd-audio"
         },
         {
           "artist": "Wrvth",
           "track": "Eventide",
           "genre": "post metal",
           "youtube_url": "https://www.youtube.com/watch?v=Yzp8uDhd_Oc",
-          "spotify_url": "https://open.spotify.com/track/5JOiL2wfOArQCp2P8HRvxU"
+          "spotify_url": "https://open.spotify.com/track/5JOiL2wfOArQCp2P8HRvxU",
+          "bandcamp_url": "https://uniqueleaderrecords.bandcamp.com/track/eventide"
         }
       ]
     },
@@ -488,21 +541,24 @@
           "track": "The Reek of Loss",
           "genre": "death/doom metal",
           "youtube_url": "https://www.youtube.com/watch?v=bh4tZBm2xaA",
-          "spotify_url": "https://open.spotify.com/track/6RA9G4q9InPHV8lJCq6Ypq"
+          "spotify_url": "https://open.spotify.com/track/6RA9G4q9InPHV8lJCq6Ypq",
+          "bandcamp_url": "https://darkdescentrecords.bandcamp.com/track/the-reek-of-loss"
         },
         {
           "artist": "SIXforNine",
           "track": "Life Devouring Demons",
           "genre": "alternative/progressive metal",
           "youtube_url": "https://www.youtube.com/watch?v=SyR5WjrJ26M",
-          "spotify_url": "https://open.spotify.com/track/0gR9JIRFq85HAdRXUbagLL"
+          "spotify_url": "https://open.spotify.com/track/0gR9JIRFq85HAdRXUbagLL",
+          "bandcamp_url": ""
         },
         {
           "artist": "Volbeat",
           "track": "Cheapside Sloggers",
           "genre": "rock\u2019n\u2019roll",
           "youtube_url": "https://www.youtube.com/watch?v=F7V18BEaKn4",
-          "spotify_url": "https://open.spotify.com/track/49Ss5itZW4JTWiXtWTbKcy"
+          "spotify_url": "https://open.spotify.com/track/49Ss5itZW4JTWiXtWTbKcy",
+          "bandcamp_url": ""
         }
       ]
     },
@@ -515,21 +571,24 @@
           "track": "They Crawl",
           "genre": "hm2 death metal",
           "youtube_url": "https://www.youtube.com/watch?v=TdXRacK5y04",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": "https://rawskullrecordz.bandcamp.com/track/they-crawl"
         },
         {
           "artist": "Hiss from the Moat",
           "track": "The Harrier",
           "genre": "blackened death metal",
           "youtube_url": "",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": "https://hissfromthemoat.bandcamp.com/album/the-harrier"
         },
         {
           "artist": "Tomb Mold",
           "track": "Planetary Clairvoyance",
           "genre": "death metal",
           "youtube_url": "https://www.youtube.com/watch?v=SHyNAQBOzkE",
-          "spotify_url": "https://open.spotify.com/track/2TF9ChYLGz8Y7Bzsi898Id"
+          "spotify_url": "https://open.spotify.com/track/2TF9ChYLGz8Y7Bzsi898Id",
+          "bandcamp_url": "https://20buckspin.bandcamp.com/album/planetary-clairvoyance"
         }
       ]
     },
@@ -542,21 +601,24 @@
           "track": "Of Harvest, Scythe and Sickle Moon",
           "genre": "black metal",
           "youtube_url": "https://www.youtube.com/watch?v=KeuX4EQeNPQ",
-          "spotify_url": "https://open.spotify.com/track/2H3feNyjjDvfBBrkLouh4G"
+          "spotify_url": "https://open.spotify.com/track/2H3feNyjjDvfBBrkLouh4G",
+          "bandcamp_url": "https://aoratos.bandcamp.com/track/of-harvest-scythe-and-sickle-moon-2"
         },
         {
           "artist": "Brymir",
           "track": "Ride on, Spirit",
           "genre": "heavy metal",
           "youtube_url": "https://www.youtube.com/watch?v=tyhOFQWfOyE",
-          "spotify_url": "https://open.spotify.com/track/2ic85Y77Mr4K6vjYTPeVoM"
+          "spotify_url": "https://open.spotify.com/track/2ic85Y77Mr4K6vjYTPeVoM",
+          "bandcamp_url": ""
         },
         {
           "artist": "The Ominous Circle",
           "track": "As the Worm Descends",
           "genre": "death metal",
           "youtube_url": "https://www.youtube.com/watch?v=954e84zWMOY",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": "https://osmoseproductions.bandcamp.com/track/as-the-worm-descends"
         }
       ]
     },
@@ -569,14 +631,16 @@
           "track": "Nothing to Bleed",
           "genre": "death metal/hardcore",
           "youtube_url": "https://www.youtube.com/watch?v=hUXXlWQJOzE",
-          "spotify_url": "https://open.spotify.com/track/1Ldq8HTGhy60RQspCS14A8"
+          "spotify_url": "https://open.spotify.com/track/1Ldq8HTGhy60RQspCS14A8",
+          "bandcamp_url": "https://fumingmouth.bandcamp.com/track/nothing-to-bleed"
         },
         {
           "artist": "Vein",
           "track": "Doomtech",
           "genre": "hardcore/crossover",
           "youtube_url": "https://www.youtube.com/watch?v=8PykbLOrH34",
-          "spotify_url": "https://open.spotify.com/track/3HZUUjUk4xKqkP7u09X8Nb"
+          "spotify_url": "https://open.spotify.com/track/3HZUUjUk4xKqkP7u09X8Nb",
+          "bandcamp_url": "https://veinband.bandcamp.com/track/doomtech"
         }
       ]
     },
@@ -589,21 +653,24 @@
           "track": "Darkhorse",
           "genre": "alternative",
           "youtube_url": "https://www.youtube.com/watch?v=1JKAoIYGhX8",
-          "spotify_url": "https://open.spotify.com/track/53oc5U2cz4MydANM35abYV"
+          "spotify_url": "https://open.spotify.com/track/53oc5U2cz4MydANM35abYV",
+          "bandcamp_url": "https://emmaruthrundle.bandcamp.com/track/darkhorse"
         },
         {
           "artist": "Possessed",
           "track": "Dominion",
           "genre": "death metal",
           "youtube_url": "https://www.youtube.com/watch?v=5Kheg8UKRD0",
-          "spotify_url": "https://open.spotify.com/track/45sbUQZxmJDWtDWIJ9TgWr"
+          "spotify_url": "https://open.spotify.com/track/45sbUQZxmJDWtDWIJ9TgWr",
+          "bandcamp_url": ""
         },
         {
           "artist": "Vanum",
           "track": "Immortal Will",
           "genre": "black metal",
           "youtube_url": "https://www.youtube.com/watch?v=PRCmPcskQiw",
-          "spotify_url": "https://open.spotify.com/track/01WvrYafzhLPUB44EVF6TQ"
+          "spotify_url": "https://open.spotify.com/track/01WvrYafzhLPUB44EVF6TQ",
+          "bandcamp_url": "https://vanum.bandcamp.com/track/immortal-will"
         }
       ]
     },
@@ -616,21 +683,24 @@
           "track": "Shield Wall",
           "genre": "melodic death metal",
           "youtube_url": "https://www.youtube.com/watch?v=ojjDhdoPF6E",
-          "spotify_url": "https://open.spotify.com/track/0gU58a8WjPaEG3Dt56i4Fr"
+          "spotify_url": "https://open.spotify.com/track/0gU58a8WjPaEG3Dt56i4Fr",
+          "bandcamp_url": ""
         },
         {
           "artist": "Power Trip",
           "track": "Executioner\u2019s Tax",
           "genre": "thrash/hardcore crossover",
           "youtube_url": "https://www.youtube.com/watch?v=xdE4RO_P-qE",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": ""
         },
         {
           "artist": "Ringworm",
           "track": "Vicious Circles of Life",
           "genre": "hardcore",
           "youtube_url": "https://www.youtube.com/watch?v=F4QYR1A0W08",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": "https://ringworm.bandcamp.com/track/vicious-circle-of-life"
         }
       ]
     },
@@ -643,21 +713,24 @@
           "track": "Seasons",
           "genre": "progressive sludge rock",
           "youtube_url": "https://www.youtube.com/watch?v=k3n8RBaUMpc",
-          "spotify_url": "https://open.spotify.com/track/1BykOjuWC9iCEf7QsVDjca"
+          "spotify_url": "https://open.spotify.com/track/1BykOjuWC9iCEf7QsVDjca",
+          "bandcamp_url": ""
         },
         {
           "artist": "Wake",
           "track": "Rot",
           "genre": "grindcore",
           "youtube_url": "https://www.youtube.com/watch?v=H6x2_9XJ53w",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": "https://wakegrind.bandcamp.com/track/rot"
         },
         {
           "artist": "Wormwitch",
           "track": "Dancing in the Ashes",
           "genre": "black metal",
           "youtube_url": "https://www.youtube.com/watch?v=VIWy8JvRoO0",
-          "spotify_url": ""
+          "spotify_url": "https://open.spotify.com/track/5AOdQf3kE8kzDByuThqdmQ",
+          "bandcamp_url": "https://wormwitch.bandcamp.com/track/dancing-in-the-ashes"
         }
       ]
     },
@@ -670,21 +743,24 @@
           "track": "Modern Misery",
           "genre": "metalcore",
           "youtube_url": "https://www.youtube.com/watch?v=T35p44JQ4Uk",
-          "spotify_url": "https://open.spotify.com/track/6jaJVPLZOME4TtgW1Es5NT"
+          "spotify_url": "https://open.spotify.com/track/6jaJVPLZOME4TtgW1Es5NT",
+          "bandcamp_url": ""
         },
         {
           "artist": "Periphery",
           "track": "Follow Your Ghost",
           "genre": "progressive/djent",
           "youtube_url": "https://www.youtube.com/watch?v=X_F7auDDFrY",
-          "spotify_url": "https://open.spotify.com/track/4NlpTJTL13deKp3fOSyYPV"
+          "spotify_url": "https://open.spotify.com/track/4NlpTJTL13deKp3fOSyYPV",
+          "bandcamp_url": ""
         },
         {
           "artist": "VLTIMAS",
           "track": "Total Destroy",
           "genre": "death metal",
           "youtube_url": "https://www.youtube.com/watch?v=iKBe-KFpmS8",
-          "spotify_url": "https://open.spotify.com/track/3yJTfoQxJFIY7ABxMbnsmt"
+          "spotify_url": "https://open.spotify.com/track/3yJTfoQxJFIY7ABxMbnsmt",
+          "bandcamp_url": ""
         }
       ]
     },
@@ -697,21 +773,24 @@
           "track": "Elleskudt",
           "genre": "black/folk metal",
           "youtube_url": "https://www.youtube.com/watch?v=7AbLjTZk9zM",
-          "spotify_url": "https://open.spotify.com/track/197mFHzAp0rlVRUyIIcws7"
+          "spotify_url": "https://open.spotify.com/track/197mFHzAp0rlVRUyIIcws7",
+          "bandcamp_url": "https://myrkur.bandcamp.com/track/elleskudt-2"
         },
         {
           "artist": "Nervosa",
           "track": "Bleeding",
           "genre": "thrash/death metal",
           "youtube_url": "https://www.youtube.com/watch?v=RzGXceAGoBQ",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": "https://nervosa-brazil.bandcamp.com/album/downfall-of-mankind"
         },
         {
           "artist": "Venom Prison",
           "track": "Implementing the Metaphysics of Morals",
           "genre": "hardcore/death metal",
           "youtube_url": "",
-          "spotify_url": "https://open.spotify.com/track/5bPdBi0uYdcpnhCNFBiFb2"
+          "spotify_url": "https://open.spotify.com/track/5bPdBi0uYdcpnhCNFBiFb2",
+          "bandcamp_url": "https://venomprison.bandcamp.com/album/samsara"
         }
       ]
     },
@@ -724,28 +803,32 @@
           "track": "Hidden Species (Vitrification of Blood, Pt. 2)",
           "genre": "death metal",
           "youtube_url": "https://www.youtube.com/watch?v=eHsdXTCOx6g",
-          "spotify_url": "https://open.spotify.com/track/3jYMAtv2dEi8V4sIh8h1W2"
+          "spotify_url": "https://open.spotify.com/track/3jYMAtv2dEi8V4sIh8h1W2",
+          "bandcamp_url": "https://darkdescentrecords.bandcamp.com/track/hidden-species-vitrification-of-blood-part-2"
         },
         {
           "artist": "Immolation",
           "track": "Furthest from the Truth",
           "genre": "death metal",
           "youtube_url": "https://www.youtube.com/watch?v=LRccaIXdFjY",
-          "spotify_url": "https://open.spotify.com/track/03sWNpyNcjxxR2JDhZ0phF"
+          "spotify_url": "https://open.spotify.com/track/03sWNpyNcjxxR2JDhZ0phF",
+          "bandcamp_url": "https://immolation.bandcamp.com/track/furthest-from-the-truth"
         },
         {
           "artist": "Morbid Angel",
           "track": "Immortal Rites",
           "genre": "death metal",
           "youtube_url": "https://www.youtube.com/watch?v=mmOYSH_LjF4",
-          "spotify_url": "https://open.spotify.com/track/5hmek3mrSYvfSElBsPNbxo"
+          "spotify_url": "https://open.spotify.com/track/5hmek3mrSYvfSElBsPNbxo",
+          "bandcamp_url": ""
         },
         {
           "artist": "Necrot",
           "track": "Empty Hands",
           "genre": "death metal",
           "youtube_url": "https://www.youtube.com/watch?v=bTNas0q5exI",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": "https://necrot.bandcamp.com/track/empty-hands"
         }
       ]
     },
@@ -758,28 +841,32 @@
           "track": "Rhea (1672)",
           "genre": "post metal",
           "youtube_url": "https://www.youtube.com/watch?v=O60k5cwiqy8",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": "https://anteros.bandcamp.com/album/lunas"
         },
         {
           "artist": "Ghastly",
           "track": "Death by Meditation",
           "genre": "death metal",
           "youtube_url": "https://www.youtube.com/watch?v=1zfAeGq7Itc",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": "https://20buckspin.bandcamp.com/album/death-velour"
         },
         {
           "artist": "Rolo Tomassi",
           "track": "The Hollow Hour",
           "genre": "post/progressive hardcore",
           "youtube_url": "https://www.youtube.com/watch?v=m-KVx2hHb7g",
-          "spotify_url": "https://open.spotify.com/track/3z1Y7aH49FwaSZmIHKQc5w"
+          "spotify_url": "https://open.spotify.com/track/3z1Y7aH49FwaSZmIHKQc5w",
+          "bandcamp_url": "https://rolotomassi.bandcamp.com/track/the-hollow-hour"
         },
         {
           "artist": "Sulphur Aeon",
           "track": "Cult of Starry Wisdom",
           "genre": "progressive/technical death",
           "youtube_url": "https://www.youtube.com/watch?v=BvjNLgYcDYs",
-          "spotify_url": "https://open.spotify.com/track/7pN4PXovW1KjUdSeWJc98n"
+          "spotify_url": "https://open.spotify.com/track/7pN4PXovW1KjUdSeWJc98n",
+          "bandcamp_url": "https://sulphuraeon-vanrecords.bandcamp.com/track/cult-of-starry-wisdom"
         }
       ]
     },
@@ -792,14 +879,16 @@
           "track": "Drohende Schatten",
           "genre": "black metal",
           "youtube_url": "https://www.youtube.com/watch?v=vzSKdKBwY6Q",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": "https://derrotemilan.bandcamp.com/track/drohende-schatten"
         },
         {
           "artist": "Serocs",
           "track": "Thanatophobia",
           "genre": "technical death metal",
           "youtube_url": "https://www.youtube.com/watch?v=N3gAKLFjiPw",
-          "spotify_url": "https://open.spotify.com/track/348QxL0aLYcOiMzpfpsx6E"
+          "spotify_url": "https://open.spotify.com/track/348QxL0aLYcOiMzpfpsx6E",
+          "bandcamp_url": "https://serocs.bandcamp.com/track/thanatophobia"
         }
       ]
     },
@@ -812,14 +901,16 @@
           "track": "Graveborne",
           "genre": "death",
           "youtube_url": "https://www.youtube.com/watch?v=DctpX-tALvA",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": "https://corpsessed.bandcamp.com/track/graveborne"
         },
         {
           "artist": "Funeral Mist",
           "track": "Naught but Death",
           "genre": "black",
           "youtube_url": "https://www.youtube.com/watch?v=TcDDwMHRjC4",
-          "spotify_url": "https://open.spotify.com/track/3y4sgr7zN897ck5odWN5uP"
+          "spotify_url": "https://open.spotify.com/track/3y4sgr7zN897ck5odWN5uP",
+          "bandcamp_url": ""
         }
       ]
     },
@@ -832,21 +923,24 @@
           "track": "His Kingdom is Vast",
           "genre": "progressive/technical death",
           "youtube_url": "https://www.youtube.com/watch?v=K1XGMNxb2-8",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": "https://anovelist.bandcamp.com/album/folie"
         },
         {
           "artist": "Bring Me the Horizon",
           "track": "i apologise if you feel something",
           "genre": "electronic/pop",
           "youtube_url": "https://www.youtube.com/watch?v=N0eOaXc9H4s",
-          "spotify_url": "https://open.spotify.com/track/4mrjzz6ETpW3wosJUYmKoL"
+          "spotify_url": "https://open.spotify.com/track/4mrjzz6ETpW3wosJUYmKoL",
+          "bandcamp_url": ""
         },
         {
           "artist": "Nekrogoblikon",
           "track": "The Magic Spider",
           "genre": "melodic death",
           "youtube_url": "https://www.youtube.com/watch?v=KFFeeACcXC0",
-          "spotify_url": "https://open.spotify.com/track/2KysEWFfA9H8zSh91f4m8R"
+          "spotify_url": "https://open.spotify.com/track/2KysEWFfA9H8zSh91f4m8R",
+          "bandcamp_url": "https://nekrogoblikon.bandcamp.com/track/the-magic-spider"
         }
       ]
     },
@@ -859,14 +953,16 @@
           "track": "Tumulus of Ancient Bones",
           "genre": "death",
           "youtube_url": "https://www.youtube.com/watch?v=7QzcTw1jgQY",
-          "spotify_url": "https://open.spotify.com/track/1ktkrmwUp9vedNebxXACNi"
+          "spotify_url": "https://open.spotify.com/track/1ktkrmwUp9vedNebxXACNi",
+          "bandcamp_url": "https://obliterationorway.bandcamp.com/track/tumulus-of-ancient-bones"
         },
         {
           "artist": "Swallow the Sun",
           "track": "Upon the Water",
           "genre": "doom",
           "youtube_url": "https://www.youtube.com/watch?v=n7AnGqSpeg0",
-          "spotify_url": "https://open.spotify.com/track/2rxoD3APza2XEGHOQ5bry6"
+          "spotify_url": "https://open.spotify.com/track/2rxoD3APza2XEGHOQ5bry6",
+          "bandcamp_url": "https://centurymedia.bandcamp.com/track/upon-the-water"
         }
       ]
     },
@@ -879,14 +975,16 @@
           "track": "Cryonesia",
           "genre": "death",
           "youtube_url": "https://www.youtube.com/watch?v=uMjCULDZLec",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": "https://cist.bandcamp.com/track/cryonesia"
         },
         {
           "artist": "Howling Sycamore",
           "track": "Obstinate Pace",
           "genre": "progressive",
           "youtube_url": "https://www.youtube.com/watch?v=wnknODIXfK8",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": "https://howlingsycamore.bandcamp.com/album/howling-sycamore"
         }
       ]
     },
@@ -899,14 +997,16 @@
           "track": "Sunless Dawn",
           "genre": "death/doom",
           "youtube_url": "https://www.youtube.com/watch?v=DzNt1Lbf63A",
-          "spotify_url": "https://open.spotify.com/track/69duWlZTcDswRLbKPzX0nx"
+          "spotify_url": "https://open.spotify.com/track/69duWlZTcDswRLbKPzX0nx",
+          "bandcamp_url": "https://glacialtomb.bandcamp.com/track/sunless-dawn"
         },
         {
           "artist": "Immortal",
           "track": "Called to Ice",
           "genre": "black metal",
           "youtube_url": "https://www.youtube.com/watch?v=aLAK4Hg069c",
-          "spotify_url": "https://open.spotify.com/track/7qiJN44hgzbZxJ9qnmIqhU"
+          "spotify_url": "https://open.spotify.com/track/7qiJN44hgzbZxJ9qnmIqhU",
+          "bandcamp_url": ""
         }
       ]
     },
@@ -919,14 +1019,16 @@
           "track": "Forward!",
           "genre": "black metal",
           "youtube_url": "https://www.youtube.com/watch?v=Lmloi1rcres",
-          "spotify_url": "https://open.spotify.com/track/38XmF28XW6a7g44JhZdsDT"
+          "spotify_url": "https://open.spotify.com/track/38XmF28XW6a7g44JhZdsDT",
+          "bandcamp_url": ""
         },
         {
           "artist": "YOB",
           "track": "Ablaze",
           "genre": "doom",
           "youtube_url": "https://www.youtube.com/watch?v=ei9PR87zDk8",
-          "spotify_url": "https://open.spotify.com/track/6qnR9hixeaxOTQrjqxJy0N"
+          "spotify_url": "https://open.spotify.com/track/6qnR9hixeaxOTQrjqxJy0N",
+          "bandcamp_url": "https://yobislove.bandcamp.com/track/ablaze"
         }
       ]
     },
@@ -939,35 +1041,40 @@
           "track": "Funereal Might",
           "genre": "technical/melodic death",
           "youtube_url": "https://www.youtube.com/watch?v=8wQutJGTQIw",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": ""
         },
         {
           "artist": "Chapel of Disease",
           "track": "Oblivious/Obnoxious/Defiant",
           "genre": "death'n'roll",
           "youtube_url": "https://www.youtube.com/watch?v=V05Jsr6zXyM",
-          "spotify_url": "https://open.spotify.com/track/2YGU7dLYyQckTXwy9lXFSL"
+          "spotify_url": "https://open.spotify.com/track/2YGU7dLYyQckTXwy9lXFSL",
+          "bandcamp_url": ""
         },
         {
           "artist": "Esben and the Witch",
           "track": "Dull Gret",
           "genre": "post metal",
           "youtube_url": "https://www.youtube.com/watch?v=f1gFgAkRiyQ",
-          "spotify_url": "https://open.spotify.com/track/6PzHte9I02hGUnsskm2UTV"
+          "spotify_url": "https://open.spotify.com/track/6PzHte9I02hGUnsskm2UTV",
+          "bandcamp_url": "https://esbenandthewitch.bandcamp.com/track/dull-gret"
         },
         {
           "artist": "Hate Eternal",
           "track": "What Lies Beyond",
           "genre": "death",
           "youtube_url": "https://www.youtube.com/watch?v=kdPEE8_u8cQ",
-          "spotify_url": "https://open.spotify.com/track/2twkod822LTomifvDubtM8"
+          "spotify_url": "https://open.spotify.com/track/2twkod822LTomifvDubtM8",
+          "bandcamp_url": "https://hateeternal.bandcamp.com/track/what-lies-beyond"
         },
         {
           "artist": "Outer Heaven",
           "track": "Echoes from Beyond",
           "genre": "death",
           "youtube_url": "https://www.youtube.com/watch?v=n7vdzEdrIy4",
-          "spotify_url": "https://open.spotify.com/track/5lBXwlwJ8Qe4C2vjrOIA7N"
+          "spotify_url": "https://open.spotify.com/track/5lBXwlwJ8Qe4C2vjrOIA7N",
+          "bandcamp_url": "https://outerheaven.bandcamp.com/track/echoes-from-beyond"
         }
       ]
     },
@@ -980,21 +1087,24 @@
           "track": "Long Road, No Turns",
           "genre": "noise rock/experimental",
           "youtube_url": "https://www.youtube.com/watch?v=MS80rK-sRoU",
-          "spotify_url": "https://open.spotify.com/track/0GFdh2alLLCJnLHuzdsQ2e"
+          "spotify_url": "https://open.spotify.com/track/0GFdh2alLLCJnLHuzdsQ2e",
+          "bandcamp_url": "https://daughters.bandcamp.com/track/long-road-no-turns"
         },
         {
           "artist": "Haken",
           "track": "The Good Doctor",
           "genre": "progressive",
           "youtube_url": "https://www.youtube.com/watch?v=BD3v8w57_lU",
-          "spotify_url": "https://open.spotify.com/track/6UvK7paq5HLuUxo3ksVmlj"
+          "spotify_url": "https://open.spotify.com/track/6UvK7paq5HLuUxo3ksVmlj",
+          "bandcamp_url": "https://hakenofficial.bandcamp.com/track/the-good-doctor"
         },
         {
           "artist": "Scorched",
           "track": "Astral Savior",
           "genre": "death",
           "youtube_url": "https://www.youtube.com/watch?v=l_p59lSYv5k",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": "https://20buckspin.bandcamp.com/track/astral-savior"
         }
       ]
     },
@@ -1007,14 +1117,16 @@
           "track": "Bartzabel",
           "genre": "blackened death",
           "youtube_url": "https://www.youtube.com/watch?v=P3fbYqeOzxY",
-          "spotify_url": "https://open.spotify.com/track/3wBHF6evf55iEzyMtReJSH"
+          "spotify_url": "https://open.spotify.com/track/3wBHF6evf55iEzyMtReJSH",
+          "bandcamp_url": ""
         },
         {
           "artist": "Horrendous",
           "track": "Devotion (Blood for Ink)",
           "genre": "progressive death",
           "youtube_url": "https://www.youtube.com/watch?v=QkD3U5FpXXc",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": "https://horrendous.bandcamp.com/track/devotion-blood-for-ink"
         }
       ]
     },
@@ -1027,21 +1139,24 @@
           "track": "Sanctioned Annihilation",
           "genre": "doom/stoner",
           "youtube_url": "https://www.youtube.com/watch?v=AhfBRfj37L0",
-          "spotify_url": "https://open.spotify.com/track/0avjZ6HUZk2xbgjKycKL8Z"
+          "spotify_url": "https://open.spotify.com/track/0avjZ6HUZk2xbgjKycKL8Z",
+          "bandcamp_url": "https://highonfire.bandcamp.com/track/sanctioned-annihilation"
         },
         {
           "artist": "Mestis",
           "track": "Ever Wonder",
           "genre": "progressive",
           "youtube_url": "https://www.youtube.com/watch?v=W4FYxrl-I34",
-          "spotify_url": "https://open.spotify.com/track/1qKoCfkwVqNt490TdwzFRe"
+          "spotify_url": "https://open.spotify.com/track/1qKoCfkwVqNt490TdwzFRe",
+          "bandcamp_url": ""
         },
         {
           "artist": "Revocation",
           "track": "The Outer Ones",
           "genre": "death/thrash",
           "youtube_url": "https://www.youtube.com/watch?v=tbEBKH_XDrU",
-          "spotify_url": "https://open.spotify.com/track/1U1mJ2kStcsHlt71m8TRI3"
+          "spotify_url": "https://open.spotify.com/track/1U1mJ2kStcsHlt71m8TRI3",
+          "bandcamp_url": "https://revocationband.bandcamp.com/album/the-outer-ones"
         }
       ]
     },
@@ -1054,14 +1169,16 @@
           "track": "House of Snakes",
           "genre": "grindcore",
           "youtube_url": "https://www.youtube.com/watch?v=pUYHPSIQpKE",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": "https://pigdestroyer.bandcamp.com/track/house-of-snakes"
         },
         {
           "artist": "Wound",
           "track": "Echoes",
           "genre": "death metal",
           "youtube_url": "https://www.youtube.com/watch?v=cbRdYH7NZ3k",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": ""
         }
       ]
     },
@@ -1074,14 +1191,16 @@
           "track": "The Stench",
           "genre": "death metal",
           "youtube_url": "https://www.youtube.com/watch?v=nMaJKLm3tUw",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": "https://crawldeath.bandcamp.com/track/the-stench"
         },
         {
           "artist": "Mask of Judas",
           "track": "The Conspirator",
           "genre": "progressive deathcore",
           "youtube_url": "https://www.youtube.com/watch?v=k5Z96m032sA",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": "https://maskofjudas.bandcamp.com/album/the-mesmerist"
         }
       ]
     },
@@ -1094,21 +1213,24 @@
           "track": "Martyr",
           "genre": "brutal death metal",
           "youtube_url": "https://www.youtube.com/watch?v=dD8JNrFHqOw",
-          "spotify_url": "https://open.spotify.com/track/5YHH0Q7sXD1V7YIOddK8JK"
+          "spotify_url": "https://open.spotify.com/track/5YHH0Q7sXD1V7YIOddK8JK",
+          "bandcamp_url": "https://benighted.bandcamp.com/track/martyr"
         },
         {
           "artist": "Parius",
           "track": "Phylactery",
           "genre": "progressive death metal",
           "youtube_url": "https://www.youtube.com/watch?v=elkfqYIcBXU",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": "https://parius.bandcamp.com/track/phylactery"
         },
         {
           "artist": "Uada",
           "track": "Purging Fire",
           "genre": "black metal",
           "youtube_url": "https://www.youtube.com/watch?v=9NrC7pRra9o",
-          "spotify_url": "https://open.spotify.com/track/19iaDzpgbFLc2HPUZjmNDM"
+          "spotify_url": "https://open.spotify.com/track/19iaDzpgbFLc2HPUZjmNDM",
+          "bandcamp_url": "https://uada.bandcamp.com/track/the-purging-fire"
         }
       ]
     },
@@ -1121,21 +1243,24 @@
           "track": "Swarming Opulence",
           "genre": "black metal",
           "youtube_url": "https://www.youtube.com/watch?v=QNCuNmo5Csg",
-          "spotify_url": "https://open.spotify.com/track/4OWb4mcmrfWrafdrjUs5I7"
+          "spotify_url": "https://open.spotify.com/track/4OWb4mcmrfWrafdrjUs5I7",
+          "bandcamp_url": "https://throatruinerrecords.bandcamp.com/track/swarming-opulence"
         },
         {
           "artist": "Panopticon",
           "track": "En hvit ravns dod",
           "genre": "black metal/americana",
           "youtube_url": "https://www.youtube.com/watch?v=H64QqCUnyVE",
-          "spotify_url": "https://open.spotify.com/track/2vluFKWBHtkr691daGDUzP"
+          "spotify_url": "https://open.spotify.com/track/2vluFKWBHtkr691daGDUzP",
+          "bandcamp_url": ""
         },
         {
           "artist": "Panopticon",
           "track": "The Wandering Ghost",
           "genre": "black metal/americana",
           "youtube_url": "https://www.youtube.com/watch?v=bhXguIufmzk",
-          "spotify_url": "https://open.spotify.com/track/4Jy1uOj0ZSNK6W1DCu91jU"
+          "spotify_url": "https://open.spotify.com/track/4Jy1uOj0ZSNK6W1DCu91jU",
+          "bandcamp_url": "https://thetruepanopticon.bandcamp.com/track/the-wandering-ghost"
         }
       ]
     },
@@ -1148,14 +1273,16 @@
           "track": "The Vault",
           "genre": "black metal",
           "youtube_url": "",
-          "spotify_url": "https://open.spotify.com/track/0J81ymfVUwBAlNnecASiRG"
+          "spotify_url": "https://open.spotify.com/track/0J81ymfVUwBAlNnecASiRG",
+          "bandcamp_url": "https://skeletonwitch.bandcamp.com/track/the-vault"
         },
         {
           "artist": "The Ominous Circle",
           "track": "A Gray Outcast",
           "genre": "death metal",
           "youtube_url": "https://www.youtube.com/watch?v=JeLC79Et-CQ",
-          "spotify_url": "https://open.spotify.com/track/26ChmTYVd2ZtC6y9cpdowR"
+          "spotify_url": "https://open.spotify.com/track/26ChmTYVd2ZtC6y9cpdowR",
+          "bandcamp_url": ""
         }
       ]
     },
@@ -1168,21 +1295,24 @@
           "track": "Soothsayer",
           "genre": "progressive death",
           "youtube_url": "https://www.youtube.com/watch?v=-r9iS6fWnMA",
-          "spotify_url": "https://open.spotify.com/track/7mp40baUsjqzTEuvCF4Vja"
+          "spotify_url": "https://open.spotify.com/track/7mp40baUsjqzTEuvCF4Vja",
+          "bandcamp_url": ""
         },
         {
           "artist": "Obscura",
           "track": "Clandestine Stars",
           "genre": "technical death",
           "youtube_url": "https://www.youtube.com/watch?v=uwcocrUz1y8",
-          "spotify_url": "https://open.spotify.com/track/7kV5FvExdqzu3kgpuRiTLv"
+          "spotify_url": "https://open.spotify.com/track/7kV5FvExdqzu3kgpuRiTLv",
+          "bandcamp_url": ""
         },
         {
           "artist": "Vein",
           "track": "End Eternal",
           "genre": "mathcore/hardcore",
           "youtube_url": "https://www.youtube.com/watch?v=anMz5vtdnZ4",
-          "spotify_url": "https://open.spotify.com/track/7iHBbgRWz8D5x7rzEWh0tG"
+          "spotify_url": "https://open.spotify.com/track/7iHBbgRWz8D5x7rzEWh0tG",
+          "bandcamp_url": ""
         }
       ]
     },
@@ -1195,14 +1325,16 @@
           "track": "Don't You Dare",
           "genre": "avant-garde black metal",
           "youtube_url": "https://www.youtube.com/watch?v=JVqgI5HY3js",
-          "spotify_url": "https://open.spotify.com/track/5zJeYwrdz3ikxxgSAaqVXs"
+          "spotify_url": "https://open.spotify.com/track/5zJeYwrdz3ikxxgSAaqVXs",
+          "bandcamp_url": ""
         },
         {
           "artist": "Zeal and Ardor",
           "track": "You Ain't Coming Back",
           "genre": "avant-garde black metal",
           "youtube_url": "https://www.youtube.com/watch?v=4tWGD-EAgNQ",
-          "spotify_url": "https://open.spotify.com/track/0ltZfCMoFkijXOnyBMZVTq"
+          "spotify_url": "https://open.spotify.com/track/0ltZfCMoFkijXOnyBMZVTq",
+          "bandcamp_url": ""
         }
       ]
     },
@@ -1215,14 +1347,16 @@
           "track": "Evil Upheaval",
           "genre": "death",
           "youtube_url": "https://www.youtube.com/watch?v=GkPE5nh6yiU",
-          "spotify_url": "https://open.spotify.com/track/4uMVdXCVhTprUUOomD00j9"
+          "spotify_url": "https://open.spotify.com/track/4uMVdXCVhTprUUOomD00j9",
+          "bandcamp_url": "https://depravityaustralia.bandcamp.com/album/evil-upheaval"
         },
         {
           "artist": "Spirit Adrift",
           "track": "Starless Age (Enshrined)",
           "genre": "doom",
           "youtube_url": "https://www.youtube.com/watch?v=jQw4MuKc_Oc",
-          "spotify_url": "https://open.spotify.com/track/6SPcj8Nvn5DrsBGpqRbZQs"
+          "spotify_url": "https://open.spotify.com/track/6SPcj8Nvn5DrsBGpqRbZQs",
+          "bandcamp_url": "https://spiritadrift.bandcamp.com/track/starless-age-enshrined"
         }
       ]
     },
@@ -1235,14 +1369,16 @@
           "track": "Chapters of Torment",
           "genre": "death metal",
           "youtube_url": "https://www.youtube.com/watch?v=YyuTnI_IxH4",
-          "spotify_url": "https://open.spotify.com/track/24pcz1Wtj4qXzMx7mxGBwD"
+          "spotify_url": "https://open.spotify.com/track/24pcz1Wtj4qXzMx7mxGBwD",
+          "bandcamp_url": "https://cryptrotsl.bandcamp.com/album/embryonic-devils"
         },
         {
           "artist": "Cult of Luna & Julie Christmas",
           "track": "Cygnus",
           "genre": "post metal",
           "youtube_url": "https://www.youtube.com/watch?v=DVdHw4fskj4",
-          "spotify_url": "https://open.spotify.com/track/7tFjKfTLOP5ooOM2MGPVz9"
+          "spotify_url": "https://open.spotify.com/track/7tFjKfTLOP5ooOM2MGPVz9",
+          "bandcamp_url": ""
         }
       ]
     },
@@ -1255,14 +1391,16 @@
           "track": "Father of Lies",
           "genre": "thrash",
           "youtube_url": "https://www.youtube.com/watch?v=VNBWgtCTLfw",
-          "spotify_url": "https://open.spotify.com/track/7ty0mWSjxm577Af7plUxmE"
+          "spotify_url": "https://open.spotify.com/track/7ty0mWSjxm577Af7plUxmE",
+          "bandcamp_url": ""
         },
         {
           "artist": "Fleshgod Apocalypse",
           "track": "Embodied Deception",
           "genre": "symphonic/death",
           "youtube_url": "https://www.youtube.com/watch?v=B2YDJDV8cZ4",
-          "spotify_url": "https://open.spotify.com/track/2mWoJVa7FXCvLuY4AYfvjx"
+          "spotify_url": "https://open.spotify.com/track/2mWoJVa7FXCvLuY4AYfvjx",
+          "bandcamp_url": ""
         }
       ]
     },
@@ -1275,14 +1413,16 @@
           "track": "Resplendent Misery",
           "genre": "blackened death",
           "youtube_url": "https://www.youtube.com/watch?v=3uLMHsSxZMo",
-          "spotify_url": "https://open.spotify.com/track/3hUJgdX20r5p9tpZaw6DBp"
+          "spotify_url": "https://open.spotify.com/track/3hUJgdX20r5p9tpZaw6DBp",
+          "bandcamp_url": "https://opowis.bandcamp.com/track/resplendent-misery"
         },
         {
           "artist": "Sleep",
           "track": "Sonic Titan",
           "genre": "sludge/stoner",
           "youtube_url": "https://www.youtube.com/watch?v=urKcU7kDPB8",
-          "spotify_url": "https://open.spotify.com/track/2VpU78BBUV2GOD26Uvl3Ow"
+          "spotify_url": "https://open.spotify.com/track/2VpU78BBUV2GOD26Uvl3Ow",
+          "bandcamp_url": ""
         }
       ]
     },
@@ -1295,14 +1435,16 @@
           "track": "Let it Go",
           "genre": "progressive",
           "youtube_url": "https://www.youtube.com/watch?v=yrfNNliO_dw",
-          "spotify_url": "https://open.spotify.com/track/0etWfjVOyoRhZXnfLt0jgW"
+          "spotify_url": "https://open.spotify.com/track/0etWfjVOyoRhZXnfLt0jgW",
+          "bandcamp_url": "https://grayceon.bandcamp.com/track/let-it-go"
         },
         {
           "artist": "Homewrecker",
           "track": "Bound by Validation",
           "genre": "hardcore (mostly)",
           "youtube_url": "https://www.youtube.com/watch?v=zeuDdsKWfPQ",
-          "spotify_url": "https://open.spotify.com/track/4kYdOFU7lm5Kab7lSQozHJ"
+          "spotify_url": "https://open.spotify.com/track/4kYdOFU7lm5Kab7lSQozHJ",
+          "bandcamp_url": ""
         }
       ]
     },
@@ -1315,14 +1457,16 @@
           "track": "Mirror Reaper",
           "genre": "funeral doom",
           "youtube_url": "https://www.youtube.com/watch?v=pzB-cuxBqdk",
-          "spotify_url": "https://open.spotify.com/track/75dSM9nk2SF9ENfMfpuYez"
+          "spotify_url": "https://open.spotify.com/track/75dSM9nk2SF9ENfMfpuYez",
+          "bandcamp_url": ""
         },
         {
           "artist": "Car Bomb",
           "track": "Nonagon",
           "genre": "mathcore",
           "youtube_url": "https://www.youtube.com/watch?v=qFUIpH1aIzs",
-          "spotify_url": "https://open.spotify.com/track/6cD9brkZUhepHmS9x9TiQd"
+          "spotify_url": "https://open.spotify.com/track/6cD9brkZUhepHmS9x9TiQd",
+          "bandcamp_url": ""
         }
       ]
     },
@@ -1335,14 +1479,16 @@
           "track": "Epitaph",
           "genre": "post rock",
           "youtube_url": "https://www.youtube.com/watch?v=fm5gNUYFPs8",
-          "spotify_url": "https://open.spotify.com/track/2uCR5vRJOjzh4MWNkWSAxr"
+          "spotify_url": "https://open.spotify.com/track/2uCR5vRJOjzh4MWNkWSAxr",
+          "bandcamp_url": ""
         },
         {
           "artist": "Ingested",
           "track": "Misery Leech",
           "genre": "slam death",
           "youtube_url": "https://www.youtube.com/watch?v=kvigr0aGkm0",
-          "spotify_url": "https://open.spotify.com/track/00Xf7wRRRAnCeghgsv7beW"
+          "spotify_url": "https://open.spotify.com/track/00Xf7wRRRAnCeghgsv7beW",
+          "bandcamp_url": ""
         }
       ]
     },
@@ -1355,21 +1501,24 @@
           "track": "Keeping the Lighthouse",
           "genre": "doom",
           "youtube_url": "https://www.youtube.com/watch?v=jAPF8CQ3PiA",
-          "spotify_url": "https://open.spotify.com/track/55Y0Z1Z2QqN2W3TWNFfgDI"
+          "spotify_url": "https://open.spotify.com/track/55Y0Z1Z2QqN2W3TWNFfgDI",
+          "bandcamp_url": ""
         },
         {
           "artist": "Necrot",
           "track": "Rather be Dead",
           "genre": "death",
           "youtube_url": "https://www.youtube.com/watch?v=SClkXPa4dvo",
-          "spotify_url": "https://open.spotify.com/track/7MQw7dTT78aABS9QDuU2HU"
+          "spotify_url": "https://open.spotify.com/track/7MQw7dTT78aABS9QDuU2HU",
+          "bandcamp_url": "https://necrot.bandcamp.com/track/rather-be-dead"
         },
         {
           "artist": "m\u00f8l",
           "track": "Bruma",
           "genre": "blackened shoegaze",
           "youtube_url": "https://www.youtube.com/watch?v=ZE_ejqDPB6I",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": ""
         }
       ]
     },
@@ -1382,7 +1531,8 @@
           "track": "Upon This Intimate Madness",
           "genre": "blackened death",
           "youtube_url": "https://www.youtube.com/watch?v=Z90NVCtR8gs",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": ""
         }
       ]
     },
@@ -1395,14 +1545,16 @@
           "track": "Lie of Survival",
           "genre": "doom",
           "youtube_url": "https://www.youtube.com/watch?v=2yApm0Hl_kY",
-          "spotify_url": "https://open.spotify.com/track/2VARHIdVDtxvXagENDRBlA"
+          "spotify_url": "https://open.spotify.com/track/2VARHIdVDtxvXagENDRBlA",
+          "bandcamp_url": "https://pallbearer.bandcamp.com/track/lie-of-survival"
         },
         {
           "artist": "Rivers of Nihil",
           "track": "A Home",
           "genre": "technical death metal",
           "youtube_url": "https://www.youtube.com/watch?v=ewE4hXWnDhM",
-          "spotify_url": "https://open.spotify.com/track/1OeD1qftfYJk3B0q4ADP6L"
+          "spotify_url": "https://open.spotify.com/track/1OeD1qftfYJk3B0q4ADP6L",
+          "bandcamp_url": "https://riversofnihil.bandcamp.com/track/a-home"
         }
       ]
     },
@@ -1415,14 +1567,16 @@
           "track": "Sisters of the Stone",
           "genre": "doom/stoner",
           "youtube_url": "https://www.youtube.com/watch?v=_ZgGY-7cSkw",
-          "spotify_url": "https://open.spotify.com/track/1sAxjZKKhV2Hg5oFEczJV0"
+          "spotify_url": "https://open.spotify.com/track/1sAxjZKKhV2Hg5oFEczJV0",
+          "bandcamp_url": ""
         },
         {
           "artist": "Leng Tch\u2019e",
           "track": "Stentor of Doom",
           "genre": "deathgrind",
           "youtube_url": "https://www.youtube.com/watch?v=watxi4x9f6A",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": ""
         }
       ]
     },
@@ -1435,14 +1589,16 @@
           "track": "Behold the Swine",
           "genre": "sludge",
           "youtube_url": "https://www.youtube.com/watch?v=Vcq59D1U0zA",
-          "spotify_url": "https://open.spotify.com/track/02NcaPsVtAnYUhpsFoT3qo"
+          "spotify_url": "https://open.spotify.com/track/02NcaPsVtAnYUhpsFoT3qo",
+          "bandcamp_url": "https://conjureruk.bandcamp.com/track/behold-the-swine"
         },
         {
           "artist": "Huntsmen",
           "track": "Canary King",
           "genre": "post-metal",
           "youtube_url": "https://www.youtube.com/watch?v=lebqod-GU7k",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": "https://huntsmen.bandcamp.com/track/canary-king-2"
         }
       ]
     },
@@ -1455,14 +1611,16 @@
           "track": "Lord of All Death",
           "genre": "death metal",
           "youtube_url": "https://www.youtube.com/watch?v=da5UVu4PUsU",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": ""
         },
         {
           "artist": "Code Orange",
           "track": "Forever",
           "genre": "hardcore",
           "youtube_url": "https://www.youtube.com/watch?v=dZ9JVxQVQy4",
-          "spotify_url": "https://open.spotify.com/track/1G6czdqgskwJ4cBgx9CDAJ"
+          "spotify_url": "https://open.spotify.com/track/1G6czdqgskwJ4cBgx9CDAJ",
+          "bandcamp_url": ""
         }
       ]
     },
@@ -1475,14 +1633,16 @@
           "track": "Collapse",
           "genre": "deathrock/doom",
           "youtube_url": "https://www.youtube.com/watch?v=nu7QDcncgmk",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": "https://atriarch.bandcamp.com/track/collapse"
         },
         {
           "artist": "Eight Bells",
           "track": "Landless",
           "genre": "experimental/post",
           "youtube_url": "https://www.youtube.com/watch?v=1wd8T9ADgS8",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": "https://eightbells.bandcamp.com/track/landless"
         }
       ]
     },
@@ -1495,21 +1655,24 @@
           "track": "In Propaganda",
           "genre": "folk/progressive",
           "youtube_url": "https://www.youtube.com/watch?v=rmXh3Q47pEU",
-          "spotify_url": "https://open.spotify.com/track/0CRqKa4QMHUz5HqqSlsNCu"
+          "spotify_url": "https://open.spotify.com/track/0CRqKa4QMHUz5HqqSlsNCu",
+          "bandcamp_url": ""
         },
         {
           "artist": "Temple of Void",
           "track": "Wretched Banquet",
           "genre": "death/doom",
           "youtube_url": "https://www.youtube.com/watch?v=gZs_uYjJaQ4",
-          "spotify_url": "https://open.spotify.com/track/4OgsvKz6VsWwUGWWRyhNtt"
+          "spotify_url": "https://open.spotify.com/track/4OgsvKz6VsWwUGWWRyhNtt",
+          "bandcamp_url": "https://templeofvoid.bandcamp.com/track/wretched-banquet"
         },
         {
           "artist": "Tribulation",
           "track": "Subterranea",
           "genre": "death/doom rock",
           "youtube_url": "https://www.youtube.com/watch?v=i_4thg_JFcs",
-          "spotify_url": "https://open.spotify.com/track/2XtGxlFd9vMFpUk7NDM0Qn"
+          "spotify_url": "https://open.spotify.com/track/2XtGxlFd9vMFpUk7NDM0Qn",
+          "bandcamp_url": ""
         }
       ]
     },
@@ -1522,21 +1685,24 @@
           "track": "Through the Fire and Flames",
           "genre": "power",
           "youtube_url": "https://www.youtube.com/watch?v=WHJapDojlaE",
-          "spotify_url": "https://open.spotify.com/track/6nnacTL5on2aVsRhVDNUSo"
+          "spotify_url": "https://open.spotify.com/track/6nnacTL5on2aVsRhVDNUSo",
+          "bandcamp_url": ""
         },
         {
           "artist": "Symphony X",
           "track": "Set the World on Fire",
           "genre": "progressive",
           "youtube_url": "https://www.youtube.com/watch?v=5gQBuGeAOQQ",
-          "spotify_url": "https://open.spotify.com/track/6OZ6pBvrfCb6tRu6h2rzfG"
+          "spotify_url": "https://open.spotify.com/track/6OZ6pBvrfCb6tRu6h2rzfG",
+          "bandcamp_url": ""
         },
         {
           "artist": "The Faceless",
           "track": "Black Star",
           "genre": "progressive/technical death",
           "youtube_url": "https://www.youtube.com/watch?v=ABX6K6yLloQ",
-          "spotify_url": "https://open.spotify.com/track/44OEQAUFIg2CHr0nkKiEzX"
+          "spotify_url": "https://open.spotify.com/track/44OEQAUFIg2CHr0nkKiEzX",
+          "bandcamp_url": ""
         }
       ]
     },
@@ -1549,14 +1715,16 @@
           "track": "Under Duress",
           "genre": "hardcore/metalcore",
           "youtube_url": "https://www.youtube.com/watch?v=BSSUpywhPqM",
-          "spotify_url": "https://open.spotify.com/track/1hUNACaFucS3hTBdqx4pN8"
+          "spotify_url": "https://open.spotify.com/track/1hUNACaFucS3hTBdqx4pN8",
+          "bandcamp_url": "https://convergecult.bandcamp.com/track/under-duress"
         },
         {
           "artist": "Pyrrhon",
           "track": "Trash Talk Landfill",
           "genre": "technical death metal",
           "youtube_url": "https://www.youtube.com/watch?v=RgH4vdNfY-4",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": "https://pyrrhonband.bandcamp.com/track/trash-talk-landfill"
         }
       ]
     },
@@ -1569,14 +1737,16 @@
           "track": "Syndromes of Deadly Endogenous Intoxication",
           "genre": "brutal death metal",
           "youtube_url": "https://www.youtube.com/watch?v=mh9MIZVW-Wo",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": "https://cenotaph666.bandcamp.com/album/perverse-dehumanized-dysfunctions"
         },
         {
           "artist": "Morbid Angel",
           "track": "Piles of Little Arms",
           "genre": "death metal",
           "youtube_url": "https://www.youtube.com/watch?v=bY20SxKXEtQ",
-          "spotify_url": "https://open.spotify.com/track/5lgdzdObWdVS0MAbjhVPit"
+          "spotify_url": "https://open.spotify.com/track/5lgdzdObWdVS0MAbjhVPit",
+          "bandcamp_url": "https://officialmorbidangel.bandcamp.com/track/piles-of-little-arms-2"
         }
       ]
     },
@@ -1589,21 +1759,24 @@
           "track": "Black Flame Divination",
           "genre": "thrash metal",
           "youtube_url": "https://www.youtube.com/watch?v=QzETrThb6RA",
-          "spotify_url": "https://open.spotify.com/album/2UgEbTsRA7mIMB12L5CJPb"
+          "spotify_url": "https://open.spotify.com/album/2UgEbTsRA7mIMB12L5CJPb",
+          "bandcamp_url": "https://darkdescentrecords.bandcamp.com/album/the-shackles-of-mammon"
         },
         {
           "artist": "Dreadnought",
           "track": "Utopia",
           "genre": "progressive/post metal",
           "youtube_url": "https://www.youtube.com/watch?v=-1w6kp-Qd5c",
-          "spotify_url": "https://open.spotify.com/track/5BAfA1GvDG9pANiKuApeUx"
+          "spotify_url": "https://open.spotify.com/track/5BAfA1GvDG9pANiKuApeUx",
+          "bandcamp_url": "https://dreadnoughtdenver.bandcamp.com/track/utopia"
         },
         {
           "artist": "Immolation",
           "track": "Destructive Currents",
           "genre": "death metal",
           "youtube_url": "https://www.youtube.com/watch?v=lOUh2ctYZFE",
-          "spotify_url": "https://open.spotify.com/track/3M9GZZTXziQYWAfGKHOYhK"
+          "spotify_url": "https://open.spotify.com/track/3M9GZZTXziQYWAfGKHOYhK",
+          "bandcamp_url": ""
         }
       ]
     },
@@ -1616,7 +1789,8 @@
           "track": "Firehaven",
           "genre": "melodic death metal",
           "youtube_url": "https://www.youtube.com/watch?v=I2UxcHQCEZE",
-          "spotify_url": "https://open.spotify.com/album/4NV95vgsOWVtYI7Ac84nQW"
+          "spotify_url": "https://open.spotify.com/album/4NV95vgsOWVtYI7Ac84nQW",
+          "bandcamp_url": "https://creatorlightthiscity.bandcamp.com/track/firehaven"
         }
       ]
     },
@@ -1629,7 +1803,8 @@
           "track": "Asylum",
           "genre": "technical death metal",
           "youtube_url": "https://www.youtube.com/watch?v=tCs7vHm3E1c",
-          "spotify_url": "https://open.spotify.com/album/19Su1H31sIXuWYGuFcG7Wu"
+          "spotify_url": "https://open.spotify.com/album/19Su1H31sIXuWYGuFcG7Wu",
+          "bandcamp_url": "https://neuraxis.bandcamp.com/track/asylum"
         }
       ]
     },
@@ -1642,7 +1817,8 @@
           "track": "Portrait of a Headless Man",
           "genre": "symphonic/death metal",
           "youtube_url": "https://www.youtube.com/watch?v=11vSLG_jVeY",
-          "spotify_url": "https://open.spotify.com/track/39Gx9piJsL6WLDLiyCzPuB"
+          "spotify_url": "https://open.spotify.com/track/39Gx9piJsL6WLDLiyCzPuB",
+          "bandcamp_url": "https://septicflesh.bandcamp.com/track/portrait-of-a-headless-man"
         }
       ]
     },
@@ -1655,7 +1831,8 @@
           "track": "Circling Vultures",
           "genre": "hardcore/crossover",
           "youtube_url": "https://www.youtube.com/watch?v=zGKATlI6zdk",
-          "spotify_url": "https://open.spotify.com/album/1ThXZjioAU0zUYcsoHYrgy"
+          "spotify_url": "https://open.spotify.com/album/1ThXZjioAU0zUYcsoHYrgy",
+          "bandcamp_url": ""
         }
       ]
     },
@@ -1668,7 +1845,8 @@
           "track": "Hieroglyphic",
           "genre": "technical death metal",
           "youtube_url": "https://www.youtube.com/watch?v=z_B1BNm94e4",
-          "spotify_url": "https://open.spotify.com/track/1hdqv4AQn33ji5ZinnPZgA"
+          "spotify_url": "https://open.spotify.com/track/1hdqv4AQn33ji5ZinnPZgA",
+          "bandcamp_url": "https://agoniarecords.bandcamp.com/track/hieroglyphic"
         }
       ]
     },
@@ -1681,14 +1859,16 @@
           "track": "The Great divide",
           "genre": "thrash metal",
           "youtube_url": "https://www.youtube.com/watch?v=xGNzW9_52cg",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": "https://chaosthrash.bandcamp.com/album/all-against-all-thrash-metal"
         },
         {
           "artist": "Wode",
           "track": "Trails of Smoke",
           "genre": "black metal",
           "youtube_url": "https://www.youtube.com/watch?v=0Cjh0t6icwE",
-          "spotify_url": "https://open.spotify.com/artist/0omUs7Q7U5gC75RgG3JEn7"
+          "spotify_url": "https://open.spotify.com/artist/0omUs7Q7U5gC75RgG3JEn7",
+          "bandcamp_url": "https://wode.bandcamp.com/track/trails-of-smoke"
         }
       ]
     },
@@ -1701,7 +1881,8 @@
           "track": "Your Last Breaths",
           "genre": "death metal",
           "youtube_url": "https://www.youtube.com/watch?v=56jDbL6dzLw",
-          "spotify_url": "https://open.spotify.com/track/6e01NBK5kHDf0emnALYvuH"
+          "spotify_url": "https://open.spotify.com/track/6e01NBK5kHDf0emnALYvuH",
+          "bandcamp_url": ""
         }
       ]
     },
@@ -1714,7 +1895,8 @@
           "track": "Synthesized Instinct",
           "genre": "technical death metal",
           "youtube_url": "https://www.youtube.com/watch?v=r5S_BH4PSnM",
-          "spotify_url": "https://open.spotify.com/track/1vP8xmHnFkB6if6wj6UkfG"
+          "spotify_url": "https://open.spotify.com/track/1vP8xmHnFkB6if6wj6UkfG",
+          "bandcamp_url": "https://profoundlorerecords.bandcamp.com/track/synthesized-instinct"
         }
       ]
     },
@@ -1727,7 +1909,8 @@
           "track": "Awakened, We Become the Blade",
           "genre": "progressive/instrumental",
           "youtube_url": "https://www.youtube.com/watch?v=GbZgGLPOfXw",
-          "spotify_url": "https://open.spotify.com/artist/19i5TFgRSM1vduUiqJ0dLF"
+          "spotify_url": "https://open.spotify.com/artist/19i5TFgRSM1vduUiqJ0dLF",
+          "bandcamp_url": "https://nodachi.bandcamp.com/album/beyond-death-beyond-reason"
         }
       ]
     },
@@ -1740,7 +1923,8 @@
           "track": "Dancers to a Discordant System",
           "genre": "math metal/djent",
           "youtube_url": "https://www.youtube.com/watch?v=f3yH6ORCHUI",
-          "spotify_url": "https://open.spotify.com/track/2qbQLga60JnISUYwAG9aDx"
+          "spotify_url": "https://open.spotify.com/track/2qbQLga60JnISUYwAG9aDx",
+          "bandcamp_url": ""
         }
       ]
     },
@@ -1753,14 +1937,16 @@
           "track": "Voidspawn",
           "genre": "death metal",
           "youtube_url": "https://www.youtube.com/watch?v=yyDOrfCha3M",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": ""
         },
         {
           "artist": "The Ominous Circle",
           "track": "Poison fumes",
           "genre": "death metal",
           "youtube_url": "https://www.youtube.com/watch?v=3c8U6-b0Qp4",
-          "spotify_url": "https://open.spotify.com/album/015KVlFzbmCbiKKiHG9Iwn"
+          "spotify_url": "https://open.spotify.com/album/015KVlFzbmCbiKKiHG9Iwn",
+          "bandcamp_url": "https://osmoseproductions.bandcamp.com/track/poison-fumes"
         }
       ]
     },
@@ -1773,21 +1959,24 @@
           "track": "Left Hand Path",
           "genre": "death metal, 1990",
           "youtube_url": "https://www.youtube.com/watch?v=D6exw6xT0oo",
-          "spotify_url": "https://open.spotify.com/track/5faD0zZ9fMa3J5ZN3lIWtp"
+          "spotify_url": "https://open.spotify.com/track/5faD0zZ9fMa3J5ZN3lIWtp",
+          "bandcamp_url": "https://entombedband.bandcamp.com/album/left-hand-path"
         },
         {
           "artist": "Iron Maiden",
           "track": "The Trooper",
           "genre": "heavy metal, 1983",
           "youtube_url": "https://www.youtube.com/watch?v=X4bgXH3sJ2Q",
-          "spotify_url": "https://open.spotify.com/track/2C3B3dva983HPMojFqWLOp"
+          "spotify_url": "https://open.spotify.com/track/2C3B3dva983HPMojFqWLOp",
+          "bandcamp_url": ""
         },
         {
           "artist": "Slayer",
           "track": "Chemical Warfare",
           "genre": "thrash metal, 1987",
           "youtube_url": "https://www.youtube.com/watch?v=e5L7GyZeazM",
-          "spotify_url": "https://open.spotify.com/track/3u63uszxopzY7zQD2zou1r"
+          "spotify_url": "https://open.spotify.com/track/3u63uszxopzY7zQD2zou1r",
+          "bandcamp_url": ""
         }
       ]
     },
@@ -1800,7 +1989,8 @@
           "track": "Steambreather",
           "genre": "progressive metal/rock",
           "youtube_url": "https://www.youtube.com/watch?v=HEubrZV04b0",
-          "spotify_url": "https://open.spotify.com/track/4Ut80ggQbyiJN2pGCs7VfB"
+          "spotify_url": "https://open.spotify.com/track/4Ut80ggQbyiJN2pGCs7VfB",
+          "bandcamp_url": ""
         }
       ]
     },
@@ -1813,7 +2003,8 @@
           "track": "Age of the Fanatics",
           "genre": "blackened death",
           "youtube_url": "https://www.youtube.com/watch?v=LdZ_7bqLak0",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": "https://gutterinstinct.bandcamp.com/album/age-of-the-fanatics"
         }
       ]
     },
@@ -1826,7 +2017,8 @@
           "track": "Chevron",
           "genre": "post metal",
           "youtube_url": "https://www.youtube.com/watch?v=ZdGlx2pm6W8",
-          "spotify_url": "https://open.spotify.com/track/5v0hC5RcP6EhEb9QBqTk5N"
+          "spotify_url": "https://open.spotify.com/track/5v0hC5RcP6EhEb9QBqTk5N",
+          "bandcamp_url": "https://cultofluna.bandcamp.com/album/mariner"
         }
       ]
     },
@@ -1839,7 +2031,8 @@
           "track": "Fight Fire with Fire (Metallica cover)",
           "genre": "death metal",
           "youtube_url": "https://www.youtube.com/watch?v=v-W05lNjztM",
-          "spotify_url": "https://open.spotify.com/track/2UwafovdeGmWqvGv0NHt1a"
+          "spotify_url": "https://open.spotify.com/track/2UwafovdeGmWqvGv0NHt1a",
+          "bandcamp_url": ""
         }
       ]
     },
@@ -1852,14 +2045,16 @@
           "track": "Summon the Warrior",
           "genre": "nomadic folk metal",
           "youtube_url": "https://www.youtube.com/watch?v=7rFqrWh-HMQ",
-          "spotify_url": "https://open.spotify.com/track/2CmPIeQYoYQdAdTQ97r9KJ"
+          "spotify_url": "https://open.spotify.com/track/2CmPIeQYoYQdAdTQ97r9KJ",
+          "bandcamp_url": "https://tenggercavalry.bandcamp.com/track/summon-the-warrior-2"
         },
         {
           "artist": "Tengger Cavalry",
           "track": "Chant of the Cavalry",
           "genre": "nomadic folk metal",
           "youtube_url": "https://www.youtube.com/watch?v=a2NBzhqm2BU",
-          "spotify_url": "https://open.spotify.com/track/7awVdwEDAojt54mg3u72Ye"
+          "spotify_url": "https://open.spotify.com/track/7awVdwEDAojt54mg3u72Ye",
+          "bandcamp_url": "https://tenggercavalry.bandcamp.com/track/chant-of-the-cavalry"
         }
       ]
     },
@@ -1872,21 +2067,24 @@
           "track": "Fremd",
           "genre": "folk metal",
           "youtube_url": "https://www.youtube.com/watch?v=3N76cTghu_8",
-          "spotify_url": "https://open.spotify.com/track/10eDwDPbPchSdbpZWd2p3A"
+          "spotify_url": "https://open.spotify.com/track/10eDwDPbPchSdbpZWd2p3A",
+          "bandcamp_url": "https://finsterforst.bandcamp.com/track/fremd"
         },
         {
           "artist": "Primordial",
           "track": "Gallows Hymn",
           "genre": "folk/black metal",
           "youtube_url": "https://www.youtube.com/watch?v=8KIduNQ5BYk",
-          "spotify_url": "https://open.spotify.com/track/0L0jR9G4m3VNPVbKbjjrWe"
+          "spotify_url": "https://open.spotify.com/track/0L0jR9G4m3VNPVbKbjjrWe",
+          "bandcamp_url": "https://primordialofficial.bandcamp.com/track/gallows-hymn"
         },
         {
           "artist": "Wayfarer",
           "track": "Old Souls\u2019 New Dream",
           "genre": "atmospheric black/folk",
           "youtube_url": "https://www.youtube.com/watch?v=Rx66p3G7MtY",
-          "spotify_url": ""
+          "spotify_url": "",
+          "bandcamp_url": ""
         }
       ]
     },
@@ -1899,28 +2097,32 @@
           "track": "Furor Divinus",
           "genre": "blackened death metal",
           "youtube_url": "https://www.youtube.com/watch?v=7V5oxj8Qy0k",
-          "spotify_url": "https://open.spotify.com/track/65CWoT7I7N0bHxzuXujYdm"
+          "spotify_url": "https://open.spotify.com/track/65CWoT7I7N0bHxzuXujYdm",
+          "bandcamp_url": ""
         },
         {
           "artist": "Behexen",
           "track": "Cave of the Dark Dreams",
           "genre": "black metal",
           "youtube_url": "https://www.youtube.com/watch?v=JMJe4KqZOXU",
-          "spotify_url": "https://open.spotify.com/track/3WBUkNHTHZ7J1lRoA5kcl0"
+          "spotify_url": "https://open.spotify.com/track/3WBUkNHTHZ7J1lRoA5kcl0",
+          "bandcamp_url": "https://behexen.bandcamp.com/track/cave-of-the-dark-dreams"
         },
         {
           "artist": "Enslaved",
           "track": "Ground",
           "genre": "progressive black metal",
           "youtube_url": "https://www.youtube.com/watch?v=VKVa1lLJzUk",
-          "spotify_url": "https://open.spotify.com/track/7JSJj4WfwoKo4csKkkhGjG"
+          "spotify_url": "https://open.spotify.com/track/7JSJj4WfwoKo4csKkkhGjG",
+          "bandcamp_url": "https://enslaved.bandcamp.com/album/vertebrae"
         },
         {
           "artist": "Inquisition",
           "track": "Darkness Flows Towards Unseen Horizons",
           "genre": "black metal",
           "youtube_url": "https://www.youtube.com/watch?v=tZsaoUJ2ReQ",
-          "spotify_url": "https://open.spotify.com/track/1Pp498JnCE5IAVC3BFcz1b"
+          "spotify_url": "https://open.spotify.com/track/1Pp498JnCE5IAVC3BFcz1b",
+          "bandcamp_url": ""
         }
       ]
     },
@@ -1933,14 +2135,16 @@
           "track": "Conjuring the Cull",
           "genre": "death metal",
           "youtube_url": "https://www.youtube.com/watch?v=obO-yHB-vgs",
-          "spotify_url": "https://open.spotify.com/track/2KvUQpIGMypbAPJlZDR1aM"
+          "spotify_url": "https://open.spotify.com/track/2KvUQpIGMypbAPJlZDR1aM",
+          "bandcamp_url": "https://miseryindex.bandcamp.com/track/conjuring-the-cull"
         },
         {
           "artist": "Suffocation",
           "track": "Infecting the Crypts",
           "genre": "death metal",
           "youtube_url": "https://www.youtube.com/watch?v=xHXKVlD_X1o",
-          "spotify_url": "https://open.spotify.com/track/2Whteyzod5GZlc3R8hi0DX"
+          "spotify_url": "https://open.spotify.com/track/2Whteyzod5GZlc3R8hi0DX",
+          "bandcamp_url": "https://relapsealumni.bandcamp.com/track/infecting-the-crypts"
         }
       ]
     },
@@ -1953,7 +2157,8 @@
           "track": "Up and Atom",
           "genre": "progressive metal/dream thrash",
           "youtube_url": "https://www.youtube.com/watch?v=FLZ0SHY3Ya8",
-          "spotify_url": "https://open.spotify.com/track/74SJpcxfVHCENjUIr1p3cL"
+          "spotify_url": "https://open.spotify.com/track/74SJpcxfVHCENjUIr1p3cL",
+          "bandcamp_url": "https://astronoid.bandcamp.com/track/up-and-atom"
         }
       ]
     },
@@ -1966,14 +2171,16 @@
           "track": "Oblivious Mess",
           "genre": "grindcore",
           "youtube_url": "https://www.youtube.com/watch?v=Idf5m_G8Xsc",
-          "spotify_url": "https://open.spotify.com/track/04VcYPa13GaF0BP3FWYd8m"
+          "spotify_url": "https://open.spotify.com/track/04VcYPa13GaF0BP3FWYd8m",
+          "bandcamp_url": "https://wormrot.bandcamp.com/track/oblivious-mess"
         },
         {
           "artist": "Wormrot",
           "track": "Eternal Sunshine of the Spotless Grind",
           "genre": "grindcore",
           "youtube_url": "https://www.youtube.com/watch?v=WvZFD_gRM_M",
-          "spotify_url": "https://open.spotify.com/track/4HB5XuhAU5lgYL1aaDhs3S"
+          "spotify_url": "https://open.spotify.com/track/4HB5XuhAU5lgYL1aaDhs3S",
+          "bandcamp_url": "https://wormrot.bandcamp.com/track/eternal-sunshine-of-the-spotless-grind"
         }
       ]
     }

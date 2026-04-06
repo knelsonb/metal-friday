@@ -1485,6 +1485,8 @@
           if (videoId) {
             links.push(`<a class="track-link" href="${t.youtube_url}" target="_blank">${ytSvg} YouTube</a>`);
           }
+          if (t.spotify_url) links.push(`<a class="track-link" href="${t.spotify_url}" target="_blank" style="color:#1db954">${spotSvg} Spotify</a>`);
+          if (t.bandcamp_url) links.push(`<a class="track-link" href="${t.bandcamp_url}" target="_blank">${bcSvg} Bandcamp</a>`);
           return `
             <div class="search-result-item">
               <span class="sr-track">${highlightMatch(t.track, query)}</span>
@@ -1539,6 +1541,8 @@
             links.push(`<a class="track-link" href="${t.youtube_url}" target="_blank" title="Open on YouTube">${ytSvg} YouTube</a>`);
             links.push(`<a class="track-link" href="javascript:void(0)" onclick="toggleEmbed(this, '${videoId}')">${ytSvg} Play</a>`);
           }
+          if (t.spotify_url) links.push(`<a class="track-link" href="${t.spotify_url}" target="_blank" style="color:#1db954">${spotSvg} Spotify</a>`);
+          if (t.bandcamp_url) links.push(`<a class="track-link" href="${t.bandcamp_url}" target="_blank">${bcSvg} Bandcamp</a>`);
           const slug = trackSlug(t.artist, t.track);
           return `
             <div class="track" data-slug="${slug}">
@@ -1894,6 +1898,8 @@
           links.push(`<a class="track-link" href="${t.youtube_url}" target="_blank">${ytSvg} YouTube</a>`);
           links.push(`<a class="track-link" href="javascript:void(0)" onclick="toggleEmbed(this, '${videoId}')">${ytSvg} Play</a>`);
         }
+        if (t.spotify_url) links.push(`<a class="track-link" href="${t.spotify_url}" target="_blank" style="color:#1db954">${spotSvg} Spotify</a>`);
+        if (t.bandcamp_url) links.push(`<a class="track-link" href="${t.bandcamp_url}" target="_blank">${bcSvg} Bandcamp</a>`);
         return `
           <div class="track" style="border:1px solid var(--border);border-radius:4px;margin-bottom:0.5rem">
             <div class="track-title-row">
