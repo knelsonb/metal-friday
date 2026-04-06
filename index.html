@@ -1593,7 +1593,7 @@
       document.getElementById(`tab-${tab}`).classList.add('active');
       // Clear what's-new badges when user views archive
       if (tab === 'archive') {
-        setTimeout(updateLastVisit, 3000);
+
       }
     }
 
@@ -1641,7 +1641,7 @@
           btn.textContent = 'Submit Suggestion';
           showToast('Could not reach the server. Try again later.');
         });
-      successEl.classList.add('visible');
+
     }
 
     // --- SEARCH INPUT ---
@@ -1922,9 +1922,9 @@
       return cutoff.toISOString().split('T')[0];
     }
 
-    function updateLastVisit() {
-      // no-op — we use date-based "new" now, not visit-based
-    }
+
+
+
 
     function countNewEditions() {
       const cutoff = getNewCutoff();
@@ -2182,34 +2182,34 @@
         .then(r => r.json())
         .then(plan => {
           const ed = plan.next_edition;
-          const picks = (ed.picks || []).map(p => {
-            if (!p.artist && !p.track) {
-              return `
-                <div class="plan-pick open">
-                  <span class="plan-status open">open slot</span>
-                  <span class="plan-pick-note">${escHtml(p.note || 'Need a pick for this slot')}</span>
-                </div>
-              `;
-            }
-            const pLinks = planLinks(p);
-            const pArtistLinks = [];
-            if (p.artist_spotify) pArtistLinks.push(`<a class="track-link" href="${p.artist_spotify}" target="_blank">&#127911; Artist</a>`);
-            if (p.artist_youtube) pArtistLinks.push(`<a class="track-link" href="${p.artist_youtube}" target="_blank">${ytSvg} Channel</a>`);
-            const recBy = p.rec_by ? `<span class="curator-badge ${p.rec_by}" style="font-size:0.55rem;padding:0.1rem 0.4rem">${p.rec_by === 'sauron' ? 'sauron says' : p.rec_by + ' pick'}</span>${p.rec_by_note ? `<span style="font-size:0.6rem;color:var(--text-dim);font-style:italic"> (${escHtml(p.rec_by_note)})</span>` : ''}` : '';
-            return `
-              <div class="plan-pick ${p.status || 'open'}">
-                <div style="display:flex;gap:0.4rem;align-items:center;flex-wrap:wrap;margin-bottom:0.4rem">
-                  <span class="plan-status ${p.status || 'open'}">${p.status || 'open'}</span>
-                  ${recBy}
-                </div>
-                <div><span class="plan-pick-artist">${escHtml(p.artist)}</span> <span style="color:var(--text);font-size:0.9rem">"${escHtml(p.track)}"</span></div>
-                <span class="genre-tag">${escHtml(p.genre)}</span>
-                ${pLinks}
-                ${pArtistLinks.length ? `<div class="track-links" style="width:100%">${pArtistLinks.join('')}</div>` : ''}
-                <span class="plan-pick-note">${escHtml(p.note || '')}</span>
-              </div>
-            `;
-          }).join('');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
           const backlog = (plan.backlog || []).map(b => {
             // Artist-level links
@@ -2339,16 +2339,16 @@
       fetch(`${WORKER_URL}/admin/test`, {
         headers: { 'X-Admin-Key': key }
       }).then(r => {
-        if (r.status === 401) {
-          document.getElementById('admin-status').textContent = 'Wrong key';
+        if (r.status === 401 || r.status >= 500) {
+          document.getElementById('admin-status').textContent = r.status === 401 ? 'Wrong key' : 'Server error';
           document.getElementById('admin-status').style.color = '#c62828';
-        } else {
+        } else if (r.status === 404) {
           // 404 means auth passed but route doesn't exist — key is valid
           sessionStorage.setItem('mf-admin-key', key);
           document.getElementById('admin-status').textContent = 'Unlocked';
           document.getElementById('admin-status').style.color = '#4caf50';
           document.getElementById('admin-key-input').value = '';
-          loadConfirmed().then(() => loadPlanning());
+          loadConfirmed(); loadPlanning();
           loadPromoted();
           loadSuggestions();
         }
@@ -2368,6 +2368,30 @@
     function deleteSuggestion(id) {
       adminFetch(`/admin/suggestion/${id}`, 'DELETE').then(r => {
         if (r.ok) { showToast('Deleted'); loadSuggestions(); }
+      });
+    }
+
+    function promoteAs(id, curator) {
+      adminFetch(`/admin/promote/${id}`).then(r => {
+        if (r.ok) {
+          showToast(`Queued for ${curator}`);
+          loadSuggestions();
+          loadPromoted();
+        }
+      });
+    }
+
+    function confirmAs(id, curator) {
+      adminFetch(`/admin/promote/${id}`).then(r => {
+        if (r.ok) {
+          adminFetch(`/admin/confirm/${id}`).then(r2 => {
+            if (r2.ok) {
+              showToast(`Confirmed for ${curator}`);
+              loadSuggestions();
+              loadConfirmed();
+            }
+          });
+        }
       });
     }
 
@@ -2472,7 +2496,7 @@
       adminFetch(`/admin/kick/${id}`).then(r => {
         if (r.ok) {
           showToast('Kicked back to inbox');
-          loadConfirmed().then(() => loadPlanning());
+          loadConfirmed(); loadPlanning();
           loadSuggestions();
         }
       });
