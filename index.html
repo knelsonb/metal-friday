@@ -1487,6 +1487,7 @@
           }
           if (t.spotify_url) links.push(`<a class="track-link" href="${t.spotify_url}" target="_blank" style="color:#1db954">${spotSvg} Spotify</a>`);
           if (t.bandcamp_url) links.push(`<a class="track-link" href="${t.bandcamp_url}" target="_blank">${bcSvg} Bandcamp</a>`);
+          if (t.soundcloud_url) links.push(`<a class="track-link" href="${t.soundcloud_url}" target="_blank" style="color:#ff5500">${scSvg} SoundCloud</a>`);
           return `
             <div class="search-result-item">
               <span class="sr-track">${highlightMatch(t.track, query)}</span>
@@ -1543,6 +1544,7 @@
           }
           if (t.spotify_url) links.push(`<a class="track-link" href="${t.spotify_url}" target="_blank" style="color:#1db954">${spotSvg} Spotify</a>`);
           if (t.bandcamp_url) links.push(`<a class="track-link" href="${t.bandcamp_url}" target="_blank">${bcSvg} Bandcamp</a>`);
+          if (t.soundcloud_url) links.push(`<a class="track-link" href="${t.soundcloud_url}" target="_blank" style="color:#ff5500">${scSvg} SoundCloud</a>`);
           const slug = trackSlug(t.artist, t.track);
           return `
             <div class="track" data-slug="${slug}">
@@ -1900,6 +1902,7 @@
         }
         if (t.spotify_url) links.push(`<a class="track-link" href="${t.spotify_url}" target="_blank" style="color:#1db954">${spotSvg} Spotify</a>`);
         if (t.bandcamp_url) links.push(`<a class="track-link" href="${t.bandcamp_url}" target="_blank">${bcSvg} Bandcamp</a>`);
+          if (t.soundcloud_url) links.push(`<a class="track-link" href="${t.soundcloud_url}" target="_blank" style="color:#ff5500">${scSvg} SoundCloud</a>`);
         return `
           <div class="track" style="border:1px solid var(--border);border-radius:4px;margin-bottom:0.5rem">
             <div class="track-title-row">
@@ -2166,6 +2169,8 @@
 
     const spotSvg = `<svg viewBox="0 0 24 24" style="width:12px;height:12px;fill:currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm5.5 17.3c-.2.3-.6.4-.9.2-2.5-1.5-5.7-1.9-9.4-1-.4.1-.7-.1-.8-.5-.1-.4.1-.7.5-.8 4.1-.9 7.6-.5 10.4 1.2.3.2.4.6.2.9zm1.5-3.3c-.3.4-.8.5-1.2.3-2.9-1.8-7.2-2.3-10.6-1.3-.4.1-.9-.1-1-.6-.1-.4.1-.9.6-1 3.9-1.2 8.7-.6 12 1.5.3.2.5.7.2 1.1zm.1-3.4c-3.4-2-9.1-2.2-12.4-1.2-.5.2-1-.2-1.2-.7-.2-.5.2-1 .7-1.2 3.8-1.2 10-1 14 1.4.5.3.6.9.3 1.4-.3.4-.9.6-1.4.3z"/></svg>`;
 
+    const scSvg = `<svg viewBox="0 0 24 24" style="width:12px;height:12px;fill:currentColor"><path d="M1.175 12.225c-.051 0-.094.046-.101.1l-.233 2.154.233 2.105c.007.058.05.098.101.098.05 0 .09-.04.099-.098l.255-2.105-.27-2.154c-.009-.06-.05-.1-.1-.1m-.899.828c-.06 0-.091.037-.104.094L0 14.479l.172 1.308c.013.06.045.094.09.094.042 0 .075-.035.088-.094l.2-1.308-.2-1.332c-.013-.057-.046-.094-.088-.094m1.83-1.229c-.063 0-.109.05-.117.109l-.209 2.546.209 2.469c.008.063.054.109.117.109.063 0 .109-.046.121-.109l.234-2.469-.234-2.546c-.012-.059-.058-.109-.121-.109m.943-.282c-.071 0-.121.058-.129.121l-.193 2.828.193 2.768c.008.07.058.121.129.121.071 0 .121-.051.129-.121l.221-2.768-.221-2.828c-.008-.063-.058-.121-.129-.121m.947-.239c-.08 0-.133.063-.141.133l-.18 3.067.18 2.983c.008.07.062.133.141.133.079 0 .133-.063.145-.133l.201-2.983-.201-3.067c-.012-.07-.066-.133-.145-.133m.962-.102c-.088 0-.146.07-.154.146l-.164 3.169.164 3.059c.008.079.066.146.154.146.088 0 .146-.067.158-.146l.184-3.059-.184-3.169c-.012-.076-.07-.146-.158-.146m.982-.158c-.096 0-.162.08-.17.162l-.148 3.327.148 3.088c.008.084.074.162.17.162.096 0 .162-.078.174-.162l.168-3.088-.168-3.327c-.012-.082-.078-.162-.174-.162m1.006-.095c-.104 0-.174.084-.182.174l-.137 3.422.137 3.088c.008.092.078.174.182.174.104 0 .174-.082.186-.174l.154-3.088-.154-3.422c-.012-.09-.082-.174-.186-.174m1.67-1.143c-.037 0-.074.012-.104.033-.046.033-.08.084-.088.146l-.121 4.565.121 3.04c.008.098.086.176.192.176.109 0 .186-.078.199-.176l.133-3.04-.133-4.565c-.008-.063-.037-.117-.08-.15-.029-.025-.066-.033-.105-.033m.854-.121c-.121 0-.213.096-.221.209l-.109 4.686.109 3.008c.008.117.1.209.221.209.117 0 .213-.092.225-.209l.121-3.008-.121-4.686c-.012-.113-.108-.209-.225-.209m1.062-.156c-.133 0-.232.104-.24.232l-.098 4.842.098 2.971c.008.125.107.232.24.232.129 0 .232-.107.244-.232l.107-2.971-.107-4.842c-.012-.128-.115-.232-.244-.232m1.051-.158c-.141 0-.246.115-.254.254l-.086 5 .086 2.934c.008.141.113.254.254.254.141 0 .246-.113.258-.254l.098-2.934-.098-5c-.012-.139-.117-.254-.258-.254m1.047-.088c-.15 0-.258.121-.266.27l-.074 5.088.074 2.895c.008.15.117.27.266.27.15 0 .258-.12.27-.27l.084-2.895-.084-5.088c-.012-.149-.12-.27-.27-.27m1.639.826c-.063-.021-.121-.033-.184-.033-.154 0-.287.121-.295.283l-.063 4.012.063 2.852c.008.162.141.283.295.283.154 0 .291-.121.303-.283l.07-2.852-.07-4.012c-.004-.07-.025-.133-.063-.184-.054-.074-.137-.121-.229-.146m.643-.496c-.17 0-.303.133-.311.303l-.055 4.508.055 2.812c.004.17.141.303.311.303.17 0 .307-.133.316-.303l.059-2.812-.059-4.508c-.009-.17-.146-.303-.316-.303m3.391 2.25c-.205-.213-.488-.334-.783-.334-.176 0-.344.043-.494.121-.188.098-.343.246-.441.428-.354-.742-1.104-1.254-1.973-1.254-.234 0-.459.043-.668.121-.082.033-.133.07-.139.146v5.225c.006.076.062.141.141.154h3.363c.742 0 1.344-.604 1.344-1.348 0-.742-.602-1.344-1.344-1.344"/></svg>`;
+
     function planLinks(p) {
       const links = [];
       if (p.youtube_url) {
@@ -2179,6 +2184,9 @@
       }
       if (p.bandcamp_url) {
         links.push(`<a class="track-link" href="${p.bandcamp_url}" target="_blank">${bcSvg} Bandcamp</a>`);
+      }
+      if (p.soundcloud_url) {
+        links.push(`<a class="track-link" href="${p.soundcloud_url}" target="_blank" style="color:#ff5500">${scSvg} SoundCloud</a>`);
       }
       return links.length ? `<div class="track-links" style="width:100%">${links.join('')}</div>` : '';
     }
@@ -2558,6 +2566,7 @@
             else if (vid) links.push(`<a class="track-link" href="https://music.youtube.com/watch?v=${vid[1]}" target="_blank">${ytMusicSvg} YT Music</a>`);
             if (s.spotify_url) links.push(`<a class="track-link" href="${s.spotify_url}" target="_blank" style="color:#1db954">${spotSvg} Spotify</a>`);
             if (s.bandcamp_url) links.push(`<a class="track-link" href="${s.bandcamp_url}" target="_blank">${bcSvg} Bandcamp</a>`);
+            if (s.soundcloud_url) links.push(`<a class="track-link" href="${s.soundcloud_url}" target="_blank" style="color:#ff5500">${scSvg} SoundCloud</a>`);
             if (!links.length && s.link) links.push(`<a class="track-link" href="${s.link}" target="_blank">${ytSvg} Link</a>`);
 
             const recBadge = s.name ? `<span class="curator-badge ${s.name}" style="font-size:0.55rem;padding:0.1rem 0.4rem">${s.name} pick</span>` : '';
