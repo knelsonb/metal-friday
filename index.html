@@ -2371,147 +2371,144 @@
       }).then(r => r.json());
     }
 
+    // --- Local caches for optimistic UI ---
+    let confirmedCache = [];
+    let promotedCache = [];
+    let suggestionsCache = [];
+
+    function moveItem(fromCache, toCache, id, extraFields = {}) {
+      const idx = fromCache.findIndex(s => s.id === id);
+      if (idx < 0) return null;
+      const item = { ...fromCache[idx], ...extraFields };
+      fromCache.splice(idx, 1);
+      toCache.unshift(item);
+      return item;
+    }
+
+    function removeItem(cache, id) {
+      const idx = cache.findIndex(s => s.id === id);
+      if (idx >= 0) cache.splice(idx, 1);
+    }
+
+    // --- Optimistic admin actions (instant UI, background server) ---
+
     function deleteSuggestion(id) {
-      adminFetch(`/admin/suggestion/${id}`, 'DELETE').then(r => {
-        if (r.ok) { showToast('Deleted'); loadSuggestions(); }
-      });
+      removeItem(suggestionsCache, id);
+      renderSuggestionsList(suggestionsCache);
+      showToast('Deleted');
+      adminFetch(`/admin/suggestion/${id}`, 'DELETE');
     }
 
     function promoteAs(id, curator) {
-      adminFetch(`/admin/promote/${id}`).then(r => {
-        if (r.ok) {
-          showToast(`Queued for ${curator}`);
-          loadSuggestions();
-          loadPromoted();
-        }
-      });
+      moveItem(suggestionsCache, promotedCache, id, { promoted: new Date().toISOString(), name: curator });
+      renderSuggestionsList(suggestionsCache);
+      renderPromotedList(promotedCache);
+      showToast(`Queued for ${curator}`);
+      document.getElementById('planning-promoted').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      adminFetch(`/admin/promote/${id}`);
     }
 
     function confirmAs(id, curator) {
-      adminFetch(`/admin/promote/${id}`).then(r => {
-        if (r.ok) {
-          adminFetch(`/admin/confirm/${id}`).then(r2 => {
-            if (r2.ok) {
-              showToast(`Confirmed for ${curator}`);
-              loadSuggestions();
-              loadConfirmed();
-            }
-          });
-        }
-      });
+      moveItem(suggestionsCache, confirmedCache, id, { confirmed: new Date().toISOString(), name: curator });
+      renderSuggestionsList(suggestionsCache);
+      renderConfirmedList(confirmedCache);
+      showToast(`Confirmed for ${curator}`);
+      document.getElementById('planning-confirmed').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      adminFetch(`/admin/promote/${id}`).then(() => adminFetch(`/admin/confirm/${id}`));
     }
 
     function promoteSuggestion(id) {
-      adminFetch(`/admin/promote/${id}`).then(r => {
-        if (r.ok) {
-          showToast('Promoted to queue');
-          loadSuggestions();
-          loadPromoted();
-          setTimeout(() => {
-            document.getElementById('planning-promoted').scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }, 300);
-        }
-      });
+      moveItem(suggestionsCache, promotedCache, id, { promoted: new Date().toISOString() });
+      renderSuggestionsList(suggestionsCache);
+      renderPromotedList(promotedCache);
+      showToast('Promoted to queue');
+      document.getElementById('planning-promoted').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      adminFetch(`/admin/promote/${id}`);
     }
 
     function demoteTrack(id) {
-      adminFetch(`/admin/demote/${id}`).then(r => {
-        if (r.ok) { showToast('Moved back to suggestions'); loadSuggestions(); loadPromoted(); }
-      });
+      moveItem(promotedCache, suggestionsCache, id);
+      renderPromotedList(promotedCache);
+      renderSuggestionsList(suggestionsCache);
+      showToast('Moved back to inbox');
+      adminFetch(`/admin/demote/${id}`);
     }
 
     function deletePromoted(id) {
-      adminFetch(`/admin/promoted/${id}`, 'DELETE').then(r => {
-        if (r.ok) { showToast('Deleted from queue'); loadPromoted(); }
-      });
+      removeItem(promotedCache, id);
+      renderPromotedList(promotedCache);
+      showToast('Deleted from queue');
+      adminFetch(`/admin/promoted/${id}`, 'DELETE');
     }
 
     function confirmTrack(id) {
-      adminFetch(`/admin/confirm/${id}`).then(r => {
-        if (r.ok) {
-          showToast('Confirmed for next edition');
-          loadPromoted();
-          loadConfirmed();
-          setTimeout(() => {
-            document.getElementById('planning-confirmed').scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }, 300);
-        }
-      });
+      moveItem(promotedCache, confirmedCache, id, { confirmed: new Date().toISOString() });
+      renderPromotedList(promotedCache);
+      renderConfirmedList(confirmedCache);
+      showToast('Confirmed');
+      document.getElementById('planning-confirmed').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      adminFetch(`/admin/confirm/${id}`);
     }
-
-    // Store confirmed list locally for reorder
-    let confirmedCache = [];
 
     function moveConfirmed(id, direction) {
       const idx = confirmedCache.findIndex(s => s.id === id);
       if (idx < 0) return;
       const swapIdx = idx + direction;
       if (swapIdx < 0 || swapIdx >= confirmedCache.length) return;
-
-      // Swap created timestamps so sort order changes
-      const tempCreated = confirmedCache[idx].created;
-      confirmedCache[idx].created = confirmedCache[swapIdx].created;
-      confirmedCache[swapIdx].created = tempCreated;
-
-      // Swap in array
       [confirmedCache[idx], confirmedCache[swapIdx]] = [confirmedCache[swapIdx], confirmedCache[idx]];
-
-      // Re-render locally (instant feedback)
       renderConfirmedList(confirmedCache);
-
-      // Persist both items to Worker by re-submitting them
-      // (The Worker sorts by created, so swapping created timestamps changes order)
-      // For now, just re-render client-side. Order persists until page reload.
       showToast('Reordered');
     }
 
     function unconfirmTrack(id) {
-      adminFetch(`/admin/unconfirm/${id}`).then(r => {
-        if (r.ok) { showToast('Moved back to queue'); loadPromoted(); loadConfirmed(); }
-      });
-    }
-
-    function addToPipeline(artist, track, genre, note, target) {
-      const data = { artist, track, genre, comment: note, link: '', name: 'sauron' };
-      fetch(`${WORKER_URL}/suggest`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      })
-        .then(r => r.json())
-        .then(r => {
-          if (!r.ok) { showToast('Failed to add'); return; }
-          const id = r.id;
-          // Auto-promote
-          adminFetch(`/admin/promote/${id}`).then(() => {
-            if (target === 'confirmed') {
-              adminFetch(`/admin/confirm/${id}`).then(() => {
-                showToast(`${artist} added to confirmed`);
-                loadConfirmed();
-              });
-            } else {
-              showToast(`${artist} added to queue`);
-              loadPromoted();
-            }
-          });
-        })
-        .catch(() => showToast('Failed to add'));
+      moveItem(confirmedCache, promotedCache, id);
+      renderConfirmedList(confirmedCache);
+      renderPromotedList(promotedCache);
+      showToast('Moved to queue');
+      adminFetch(`/admin/unconfirm/${id}`);
     }
 
     function kickToSuggestions(id) {
-      adminFetch(`/admin/kick/${id}`).then(r => {
-        if (r.ok) {
-          showToast('Kicked back to inbox');
-          loadConfirmed(); loadPlanning();
-          loadSuggestions();
-        }
-      });
+      moveItem(confirmedCache, suggestionsCache, id);
+      renderConfirmedList(confirmedCache);
+      renderSuggestionsList(suggestionsCache);
+      showToast('Kicked to inbox');
+      adminFetch(`/admin/kick/${id}`);
     }
 
     function deleteConfirmed(id) {
-      adminFetch(`/admin/confirmed/${id}`, 'DELETE').then(r => {
-        if (r.ok) { showToast('Removed'); loadConfirmed(); }
-      });
+      removeItem(confirmedCache, id);
+      renderConfirmedList(confirmedCache);
+      showToast('Removed');
+      adminFetch(`/admin/confirmed/${id}`, 'DELETE');
+    }
+
+    function addToPipeline(artist, track, genre, note, target) {
+      const fakeId = Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+      const item = { id: fakeId, artist, track, genre, comment: note, link: '', name: 'sauron', created: new Date().toISOString() };
+      if (target === 'confirmed') {
+        item.confirmed = new Date().toISOString();
+        confirmedCache.unshift(item);
+        renderConfirmedList(confirmedCache);
+        showToast(`${artist} confirmed`);
+      } else {
+        item.promoted = new Date().toISOString();
+        promotedCache.unshift(item);
+        renderPromotedList(promotedCache);
+        showToast(`${artist} queued`);
+      }
+      // Background: submit + promote + optionally confirm
+      fetch(`${WORKER_URL}/suggest`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(item)
+      }).then(r => r.json()).then(r => {
+        if (r.ok) {
+          adminFetch(`/admin/promote/${r.id}`).then(() => {
+            if (target === 'confirmed') adminFetch(`/admin/confirm/${r.id}`);
+          });
+        }
+      }).catch(() => showToast('Server sync failed — refresh to verify'));
     }
 
     function publishEdition() {
@@ -2604,75 +2601,74 @@
         });
     }
 
+    function renderPromotedList(promoted) {
+      const container = document.getElementById('promoted-list');
+      if (!promoted.length) {
+        container.innerHTML = '<div style="color:var(--text-dim);font-size:0.85rem">Nothing queued yet.</div>';
+        return;
+      }
+      const admin = isAdmin();
+      container.innerHTML = promoted.map(s => `
+        <div class="suggestion-item" style="border-left-color:#4caf50">
+          <div style="display:flex;gap:0.5rem;align-items:baseline;flex-wrap:wrap">
+            ${s.name ? `<span class="curator-badge ${s.name}" style="font-size:0.55rem;padding:0.1rem 0.4rem">${s.name}</span>` : ''}
+            <span class="plan-pick-artist">${escHtml(s.artist)}</span>
+            <span style="color:var(--text);font-size:0.9rem">"${escHtml(s.track)}"</span>
+          </div>
+          ${s.comment ? `<div style="font-size:0.85rem;color:var(--text);margin-top:0.3rem">${escHtml(s.comment)}</div>` : ''}
+          <div class="suggestion-meta">
+            promoted ${s.promoted ? new Date(s.promoted).toLocaleDateString() : ''}
+          </div>
+          ${admin ? `<div style="margin-top:0.5rem;display:flex;gap:0.5rem">
+            <button onclick="confirmTrack('${s.id}')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem;border-color:#4caf50;color:#4caf50">Confirm</button>
+            <button onclick="demoteTrack('${s.id}')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem">Move Back</button>
+            <button onclick="deletePromoted('${s.id}')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem;border-color:#c62828;color:#c62828">Delete</button>
+          </div>` : ''}
+        </div>
+      `).join('');
+    }
+
     function loadPromoted() {
       fetch(`${WORKER_URL}/promoted?t=${Date.now()}`)
         .then(r => r.json())
-        .then(promoted => {
-          const container = document.getElementById('promoted-list');
-          if (!promoted.length) {
-            container.innerHTML = '<div style="color:var(--text-dim);font-size:0.85rem">Nothing queued yet.</div>';
-            return;
-          }
-          const admin = isAdmin();
-          container.innerHTML = promoted.map(s => `
-            <div class="suggestion-item" style="border-left-color:#4caf50">
-              <div style="display:flex;gap:0.5rem;align-items:baseline;flex-wrap:wrap">
-                <span class="plan-pick-artist">${escHtml(s.artist)}</span>
-                <span style="color:var(--text);font-size:0.9rem">"${escHtml(s.track)}"</span>
-              </div>
-              ${s.comment ? `<div style="font-size:0.85rem;color:var(--text);margin-top:0.3rem">${escHtml(s.comment)}</div>` : ''}
-              <div class="suggestion-meta">
-                from ${escHtml(s.name)} &middot; promoted ${new Date(s.promoted).toLocaleDateString()}
-              </div>
-              ${admin ? `<div style="margin-top:0.5rem;display:flex;gap:0.5rem">
-                <button onclick="confirmTrack('${s.id}')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem;border-color:#4caf50;color:#4caf50">Confirm</button>
-                <button onclick="demoteTrack('${s.id}')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem">Move Back</button>
-                <button onclick="deletePromoted('${s.id}')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem;border-color:#c62828;color:#c62828">Delete</button>
-              </div>` : ''}
-            </div>
-          `).join('');
-        })
-        .catch(() => {
-          document.getElementById('promoted-list').innerHTML =
-            '<div style="color:var(--text-dim);font-size:0.85rem">Could not load queue.</div>';
-        });
+        .then(promoted => { promotedCache = promoted; renderPromotedList(promoted); })
+        .catch(() => { document.getElementById('promoted-list').innerHTML = '<div style="color:var(--text-dim);font-size:0.85rem">Could not load queue.</div>'; });
+    }
+
+    function renderSuggestionsList(suggestions) {
+      const container = document.getElementById('suggestions-list');
+      if (!suggestions.length) {
+        container.innerHTML = '<div style="color:var(--text-dim);font-size:0.85rem">No pending suggestions.</div>';
+        return;
+      }
+      const admin = isAdmin();
+      container.innerHTML = suggestions.map(s => `
+        <div class="suggestion-item">
+          <div style="display:flex;gap:0.5rem;align-items:baseline;flex-wrap:wrap">
+            <span class="plan-pick-artist">${escHtml(s.artist)}</span>
+            <span style="color:var(--text);font-size:0.9rem">"${escHtml(s.track)}"</span>
+          </div>
+          ${s.comment ? `<div style="font-size:0.85rem;color:var(--text);margin-top:0.3rem">${escHtml(s.comment)}</div>` : ''}
+          ${s.link ? `<div class="track-links" style="margin-top:0.3rem"><a class="track-link" href="${escHtml(s.link)}" target="_blank">${ytSvg} Link</a></div>` : ''}
+          <div class="suggestion-meta">
+            from ${escHtml(s.name)} &middot; ${new Date(s.created).toLocaleDateString()}
+          </div>
+          ${admin ? `<div style="margin-top:0.5rem;display:flex;gap:0.5rem;flex-wrap:wrap;align-items:center">
+            <button onclick="promoteAs('${s.id}','keith')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem;border-color:var(--keith);color:var(--keith)">Queue (Keith)</button>
+            <button onclick="promoteAs('${s.id}','trey')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem;border-color:var(--trey);color:var(--trey)">Queue (Trey)</button>
+            <button onclick="confirmAs('${s.id}','keith')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem;border-color:#4caf50;color:#4caf50">Confirm (Keith)</button>
+            <button onclick="confirmAs('${s.id}','trey')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem;border-color:#4caf50;color:#4caf50">Confirm (Trey)</button>
+            <button onclick="deleteSuggestion('${s.id}')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem;border-color:#c62828;color:#c62828">Delete</button>
+          </div>` : ''}
+        </div>
+      `).join('');
     }
 
     function loadSuggestions() {
       fetch(`${WORKER_URL}/suggestions?t=${Date.now()}`)
         .then(r => r.json())
-        .then(suggestions => {
-          const container = document.getElementById('suggestions-list');
-          if (!suggestions.length) {
-            container.innerHTML = '<div style="color:var(--text-dim);font-size:0.85rem">No pending suggestions.</div>';
-            return;
-          }
-          const admin = isAdmin();
-          container.innerHTML = suggestions.map(s => `
-            <div class="suggestion-item">
-              <div style="display:flex;gap:0.5rem;align-items:baseline;flex-wrap:wrap">
-                <span class="plan-pick-artist">${escHtml(s.artist)}</span>
-                <span style="color:var(--text);font-size:0.9rem">"${escHtml(s.track)}"</span>
-              </div>
-              ${s.comment ? `<div style="font-size:0.85rem;color:var(--text);margin-top:0.3rem">${escHtml(s.comment)}</div>` : ''}
-              ${s.link ? `<div class="track-links" style="margin-top:0.3rem"><a class="track-link" href="${escHtml(s.link)}" target="_blank">${ytSvg} Link</a></div>` : ''}
-              <div class="suggestion-meta">
-                from ${escHtml(s.name)} &middot; ${new Date(s.created).toLocaleDateString()}
-              </div>
-              ${admin ? `<div style="margin-top:0.5rem;display:flex;gap:0.5rem;flex-wrap:wrap;align-items:center">
-                <button onclick="promoteAs('${s.id}','keith')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem;border-color:var(--keith);color:var(--keith)">Queue (Keith)</button>
-                <button onclick="promoteAs('${s.id}','trey')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem;border-color:var(--trey);color:var(--trey)">Queue (Trey)</button>
-                <button onclick="confirmAs('${s.id}','keith')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem;border-color:#4caf50;color:#4caf50">Confirm (Keith)</button>
-                <button onclick="confirmAs('${s.id}','trey')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem;border-color:#4caf50;color:#4caf50">Confirm (Trey)</button>
-                <button onclick="deleteSuggestion('${s.id}')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem;border-color:#c62828;color:#c62828">Delete</button>
-              </div>` : ''}
-            </div>
-          `).join('');
-        })
-        .catch(() => {
-          document.getElementById('suggestions-list').innerHTML =
-            '<div style="color:var(--text-dim);font-size:0.85rem">Could not load suggestions.</div>';
-        });
+        .then(suggestions => { suggestionsCache = suggestions; renderSuggestionsList(suggestions); })
+        .catch(() => { document.getElementById('suggestions-list').innerHTML = '<div style="color:var(--text-dim);font-size:0.85rem">Could not load suggestions.</div>'; });
     }
 
     // --- TAGLINE ROTATION (changes every Sunday at 00:01) ---
