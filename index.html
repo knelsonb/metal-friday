@@ -1356,6 +1356,7 @@
     const REPO = 'knelsonb/metal-friday';
     const ytSvg = `<svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.9 31.9 0 0 0 0 12a31.9 31.9 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.9 31.9 0 0 0 24 12a31.9 31.9 0 0 0-.5-5.8zM9.5 15.6V8.4L16 12l-6.5 3.6z"/></svg>`;
 
+
     // --- FUZZY SEARCH ---
     function fuzzyScore(query, text) {
       query = query.toLowerCase();
@@ -1485,6 +1486,7 @@
           if (videoId) {
             links.push(`<a class="track-link" href="${t.youtube_url}" target="_blank">${ytSvg} YouTube</a>`);
           }
+          if (t.youtube_music_url) links.push(`<a class="track-link" href="${t.youtube_music_url}" target="_blank">${ytMusicSvg} YT Music</a>`);
           if (t.spotify_url) links.push(`<a class="track-link" href="${t.spotify_url}" target="_blank" style="color:#1db954">${spotSvg} Spotify</a>`);
           if (t.bandcamp_url) links.push(`<a class="track-link" href="${t.bandcamp_url}" target="_blank">${bcSvg} Bandcamp</a>`);
           if (t.soundcloud_url) links.push(`<a class="track-link" href="${t.soundcloud_url}" target="_blank" style="color:#ff5500">${scSvg} SoundCloud</a>`);
@@ -1542,6 +1544,7 @@
             links.push(`<a class="track-link" href="${t.youtube_url}" target="_blank" title="Open on YouTube">${ytSvg} YouTube</a>`);
             links.push(`<a class="track-link" href="javascript:void(0)" onclick="toggleEmbed(this, '${videoId}')">${ytSvg} Play</a>`);
           }
+          if (t.youtube_music_url) links.push(`<a class="track-link" href="${t.youtube_music_url}" target="_blank">${ytMusicSvg} YT Music</a>`);
           if (t.spotify_url) links.push(`<a class="track-link" href="${t.spotify_url}" target="_blank" style="color:#1db954">${spotSvg} Spotify</a>`);
           if (t.bandcamp_url) links.push(`<a class="track-link" href="${t.bandcamp_url}" target="_blank">${bcSvg} Bandcamp</a>`);
           if (t.soundcloud_url) links.push(`<a class="track-link" href="${t.soundcloud_url}" target="_blank" style="color:#ff5500">${scSvg} SoundCloud</a>`);
@@ -1900,6 +1903,7 @@
           links.push(`<a class="track-link" href="${t.youtube_url}" target="_blank">${ytSvg} YouTube</a>`);
           links.push(`<a class="track-link" href="javascript:void(0)" onclick="toggleEmbed(this, '${videoId}')">${ytSvg} Play</a>`);
         }
+        if (t.youtube_music_url) links.push(`<a class="track-link" href="${t.youtube_music_url}" target="_blank">${ytMusicSvg} YT Music</a>`);
         if (t.spotify_url) links.push(`<a class="track-link" href="${t.spotify_url}" target="_blank" style="color:#1db954">${spotSvg} Spotify</a>`);
         if (t.bandcamp_url) links.push(`<a class="track-link" href="${t.bandcamp_url}" target="_blank">${bcSvg} Bandcamp</a>`);
           if (t.soundcloud_url) links.push(`<a class="track-link" href="${t.soundcloud_url}" target="_blank" style="color:#ff5500">${scSvg} SoundCloud</a>`);
