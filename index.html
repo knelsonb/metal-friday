@@ -2227,7 +2227,7 @@
                   ${tl}
                   ${isAdmin() ? `<div style="margin-top:0.3rem;display:flex;gap:0.5rem">
                     <button onclick="addToPipeline('${escHtml(b.artist).replace(/'/g,"\\\\'")}','${escHtml(t.track).replace(/'/g,"\\\\'")}','${escHtml(b.genre||"").replace(/'/g,"\\\\'")}','${escHtml(t.note||"").replace(/'/g,"\\\\'")}','promoted')" class="filter-btn" style="padding:0.2rem 0.5rem;font-size:0.55rem">Queue</button>
-                    <button onclick="addToPipeline('${escHtml(b.artist).replace(/'/g,"\\\\'")}','${escHtml(t.track).replace(/'/g,"\\\\'")}','${escHtml(b.genre||"").replace(/'/g,"\\\\'")}','${escHtml(t.note||"").replace(/'/g,"\\\\'")}','confirmed')" class="filter-btn" style="padding:0.2rem 0.5rem;font-size:0.55rem;border-color:var(--accent-glow);color:var(--accent-glow)">Confirm</button>
+                    <button onclick="addToPipeline('${escHtml(b.artist).replace(/'/g,"\\\\'")}','${escHtml(t.track).replace(/'/g,"\\\\'")}','${escHtml(b.genre||"").replace(/'/g,"\\\\'")}','${escHtml(t.note||"").replace(/'/g,"\\\\'")}','confirmed')" class="filter-btn" style="padding:0.2rem 0.5rem;font-size:0.55rem;border-color:#4caf50;color:#4caf50">Confirm</button>
                   </div>` : ''}
                 </div>
               `;
@@ -2273,7 +2273,7 @@
                 ${mArtistLinks.length ? `<div class="track-links" style="width:100%">${mArtistLinks.join('')}</div>` : ''}
                 <span class="plan-pick-note">${escHtml(p.note || '')}</span>
                 ${isAdmin() ? `<div style="margin-top:0.5rem;display:flex;gap:0.5rem;flex-wrap:wrap">
-                  <button onclick="addToPipeline('${escHtml(p.artist).replace(/'/g,"\\'")}','${escHtml(p.track).replace(/'/g,"\\'")}','${escHtml(p.genre||"").replace(/'/g,"\\'")}','${escHtml(p.note||"").replace(/'/g,"\\'")}','confirmed')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem;border-color:var(--accent-glow);color:var(--accent-glow)">Add to Confirmed</button>
+                  <button onclick="addToPipeline('${escHtml(p.artist).replace(/'/g,"\\'")}','${escHtml(p.track).replace(/'/g,"\\'")}','${escHtml(p.genre||"").replace(/'/g,"\\'")}','${escHtml(p.note||"").replace(/'/g,"\\'")}','confirmed')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem;border-color:#4caf50;color:#4caf50">Add to Confirmed</button>
                   <button onclick="addToPipeline('${escHtml(p.artist).replace(/'/g,"\\'")}','${escHtml(p.track).replace(/'/g,"\\'")}','${escHtml(p.genre||"").replace(/'/g,"\\'")}','${escHtml(p.note||"").replace(/'/g,"\\'")}','promoted')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem">Add to Queued</button>
                 </div>` : ''}
               </div>
@@ -2409,6 +2409,32 @@
       });
     }
 
+    // Store confirmed list locally for reorder
+    let confirmedCache = [];
+
+    function moveConfirmed(id, direction) {
+      const idx = confirmedCache.findIndex(s => s.id === id);
+      if (idx < 0) return;
+      const swapIdx = idx + direction;
+      if (swapIdx < 0 || swapIdx >= confirmedCache.length) return;
+
+      // Swap created timestamps so sort order changes
+      const tempCreated = confirmedCache[idx].created;
+      confirmedCache[idx].created = confirmedCache[swapIdx].created;
+      confirmedCache[swapIdx].created = tempCreated;
+
+      // Swap in array
+      [confirmedCache[idx], confirmedCache[swapIdx]] = [confirmedCache[swapIdx], confirmedCache[idx]];
+
+      // Re-render locally (instant feedback)
+      renderConfirmedList(confirmedCache);
+
+      // Persist both items to Worker by re-submitting them
+      // (The Worker sorts by created, so swapping created timestamps changes order)
+      // For now, just re-render client-side. Order persists until page reload.
+      showToast('Reordered');
+    }
+
     function unconfirmTrack(id) {
       adminFetch(`/admin/unconfirm/${id}`).then(r => {
         if (r.ok) { showToast('Moved back to queue'); loadPromoted(); loadConfirmed(); }
@@ -2480,10 +2506,7 @@
         });
     }
 
-    function loadConfirmed() {
-      return fetch(`${WORKER_URL}/confirmed?t=${Date.now()}`)
-        .then(r => r.json())
-        .then(confirmed => {
+    function renderConfirmedList(confirmed) {
           const container = document.getElementById('confirmed-list');
           const admin = isAdmin();
 
@@ -2495,14 +2518,12 @@
 
           if (admin) {
             document.getElementById('publish-controls').style.display = 'block';
-            // Default date to next Friday
             const d = new Date();
             d.setDate(d.getDate() + ((5 - d.getDay() + 7) % 7 || 7));
             document.getElementById('publish-date').value = d.toISOString().split('T')[0];
           }
 
-          container.innerHTML = confirmed.map(s => {
-            // Build links
+          container.innerHTML = confirmed.map((s, idx) => {
             const links = [];
             const vid = s.youtube_url ? s.youtube_url.match(/(?:v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/) : null;
             if (s.youtube_url) links.push(`<a class="track-link" href="${s.youtube_url}" target="_blank">${ytSvg} YouTube</a>`);
@@ -2510,13 +2531,12 @@
             else if (vid) links.push(`<a class="track-link" href="https://music.youtube.com/watch?v=${vid[1]}" target="_blank">${ytMusicSvg} YT Music</a>`);
             if (s.spotify_url) links.push(`<a class="track-link" href="${s.spotify_url}" target="_blank" style="color:#1db954">${spotSvg} Spotify</a>`);
             if (s.bandcamp_url) links.push(`<a class="track-link" href="${s.bandcamp_url}" target="_blank">${bcSvg} Bandcamp</a>`);
-            // Fallback: if link field exists and no other links found
             if (!links.length && s.link) links.push(`<a class="track-link" href="${s.link}" target="_blank">${ytSvg} Link</a>`);
 
             const recBadge = s.name ? `<span class="curator-badge ${s.name}" style="font-size:0.55rem;padding:0.1rem 0.4rem">${s.name} pick</span>` : '';
 
             return `
-              <div class="plan-pick confirmed" style="border-left:3px solid var(--accent-glow)">
+              <div class="plan-pick confirmed" style="border-left:3px solid #4caf50">
                 <div style="display:flex;gap:0.4rem;align-items:center;flex-wrap:wrap;margin-bottom:0.3rem">
                   ${recBadge}
                   ${s.genre ? `<span class="genre-tag">${escHtml(s.genre)}</span>` : ''}
@@ -2529,7 +2549,9 @@
                 <div class="suggestion-meta">
                   confirmed ${s.confirmed ? new Date(s.confirmed).toLocaleDateString() : ''}
                 </div>
-                ${admin ? `<div style="margin-top:0.5rem;display:flex;gap:0.5rem;flex-wrap:wrap">
+                ${admin ? `<div style="margin-top:0.5rem;display:flex;gap:0.5rem;flex-wrap:wrap;align-items:center">
+                  <button onclick="moveConfirmed('${s.id}',-1)" class="filter-btn" style="padding:0.3rem 0.5rem;font-size:0.7rem" title="Move up"${idx === 0 ? ' disabled' : ''}>&#9650;</button>
+                  <button onclick="moveConfirmed('${s.id}',1)" class="filter-btn" style="padding:0.3rem 0.5rem;font-size:0.7rem" title="Move down"${idx === confirmed.length - 1 ? ' disabled' : ''}>&#9660;</button>
                   <button onclick="unconfirmTrack('${s.id}')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem">Demote to Queued</button>
                   <button onclick="kickToSuggestions('${s.id}')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem">Kick to Inbox</button>
                   <button onclick="deleteConfirmed('${s.id}')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem;border-color:#c62828;color:#c62828">Delete</button>
@@ -2537,6 +2559,14 @@
               </div>
             `;
           }).join('');
+    }
+
+    function loadConfirmed() {
+      return fetch(`${WORKER_URL}/confirmed?t=${Date.now()}`)
+        .then(r => r.json())
+        .then(confirmed => {
+          confirmedCache = confirmed;
+          renderConfirmedList(confirmed);
         })
         .catch(() => {
           document.getElementById('confirmed-list').innerHTML =
@@ -2565,7 +2595,7 @@
                 from ${escHtml(s.name)} &middot; promoted ${new Date(s.promoted).toLocaleDateString()}
               </div>
               ${admin ? `<div style="margin-top:0.5rem;display:flex;gap:0.5rem">
-                <button onclick="confirmTrack('${s.id}')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem;border-color:var(--accent-glow);color:var(--accent-glow)">Confirm</button>
+                <button onclick="confirmTrack('${s.id}')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem;border-color:#4caf50;color:#4caf50">Confirm</button>
                 <button onclick="demoteTrack('${s.id}')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem">Move Back</button>
                 <button onclick="deletePromoted('${s.id}')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem;border-color:#c62828;color:#c62828">Delete</button>
               </div>` : ''}
@@ -2599,8 +2629,11 @@
               <div class="suggestion-meta">
                 from ${escHtml(s.name)} &middot; ${new Date(s.created).toLocaleDateString()}
               </div>
-              ${admin ? `<div style="margin-top:0.5rem;display:flex;gap:0.5rem">
-                <button onclick="promoteSuggestion('${s.id}')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem;border-color:#4caf50;color:#4caf50">Promote</button>
+              ${admin ? `<div style="margin-top:0.5rem;display:flex;gap:0.5rem;flex-wrap:wrap;align-items:center">
+                <button onclick="promoteAs('${s.id}','keith')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem;border-color:var(--keith);color:var(--keith)">Queue (Keith)</button>
+                <button onclick="promoteAs('${s.id}','trey')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem;border-color:var(--trey);color:var(--trey)">Queue (Trey)</button>
+                <button onclick="confirmAs('${s.id}','keith')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem;border-color:#4caf50;color:#4caf50">Confirm (Keith)</button>
+                <button onclick="confirmAs('${s.id}','trey')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem;border-color:#4caf50;color:#4caf50">Confirm (Trey)</button>
                 <button onclick="deleteSuggestion('${s.id}')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem;border-color:#c62828;color:#c62828">Delete</button>
               </div>` : ''}
             </div>
