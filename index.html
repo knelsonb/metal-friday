@@ -1271,8 +1271,12 @@
           <textarea class="form-textarea" id="sg-comment" placeholder="What makes it Metal Friday material?"></textarea>
         </div>
         <div class="form-group">
-          <label class="form-label">YouTube or Spotify link</label>
-          <input type="url" class="form-input" id="sg-link" placeholder="https://...">
+          <label class="form-label">YouTube Music link</label>
+          <input type="url" class="form-input" id="sg-youtube-url" placeholder="https://music.youtube.com/watch?v=...">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Spotify link</label>
+          <input type="url" class="form-input" id="sg-spotify-url" placeholder="https://open.spotify.com/track/...">
         </div>
         <div class="form-group">
           <label class="form-label">Your name *</label>
@@ -1325,7 +1329,7 @@
             </div>
             <button onclick="publishEdition()" class="suggest-btn" style="padding:0.5rem 1.5rem;font-size:0.85rem;margin-top:auto">Publish \m/</button>
           </div>
-          <div style="font-size:0.7rem;color:var(--text-dim);margin-top:0.5rem">All confirmed tracks publish together as one edition.</div>
+          <div style="font-size:0.7rem;color:var(--text-dim);margin-top:0.5rem">All confirmed tracks publish together as one edition. Commits to GitHub, auto-deploys in ~60s.</div>
         </div>
       </div>
       <div class="planning-section" id="planning-promoted">
@@ -1338,6 +1342,12 @@
       </div>
       <div id="planning-content">Loading...</div>
       <div class="planning-section" id="planning-bios"></div>
+      <div class="planning-section" id="planning-bin" style="margin-top:2rem;opacity:0.7">
+        <h3 class="planning-section-title" style="cursor:pointer" onclick="document.getElementById('bin-list').style.display=document.getElementById('bin-list').style.display==='none'?'block':'none';this.querySelector('span').textContent=document.getElementById('bin-list').style.display==='none'?'&#9654;':'&#9660;'">
+          <span>&#9654;</span> Recycling Bin
+        </h3>
+        <div id="bin-list" style="display:none">Loading...</div>
+      </div>
     </div>
   </div>
 
@@ -1615,7 +1625,8 @@
       const artist = document.getElementById('sg-artist').value.trim();
       const track = document.getElementById('sg-track').value.trim();
       const comment = document.getElementById('sg-comment').value.trim();
-      const link = document.getElementById('sg-link').value.trim();
+      const youtube_url = document.getElementById('sg-youtube-url').value.trim();
+      const spotify_url = document.getElementById('sg-spotify-url').value.trim();
       const name = document.getElementById('sg-name').value.trim();
 
       if (!artist || !track || !name) return;
@@ -1627,7 +1638,7 @@
       fetch(`${WORKER_URL}/suggest`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ artist, track, comment, link, name }),
+        body: JSON.stringify({ artist, track, comment, youtube_url, spotify_url, name }),
       })
         .then(r => r.json())
         .then(result => {
@@ -2161,6 +2172,7 @@
         loadConfirmed();
         loadPromoted();
         loadSuggestions();
+        loadBinned();
         loadPlanning();
         window.scrollTo({ top: 0, behavior: 'instant' });
       }, 500);
@@ -2377,6 +2389,7 @@
           loadConfirmed(); loadPlanning();
           loadPromoted();
           loadSuggestions();
+          loadBinned();
         }
       }).catch(() => {
         document.getElementById('admin-status').textContent = 'Connection failed';
@@ -2384,11 +2397,16 @@
       });
     }
 
-    function adminFetch(path, method = 'POST') {
-      return fetch(`${WORKER_URL}${path}`, {
+    function adminFetch(path, method = 'POST', body = null) {
+      const opts = {
         method,
         headers: { 'X-Admin-Key': getAdminKey() }
-      }).then(r => r.json());
+      };
+      if (body) {
+        opts.headers['Content-Type'] = 'application/json';
+        opts.body = JSON.stringify(body);
+      }
+      return fetch(`${WORKER_URL}${path}`, opts).then(r => r.json());
     }
 
     // --- Local caches for optimistic UI ---
@@ -2412,11 +2430,39 @@
 
     // --- Optimistic admin actions (instant UI, background server) ---
 
-    function deleteSuggestion(id) {
-      removeItem(suggestionsCache, id);
+    let binnedCache = [];
+
+    function binItem(stage, cache, id) {
+      const idx = cache.findIndex(s => s.id === id);
+      if (idx >= 0) {
+        const item = { ...cache[idx], binned_at: new Date().toISOString(), binned_from: stage };
+        cache.splice(idx, 1);
+        binnedCache.unshift(item);
+        renderBinnedList(binnedCache);
+      }
+      adminFetch(`/admin/bin/${stage}/${id}`, 'POST');
+    }
+
+    function restoreFromBin(id) {
+      const idx = binnedCache.findIndex(s => s.id === id);
+      if (idx < 0) return;
+      const item = binnedCache[idx];
+      const restoreTo = item.binned_from || 'suggestion';
+      delete item.binned_at;
+      delete item.binned_from;
+      binnedCache.splice(idx, 1);
+      if (restoreTo === 'confirmed') { confirmedCache.unshift(item); renderConfirmedList(confirmedCache); }
+      else if (restoreTo === 'promoted') { promotedCache.unshift(item); renderPromotedList(promotedCache); }
+      else { suggestionsCache.unshift(item); renderSuggestionsList(suggestionsCache); }
+      renderBinnedList(binnedCache);
+      showToast(`Restored to ${restoreTo}`);
+      adminFetch(`/admin/restore/${id}`, 'POST');
+    }
+
+    function binSuggestion(id) {
+      binItem('suggestion', suggestionsCache, id);
       renderSuggestionsList(suggestionsCache);
-      showToast('Deleted');
-      adminFetch(`/admin/suggestion/${id}`, 'DELETE');
+      showToast('Binned');
     }
 
     function promoteAs(id, curator) {
@@ -2454,11 +2500,10 @@
       adminFetch(`/admin/demote/${id}`);
     }
 
-    function deletePromoted(id) {
-      removeItem(promotedCache, id);
+    function binPromoted(id) {
+      binItem('promoted', promotedCache, id);
       renderPromotedList(promotedCache);
-      showToast('Deleted from queue');
-      adminFetch(`/admin/promoted/${id}`, 'DELETE');
+      showToast('Binned');
     }
 
     function confirmTrack(id) {
@@ -2496,16 +2541,15 @@
       adminFetch(`/admin/kick/${id}`);
     }
 
-    function deleteConfirmed(id) {
-      removeItem(confirmedCache, id);
+    function binConfirmed(id) {
+      binItem('confirmed', confirmedCache, id);
       renderConfirmedList(confirmedCache);
-      showToast('Removed');
-      adminFetch(`/admin/confirmed/${id}`, 'DELETE');
+      showToast('Binned');
     }
 
     function addToPipeline(artist, track, genre, note, target) {
       const fakeId = Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
-      const item = { id: fakeId, artist, track, genre, comment: note, link: '', name: 'sauron', created: new Date().toISOString() };
+      const item = { id: fakeId, artist, track, genre, comment: note, link: '', youtube_url: '', spotify_url: '', name: 'sauron', created: new Date().toISOString() };
       if (target === 'confirmed') {
         item.confirmed = new Date().toISOString();
         confirmedCache.unshift(item);
@@ -2531,11 +2575,28 @@
       }).catch(() => showToast('Server sync failed — refresh to verify'));
     }
 
+    function updateConfirmedField(id, field, value) {
+      const item = confirmedCache.find(s => s.id === id);
+      if (item) {
+        item[field] = value;
+        showToast('Updated');
+        adminFetch(`/admin/update/confirmed/${id}`, 'POST', { [field]: value });
+      }
+    }
+
     function publishEdition() {
       const date = document.getElementById('publish-date').value;
       const curator = document.getElementById('publish-curator').value;
       if (!date) { showToast('Pick a date'); return; }
-      if (!confirm(`Publish all confirmed tracks as the ${date} edition by ${curator}? This adds them to the live archive.`)) return;
+
+      // Validate: every confirmed track needs at least one link
+      const missing = confirmedCache.filter(s => !s.youtube_url && !s.spotify_url && !s.link);
+      if (missing.length) {
+        showToast(`${missing.length} track(s) have no links — add YT Music or Spotify URLs first`);
+        return;
+      }
+
+      if (!confirm(`Publish all ${confirmedCache.length} confirmed tracks as the ${date} edition by ${curator}? This commits to GitHub and goes live.`)) return;
 
       fetch(`${WORKER_URL}/admin/publish`, {
         method: 'POST',
@@ -2545,12 +2606,44 @@
         .then(r => r.json())
         .then(r => {
           if (r.ok) {
-            showToast(`Published! ${r.tracks} tracks added to ${date} edition`);
+            showToast(`Published! ${r.tracks} tracks committed to GitHub (${r.commit_sha?.slice(0,7) || ''}). Site deploys in ~60s.`);
             loadConfirmed();
           } else {
             showToast(r.error || 'Publish failed');
           }
         });
+    }
+
+    function renderBinnedList(binned) {
+      const container = document.getElementById('bin-list');
+      if (!binned.length) {
+        container.innerHTML = '<div style="color:var(--text-dim);font-size:0.85rem">Empty.</div>';
+        return;
+      }
+      const admin = isAdmin();
+      container.innerHTML = binned.map(s => `
+        <div class="suggestion-item" style="border-left-color:#555;opacity:0.6">
+          <div style="display:flex;gap:0.5rem;align-items:baseline;flex-wrap:wrap">
+            <span class="plan-pick-artist">${escHtml(s.artist)}</span>
+            <span style="color:var(--text);font-size:0.9rem">"${escHtml(s.track)}"</span>
+            <span style="font-size:0.6rem;color:var(--text-dim)">from ${escHtml(s.binned_from || '?')}</span>
+          </div>
+          ${s.comment ? `<div style="font-size:0.8rem;color:var(--text-dim);margin-top:0.2rem">${escHtml(s.comment)}</div>` : ''}
+          <div class="suggestion-meta">
+            binned ${s.binned_at ? new Date(s.binned_at).toLocaleDateString() : ''}
+          </div>
+          ${admin ? `<div style="margin-top:0.4rem">
+            <button onclick="restoreFromBin('${s.id}')" class="filter-btn" style="padding:0.2rem 0.5rem;font-size:0.55rem">Restore</button>
+          </div>` : ''}
+        </div>
+      `).join('');
+    }
+
+    function loadBinned() {
+      fetch(`${WORKER_URL}/binned?t=${Date.now()}`)
+        .then(r => r.json())
+        .then(binned => { binnedCache = binned; renderBinnedList(binned); })
+        .catch(() => {});
     }
 
     function renderConfirmedList(confirmed) {
@@ -2592,6 +2685,10 @@
                 </div>
                 <div><span class="plan-pick-artist">${escHtml(s.artist)}</span> <span style="color:var(--text);font-size:0.9rem">"${escHtml(s.track)}"</span></div>
                 ${links.length ? `<div class="track-links" style="margin-top:0.4rem">${links.join('')}</div>` : ''}
+                ${admin ? `<div style="margin-top:0.5rem;display:flex;gap:0.5rem;flex-wrap:wrap;align-items:center">
+                  <input type="url" class="form-input" id="yt-${s.id}" value="${escHtml(s.youtube_url || s.link || '')}" placeholder="YT Music URL" style="font-size:0.7rem;padding:0.3rem 0.5rem;flex:1;min-width:200px" onchange="updateConfirmedField('${s.id}','youtube_url',this.value)">
+                  <input type="url" class="form-input" id="sp-${s.id}" value="${escHtml(s.spotify_url || '')}" placeholder="Spotify URL" style="font-size:0.7rem;padding:0.3rem 0.5rem;flex:1;min-width:200px" onchange="updateConfirmedField('${s.id}','spotify_url',this.value)">
+                </div>` : ''}
                 ${s.sauron_note ? `<div style="font-size:0.8rem;color:var(--accent-glow);margin-top:0.4rem;border-left:2px solid var(--accent-dim);padding-left:0.5rem"><span style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-dim)">sauron:</span> ${escHtml(s.sauron_note)}</div>` : ''}
                 ${s.curator_note ? `<div style="font-size:0.8rem;color:var(--text);margin-top:0.3rem;border-left:2px solid var(--keith);padding-left:0.5rem"><span style="font-size:0.65rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--text-dim)">${escHtml(s.name || 'curator')}:</span> ${escHtml(s.curator_note)}</div>` : ''}
                 ${s.comment && !s.sauron_note ? `<div style="font-size:0.8rem;color:var(--text-dim);margin-top:0.3rem">${escHtml(s.comment)}</div>` : ''}
@@ -2603,7 +2700,7 @@
                   <button onclick="moveConfirmed('${s.id}',1)" class="filter-btn" style="padding:0.3rem 0.5rem;font-size:0.7rem" title="Move down"${idx === confirmed.length - 1 ? ' disabled' : ''}>&#9660;</button>
                   <button onclick="unconfirmTrack('${s.id}')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem">Demote to Queued</button>
                   <button onclick="kickToSuggestions('${s.id}')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem">Kick to Inbox</button>
-                  <button onclick="deleteConfirmed('${s.id}')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem;border-color:#c62828;color:#c62828">Delete</button>
+                  <button onclick="binConfirmed('${s.id}')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem;border-color:#c62828;color:#c62828">Bin</button>
                 </div>` : ''}
               </div>
             `;
@@ -2638,13 +2735,18 @@
             <span style="color:var(--text);font-size:0.9rem">"${escHtml(s.track)}"</span>
           </div>
           ${s.comment ? `<div style="font-size:0.85rem;color:var(--text);margin-top:0.3rem">${escHtml(s.comment)}</div>` : ''}
+          ${(s.youtube_url || s.spotify_url || s.link) ? `<div class="track-links" style="margin-top:0.3rem">
+            ${s.youtube_url ? `<a class="track-link" href="${escHtml(s.youtube_url)}" target="_blank">${ytMusicSvg} YT Music</a>` : ''}
+            ${s.spotify_url ? `<a class="track-link" href="${escHtml(s.spotify_url)}" target="_blank" style="color:#1db954">${spotSvg} Spotify</a>` : ''}
+            ${!s.youtube_url && !s.spotify_url && s.link ? `<a class="track-link" href="${escHtml(s.link)}" target="_blank">${ytSvg} Link</a>` : ''}
+          </div>` : ''}
           <div class="suggestion-meta">
             promoted ${s.promoted ? new Date(s.promoted).toLocaleDateString() : ''}
           </div>
           ${admin ? `<div style="margin-top:0.5rem;display:flex;gap:0.5rem">
             <button onclick="confirmTrack('${s.id}')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem;border-color:#4caf50;color:#4caf50">Confirm</button>
             <button onclick="demoteTrack('${s.id}')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem">Move Back</button>
-            <button onclick="deletePromoted('${s.id}')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem;border-color:#c62828;color:#c62828">Delete</button>
+            <button onclick="binPromoted('${s.id}')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem;border-color:#c62828;color:#c62828">Bin</button>
           </div>` : ''}
         </div>
       `).join('');
@@ -2671,7 +2773,11 @@
             <span style="color:var(--text);font-size:0.9rem">"${escHtml(s.track)}"</span>
           </div>
           ${s.comment ? `<div style="font-size:0.85rem;color:var(--text);margin-top:0.3rem">${escHtml(s.comment)}</div>` : ''}
-          ${s.link ? `<div class="track-links" style="margin-top:0.3rem"><a class="track-link" href="${escHtml(s.link)}" target="_blank">${ytSvg} Link</a></div>` : ''}
+          ${(s.youtube_url || s.spotify_url || s.link) ? `<div class="track-links" style="margin-top:0.3rem">
+            ${s.youtube_url ? `<a class="track-link" href="${escHtml(s.youtube_url)}" target="_blank">${ytMusicSvg} YT Music</a>` : ''}
+            ${s.spotify_url ? `<a class="track-link" href="${escHtml(s.spotify_url)}" target="_blank" style="color:#1db954">${spotSvg} Spotify</a>` : ''}
+            ${!s.youtube_url && !s.spotify_url && s.link ? `<a class="track-link" href="${escHtml(s.link)}" target="_blank">${ytSvg} Link</a>` : ''}
+          </div>` : ''}
           <div class="suggestion-meta">
             from ${escHtml(s.name)} &middot; ${new Date(s.created).toLocaleDateString()}
           </div>
@@ -2680,7 +2786,7 @@
             <button onclick="promoteAs('${s.id}','trey')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem;border-color:var(--trey);color:var(--trey)">Queue (Trey)</button>
             <button onclick="confirmAs('${s.id}','keith')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem;border-color:#4caf50;color:#4caf50">Confirm (Keith)</button>
             <button onclick="confirmAs('${s.id}','trey')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem;border-color:#4caf50;color:#4caf50">Confirm (Trey)</button>
-            <button onclick="deleteSuggestion('${s.id}')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem;border-color:#c62828;color:#c62828">Delete</button>
+            <button onclick="binSuggestion('${s.id}')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem;border-color:#c62828;color:#c62828">Bin</button>
           </div>` : ''}
         </div>
       `).join('');
