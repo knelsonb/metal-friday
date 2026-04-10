@@ -2283,18 +2283,20 @@
     }
 
     function moveToStage(from, id, to) {
-      adminFetch(`/admin/move/${from}/${id}/${to}`, 'POST');
-      showToast(`Moved to ${to}`);
-      loadSauronPicks(); loadHotList(); loadEye();
-      if (to === 'confirmed') loadConfirmed();
-      if (to === 'promoted') loadPromoted();
-      if (to === 'suggestion') loadSuggestions();
+      showToast(`Moving to ${to}...`);
+      adminFetch(`/admin/move/${from}/${id}/${to}`, 'POST').then(() => {
+        showToast(`Moved to ${to}`);
+        loadSauronPicks(); loadHotList(); loadEye();
+        loadConfirmed(); loadPromoted(); loadSuggestions();
+      });
     }
 
     function binFromStage(stage, id) {
-      adminFetch(`/admin/bin/${stage}/${id}`, 'POST');
-      showToast('Binned');
-      loadSauronPicks(); loadHotList(); loadEye(); loadBinned();
+      showToast('Binning...');
+      adminFetch(`/admin/bin/${stage}/${id}`, 'POST').then(() => {
+        showToast('Binned');
+        loadSauronPicks(); loadHotList(); loadEye(); loadBinned();
+      });
     }
 
     function loadSauronPicks() {
