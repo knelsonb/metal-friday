@@ -1,6 +1,45 @@
 {
   "editions": [
     {
+      "date": "2026-04-10",
+      "curator": "keith",
+      "tracks": [
+        {
+          "artist": "Bring Me the Horizon",
+          "track": "Ludens",
+          "genre": "electronic rock/metalcore",
+          "youtube_url": "https://www.youtube.com/watch?v=caYD1-uck_c",
+          "youtube_music_url": "https://music.youtube.com/watch?v=caYD1-uck_c",
+          "spotify_url": "https://open.spotify.com/track/4xWirulal0kGikFE3WSU75",
+          "bandcamp_url": "",
+          "soundcloud_url": "",
+          "tidal_url": ""
+        },
+        {
+          "artist": "MASTER BOOT RECORD",
+          "track": "DEV.NFO",
+          "genre": "chiptune metal",
+          "youtube_url": "https://www.youtube.com/watch?v=FR60mI6vw3U",
+          "youtube_music_url": "https://music.youtube.com/watch?v=FR60mI6vw3U",
+          "spotify_url": "https://open.spotify.com/track/0ttkoSc9LZmgTgjN69WoK1",
+          "bandcamp_url": "",
+          "soundcloud_url": "",
+          "tidal_url": ""
+        },
+        {
+          "artist": "Leprous",
+          "track": "The Price",
+          "genre": "modern prog",
+          "youtube_url": "https://www.youtube.com/watch?v=tdjVn95817A",
+          "youtube_music_url": "https://music.youtube.com/watch?v=tdjVn95817A",
+          "spotify_url": "https://open.spotify.com/track/134I0qT6UrkDjhbI6bx0x3",
+          "bandcamp_url": "",
+          "soundcloud_url": "",
+          "tidal_url": ""
+        }
+      ]
+    },
+    {
       "date": "2026-04-03",
       "curator": "trey",
       "tracks": [
@@ -2807,12 +2846,12 @@
     }
   ],
   "stats": {
-    "total_editions": 88,
-    "total_tracks": 207,
-    "unique_artists": 187,
-    "unique_genres": 103,
+    "total_editions": 89,
+    "total_tracks": 210,
+    "unique_artists": 189,
+    "unique_genres": 105,
     "date_range": [
-      "2026-04-03",
+      "2026-04-10",
       "2016-12-16"
     ]
   }
