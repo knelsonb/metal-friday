@@ -2261,7 +2261,7 @@
       if (s.youtube_url) links.push(`<a class="track-link" href="${escHtml(s.youtube_url)}" target="_blank">${ytMusicSvg} YT Music</a>`);
       if (s.spotify_url) links.push(`<a class="track-link" href="${escHtml(s.spotify_url)}" target="_blank" style="color:#1db954">${spotSvg} Spotify</a>`);
       if (!links.length && s.link) links.push(`<a class="track-link" href="${escHtml(s.link)}" target="_blank">${ytSvg} Link</a>`);
-      const badge = s.name ? `<span class="curator-badge ${s.name}" style="font-size:0.55rem;padding:0.1rem 0.4rem">${escHtml(s.name)}</span>` : '';
+      const badge = s.name ? `<span class="curator-badge ${s.name}" style="font-size:0.55rem;padding:0.1rem 0.4rem;${admin ? 'cursor:pointer' : ''}" ${admin ? `onclick="changeName('${stage}','${s.id}')"` : ''}>${escHtml(s.name)}</span>` : '';
       const recNote = s.rec_by_note ? `<span style="font-size:0.6rem;color:var(--text-dim);font-style:italic"> (${escHtml(s.rec_by_note)})</span>` : '';
       return `
         <div class="plan-pick" style="border-left:3px solid var(--accent)">
@@ -2648,6 +2648,29 @@
       }).catch(() => showToast('Server sync failed — refresh to verify'));
     }
 
+    function changeName(stage, id) {
+      const choice = prompt('Assign to:\n1 = Sauron\n2 = Keith\n3 = Trey\n4 = Custom name\n\nEnter 1-4:');
+      if (!choice) return;
+      let name;
+      if (choice === '1') name = 'sauron';
+      else if (choice === '2') name = 'keith';
+      else if (choice === '3') name = 'trey';
+      else if (choice === '4') {
+        name = prompt('Enter name (max 15 chars):');
+        if (!name) return;
+        name = name.trim().slice(0, 15);
+      } else return;
+      // Update local cache
+      const cache = cacheFor(stage);
+      if (cache) {
+        const item = cache.find(s => s.id === id);
+        if (item) item.name = name;
+      }
+      rerenderStage(stage);
+      showToast(`Assigned to ${name}`);
+      adminFetch(`/admin/update/${stage}/${id}`, 'POST', { name });
+    }
+
     function updateConfirmedField(id, field, value) {
       const item = confirmedCache.find(s => s.id === id);
       if (item) {
@@ -2767,7 +2790,7 @@
             if (s.tidal_url) links.push(`<a class="track-link" href="${s.tidal_url}" target="_blank" style="color:#00ffff">${tidalSvg} Tidal</a>`);
             if (!links.length && s.link) links.push(`<a class="track-link" href="${s.link}" target="_blank">${ytSvg} Link</a>`);
 
-            const recBadge = s.name ? `<span class="curator-badge ${s.name}" style="font-size:0.55rem;padding:0.1rem 0.4rem">${s.name} pick</span>` : '';
+            const recBadge = s.name ? `<span class="curator-badge ${s.name}" style="font-size:0.55rem;padding:0.1rem 0.4rem;${admin ? 'cursor:pointer' : ''}" ${admin ? `onclick="changeName('confirmed','${s.id}')"` : ''}>${s.name} pick</span>` : '';
 
             return `
               <div class="plan-pick confirmed" style="border-left:3px solid #4caf50">
@@ -2825,7 +2848,7 @@
       container.innerHTML = promoted.map(s => `
         <div class="suggestion-item" style="border-left-color:#4caf50">
           <div style="display:flex;gap:0.5rem;align-items:baseline;flex-wrap:wrap">
-            ${s.name ? `<span class="curator-badge ${s.name}" style="font-size:0.55rem;padding:0.1rem 0.4rem">${s.name}</span>` : ''}
+            ${s.name ? `<span class="curator-badge ${s.name}" style="font-size:0.55rem;padding:0.1rem 0.4rem;${admin ? 'cursor:pointer' : ''}" ${admin ? `onclick="changeName('promoted','${s.id}')"` : ''}>${s.name}</span>` : ''}
             <span class="plan-pick-artist">${escHtml(s.artist)}</span>
             <span style="color:var(--text);font-size:0.9rem">"${escHtml(s.track)}"</span>
           </div>
@@ -2877,7 +2900,7 @@
             ${!s.youtube_url && !s.spotify_url && s.link ? `<a class="track-link" href="${escHtml(s.link)}" target="_blank">${ytSvg} Link</a>` : ''}
           </div>` : ''}
           <div class="suggestion-meta">
-            from ${escHtml(s.name)} &middot; ${new Date(s.created).toLocaleDateString()}
+            from <span ${admin ? `style="cursor:pointer;text-decoration:underline" onclick="changeName('suggestion','${s.id}')"` : ''}>${escHtml(s.name)}</span> &middot; ${new Date(s.created).toLocaleDateString()}
           </div>
           ${admin ? `<div style="margin-top:0.5rem;display:flex;gap:0.5rem;flex-wrap:wrap;align-items:center">
             <button onclick="promoteAs('${s.id}','keith')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem;border-color:var(--keith);color:var(--keith)">Queue (Keith)</button>
