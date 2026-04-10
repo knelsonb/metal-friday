@@ -884,7 +884,8 @@
 
     .chart-bar-bg {
       flex: 1;
-      height: 18px;
+      max-width: 200px;
+      height: 14px;
       background: var(--bg-card);
       border-radius: 2px;
       overflow: hidden;
@@ -1220,8 +1221,6 @@
     </div>
 
     <div class="stats-section">
-      <button class="stats-toggle" onclick="toggleChart()">Genre Breakdown</button>
-      <div class="genre-chart" id="genre-chart"></div>
     </div>
 
     <div class="search-results" id="search-results" style="display:none"></div>
@@ -1243,6 +1242,7 @@
 
   <!-- GENRES TAB -->
   <div class="tab-content" id="tab-genres">
+    <div class="genre-chart visible" id="genre-chart" style="max-width:500px;margin:0 auto 2rem"></div>
     <div class="genre-cloud" id="genre-cloud"></div>
     <div class="genre-detail" id="genre-detail" style="display:none">
       <div class="genre-detail-header" id="genre-detail-header"></div>
