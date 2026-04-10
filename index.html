@@ -2350,7 +2350,7 @@
                   <span style="font-family:Oswald,sans-serif;font-weight:600;color:var(--text-bright);font-size:0.9rem">"${escHtml(t.track)}"</span>
                   <span style="font-size:0.75rem;color:var(--text-dim)">${escHtml(t.comment || '')}</span>
                   ${tLinks.length ? `<div class="track-links">${tLinks.join('')}</div>` : ''}
-                  ${admin ? `<div style="display:flex;gap:0.5rem;margin-top:0.2rem">
+                  ${admin ? `<div style="display:flex;gap:0.5rem;margin-top:0.2rem;width:100%">
                     <button onclick="moveToStage('eye','${t.id}','sauron-pick')" class="filter-btn" style="padding:0.2rem 0.5rem;font-size:0.55rem;border-color:var(--accent-glow);color:var(--accent-glow)">Pick</button>
                     <button onclick="moveToStage('eye','${t.id}','confirmed')" class="filter-btn" style="padding:0.2rem 0.5rem;font-size:0.55rem;border-color:#4caf50;color:#4caf50">Confirm</button>
                     <button onclick="moveToStage('eye','${t.id}','promoted')" class="filter-btn" style="padding:0.2rem 0.5rem;font-size:0.55rem">Queue</button>
