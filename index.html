@@ -2740,9 +2740,7 @@
           const container = document.getElementById('confirmed-list');
           const admin = isAdmin();
 
-          if (admin) {
-            document.getElementById('surgery-controls').style.display = 'block';
-          }
+          document.getElementById('surgery-controls').style.display = admin ? 'block' : 'none';
 
           if (!confirmed.length) {
             container.innerHTML = '<div style="color:var(--text-dim);font-size:0.85rem">No tracks confirmed yet. Promote suggestions, then confirm them here.</div>';
