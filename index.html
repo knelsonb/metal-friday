@@ -1280,7 +1280,7 @@
         </div>
         <div class="form-group">
           <label class="form-label">Your name *</label>
-          <input type="text" class="form-input" id="sg-name" placeholder="Who are you?" required>
+          <input type="text" class="form-input" id="sg-name" placeholder="Who are you?" required maxlength="15">
         </div>
         <button type="submit" class="suggest-btn" id="sg-submit">Submit Suggestion</button>
       </form>
@@ -1333,11 +1333,13 @@
         </div>
         <div id="surgery-controls" style="display:none;margin-top:1rem;padding:0.75rem 1rem;background:var(--bg);border:1px solid #c62828;border-radius:6px">
           <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap">
-            <div>
+            <div style="flex-shrink:0">
               <div style="font-family:Oswald,sans-serif;font-size:0.85rem;color:#c62828">ARCHIVE SURGERY</div>
-              <div style="font-size:0.65rem;color:var(--text-dim);margin-top:0.2rem">Remove the most recent edition from the archive and restore tracks to Confirmed.</div>
+              <div style="font-size:0.65rem;color:var(--text-dim);margin-top:0.2rem">Remove the most recent edition from the<br>archive and restore tracks to Confirmed.</div>
             </div>
-            <button onclick="archiveSurgery()" class="filter-btn" style="padding:0.4rem 1rem;font-size:0.75rem;border-color:#c62828;color:#c62828;white-space:nowrap">Unpublish Last Edition</button>
+            <div style="flex:1;display:flex;justify-content:center">
+              <button onclick="archiveSurgery()" class="filter-btn" style="padding:0.4rem 1rem;font-size:0.75rem;border-color:#c62828;color:#c62828;white-space:nowrap">Unpublish Last Edition</button>
+            </div>
           </div>
         </div>
       </div>
@@ -1349,8 +1351,27 @@
         <h3 class="planning-section-title">Inbox — Pending Suggestions</h3>
         <div id="suggestions-list">Loading suggestions...</div>
       </div>
-      <div id="planning-content">Loading...</div>
-      <div class="planning-section" id="planning-bios"></div>
+      <div class="planning-section" id="planning-sauron-picks">
+        <h3 class="planning-section-title">Sauron's Picks</h3>
+        <div style="font-size:0.65rem;color:var(--text-dim);margin-bottom:0.5rem">Always 3. When one moves out, the Eye refills it.</div>
+        <div id="sauron-picks-list">Loading...</div>
+      </div>
+      <div class="planning-section" id="planning-hot">
+        <h3 class="planning-section-title">Sauron's Hot List</h3>
+        <div style="font-size:0.65rem;color:var(--text-dim);margin-bottom:0.5rem">Top 5 new releases, last 3 months. Refreshed periodically.</div>
+        <div id="hot-list">Loading...</div>
+      </div>
+      <div class="planning-section" id="planning-eye">
+        <h3 class="planning-section-title">The Eye Sees More \m/</h3>
+        <div style="font-size:0.65rem;color:var(--text-dim);margin-bottom:0.5rem">Artists we haven't published yet but should.</div>
+        <div id="eye-list">Loading...</div>
+      </div>
+      <div class="planning-section" id="planning-bios">
+        <h3 class="planning-section-title">Who's Who</h3>
+        <div style="padding:0.75rem 1rem;border-left:3px solid var(--trey);margin-bottom:0.75rem;background:var(--bg-card);border-radius:0 4px 4px 0"><span style="font-family:Oswald,sans-serif;font-weight:600;color:var(--trey);text-transform:uppercase;font-size:0.85rem">Trey</span><span style="font-size:0.8rem;color:var(--text-dim);display:block;margin-top:0.25rem">Founded Metal Friday in 2016 with two Wormrot tracks. Death metal evangelist. His bread and butter is riffs, groove, and whatever's heaviest. Signs off with \m/ — zero exceptions.</span></div>
+        <div style="padding:0.75rem 1rem;border-left:3px solid var(--keith);margin-bottom:0.75rem;background:var(--bg-card);border-radius:0 4px 4px 0"><span style="font-family:Oswald,sans-serif;font-weight:600;color:var(--keith);text-transform:uppercase;font-size:0.85rem">Keith</span><span style="font-size:0.8rem;color:var(--text-dim);display:block;margin-top:0.25rem">Tagged in Feb 2025 while Trey was on hiatus and put 'Prog' in the subject line. Will feature a 21-minute Wobbler track without apology. Handles the electronic/atmospheric end of the spectrum. This is still Trey's baby.</span></div>
+        <div style="padding:0.75rem 1rem;border-left:3px solid var(--accent-glow);margin-bottom:0.75rem;background:var(--bg-card);border-radius:0 4px 4px 0"><span style="font-family:Oswald,sans-serif;font-weight:600;color:var(--accent-glow);text-transform:uppercase;font-size:0.85rem">Sauron</span><span style="font-size:0.8rem;color:var(--text-dim);display:block;margin-top:0.25rem">The Eye in a battle vest. An AI that catalogs every track, traces every genre lineage, and verifies every URL so the humans don't have to. Recommends tracks the way Trey hands someone a beer — no preamble, just 'listen to this.' The riffs are real. The Eye is synthetic. \m/</span></div>
+      </div>
       <div class="planning-section" id="planning-bin" style="margin-top:2rem;opacity:0.7">
         <h3 class="planning-section-title" style="cursor:pointer" onclick="document.getElementById('bin-list').style.display=document.getElementById('bin-list').style.display==='none'?'block':'none';this.querySelector('span').textContent=document.getElementById('bin-list').style.display==='none'?'&#9654;':'&#9660;'">
           <span>&#9654;</span> Recycling Bin
@@ -2225,7 +2246,145 @@
     }
 
     function loadPlanning() {
-      fetch('planning.json?t=' + Date.now())
+      loadSauronPicks();
+      loadHotList();
+      loadEye();
+    }
+
+    let sauronPicksCache = [];
+    let hotCache = [];
+    let eyeCache = [];
+
+    function renderPickCard(s, stage) {
+      const admin = isAdmin();
+      const links = [];
+      if (s.youtube_url) links.push(`<a class="track-link" href="${escHtml(s.youtube_url)}" target="_blank">${ytMusicSvg} YT Music</a>`);
+      if (s.spotify_url) links.push(`<a class="track-link" href="${escHtml(s.spotify_url)}" target="_blank" style="color:#1db954">${spotSvg} Spotify</a>`);
+      if (!links.length && s.link) links.push(`<a class="track-link" href="${escHtml(s.link)}" target="_blank">${ytSvg} Link</a>`);
+      const badge = s.name ? `<span class="curator-badge ${s.name}" style="font-size:0.55rem;padding:0.1rem 0.4rem">${escHtml(s.name)}</span>` : '';
+      const recNote = s.rec_by_note ? `<span style="font-size:0.6rem;color:var(--text-dim);font-style:italic"> (${escHtml(s.rec_by_note)})</span>` : '';
+      return `
+        <div class="plan-pick" style="border-left:3px solid var(--accent)">
+          <div style="display:flex;gap:0.4rem;align-items:center;flex-wrap:wrap;margin-bottom:0.3rem">
+            ${badge}${recNote}
+            ${s.genre ? `<span class="genre-tag">${escHtml(s.genre)}</span>` : ''}
+          </div>
+          <div><span class="plan-pick-artist">${escHtml(s.artist)}</span> <span style="color:var(--text);font-size:0.9rem">"${escHtml(s.track)}"</span></div>
+          ${links.length ? `<div class="track-links" style="margin-top:0.4rem">${links.join('')}</div>` : ''}
+          ${s.comment ? `<div style="font-size:0.8rem;color:var(--text-dim);margin-top:0.3rem">${escHtml(s.comment)}</div>` : ''}
+          ${admin ? `<div style="margin-top:0.5rem;display:flex;gap:0.5rem;flex-wrap:wrap">
+            <button onclick="moveToStage('${stage}','${s.id}','confirmed')" class="filter-btn" style="padding:0.2rem 0.5rem;font-size:0.55rem;border-color:#4caf50;color:#4caf50">Confirm</button>
+            <button onclick="moveToStage('${stage}','${s.id}','promoted')" class="filter-btn" style="padding:0.2rem 0.5rem;font-size:0.55rem">Queue</button>
+            <button onclick="moveToStage('${stage}','${s.id}','suggestion')" class="filter-btn" style="padding:0.2rem 0.5rem;font-size:0.55rem">Inbox</button>
+            <button onclick="binFromStage('${stage}','${s.id}')" class="filter-btn" style="padding:0.2rem 0.5rem;font-size:0.55rem;border-color:#c62828;color:#c62828">Bin</button>
+          </div>` : ''}
+        </div>
+      `;
+    }
+
+    function moveToStage(from, id, to) {
+      adminFetch(`/admin/move/${from}/${id}/${to}`, 'POST');
+      showToast(`Moved to ${to}`);
+      loadSauronPicks(); loadHotList(); loadEye();
+      if (to === 'confirmed') loadConfirmed();
+      if (to === 'promoted') loadPromoted();
+      if (to === 'suggestion') loadSuggestions();
+    }
+
+    function binFromStage(stage, id) {
+      adminFetch(`/admin/bin/${stage}/${id}`, 'POST');
+      showToast('Binned');
+      loadSauronPicks(); loadHotList(); loadEye(); loadBinned();
+    }
+
+    function loadSauronPicks() {
+      fetch(`${WORKER_URL}/sauron-picks?t=${Date.now()}`)
+        .then(r => r.json())
+        .then(picks => {
+          sauronPicksCache = picks;
+          const container = document.getElementById('sauron-picks-list');
+          if (!picks.length) { container.innerHTML = '<div style="color:var(--text-dim);font-size:0.85rem">No picks yet. Seed via the API.</div>'; return; }
+          container.innerHTML = picks.map(s => renderPickCard(s, 'sauron-pick')).join('');
+        })
+        .catch(() => {});
+    }
+
+    function loadHotList() {
+      fetch(`${WORKER_URL}/hot?t=${Date.now()}`)
+        .then(r => r.json())
+        .then(items => {
+          hotCache = items;
+          const container = document.getElementById('hot-list');
+          if (!items.length) { container.innerHTML = '<div style="color:var(--text-dim);font-size:0.85rem">No hot tracks yet. Run /metal-friday new-releases to populate.</div>'; return; }
+          container.innerHTML = items.map(s => renderPickCard(s, 'hot')).join('');
+        })
+        .catch(() => {});
+    }
+
+    function loadEye() {
+      fetch(`${WORKER_URL}/eye?t=${Date.now()}`)
+        .then(r => r.json())
+        .then(items => {
+          eyeCache = items;
+          const container = document.getElementById('eye-list');
+          if (!items.length) { container.innerHTML = '<div style="color:var(--text-dim);font-size:0.85rem">The Eye rests. Replenish via seed API.</div>'; return; }
+          // Group by artist
+          const grouped = {};
+          items.forEach(s => {
+            const key = s.artist || 'Unknown';
+            if (!grouped[key]) grouped[key] = { artist: key, genre: s.genre || '', note: s.artist_note || '', artist_spotify: s.artist_spotify || '', artist_youtube: s.artist_youtube || '', rec_by: s.rec_by || s.name || '', rec_by_note: s.rec_by_note || '', tracks: [] };
+            grouped[key].tracks.push(s);
+          });
+          const admin = isAdmin();
+          container.innerHTML = Object.values(grouped).map(g => {
+            const artistLinks = [];
+            if (g.artist_spotify) artistLinks.push(`<a class="track-link" href="${escHtml(g.artist_spotify)}" target="_blank" onclick="event.stopPropagation()">&#127911; Spotify</a>`);
+            if (g.artist_youtube) artistLinks.push(`<a class="track-link" href="${escHtml(g.artist_youtube)}" target="_blank" onclick="event.stopPropagation()">${ytSvg} Channel</a>`);
+            const recBadge = g.rec_by ? `<span class="curator-badge ${g.rec_by}" style="font-size:0.55rem;padding:0.1rem 0.4rem">${g.rec_by === 'sauron' ? 'sauron says' : escHtml(g.rec_by) + ' pick'}</span>${g.rec_by_note ? `<span style="font-size:0.6rem;color:var(--text-dim);font-style:italic"> (${escHtml(g.rec_by_note)})</span>` : ''}` : '';
+            const trackHtml = g.tracks.map(t => {
+              const tLinks = [];
+              if (t.youtube_url) tLinks.push(`<a class="track-link" href="${escHtml(t.youtube_url)}" target="_blank">${ytMusicSvg} YT Music</a>`);
+              if (t.spotify_url) tLinks.push(`<a class="track-link" href="${escHtml(t.spotify_url)}" target="_blank" style="color:#1db954">${spotSvg} Spotify</a>`);
+              return `
+                <div style="padding:0.5rem 0;border-top:1px solid var(--border);display:flex;flex-wrap:wrap;align-items:baseline;gap:0.5rem">
+                  <span style="font-family:Oswald,sans-serif;font-weight:600;color:var(--text-bright);font-size:0.9rem">"${escHtml(t.track)}"</span>
+                  <span style="font-size:0.75rem;color:var(--text-dim)">${escHtml(t.comment || '')}</span>
+                  ${tLinks.length ? `<div class="track-links">${tLinks.join('')}</div>` : ''}
+                  ${admin ? `<div style="display:flex;gap:0.5rem;margin-top:0.2rem">
+                    <button onclick="moveToStage('eye','${t.id}','sauron-pick')" class="filter-btn" style="padding:0.2rem 0.5rem;font-size:0.55rem;border-color:var(--accent-glow);color:var(--accent-glow)">Pick</button>
+                    <button onclick="moveToStage('eye','${t.id}','confirmed')" class="filter-btn" style="padding:0.2rem 0.5rem;font-size:0.55rem;border-color:#4caf50;color:#4caf50">Confirm</button>
+                    <button onclick="moveToStage('eye','${t.id}','promoted')" class="filter-btn" style="padding:0.2rem 0.5rem;font-size:0.55rem">Queue</button>
+                    <button onclick="binFromStage('eye','${t.id}')" class="filter-btn" style="padding:0.2rem 0.5rem;font-size:0.55rem;border-color:#c62828;color:#c62828">Bin</button>
+                  </div>` : ''}
+                </div>
+              `;
+            }).join('');
+            return `
+              <div class="artist-card" style="margin-bottom:0.75rem">
+                <div class="artist-header" onclick="this.closest('.artist-card').classList.toggle('open')" style="flex-wrap:wrap">
+                  <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap">
+                    ${recBadge}
+                    <span class="artist-name">${escHtml(g.artist)}</span>
+                    <span class="genre-tag">${escHtml(g.genre)}</span>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:0.75rem">
+                    ${artistLinks.join('')}
+                    <span class="artist-count">${g.tracks.length} track${g.tracks.length !== 1 ? 's' : ''}</span>
+                  </div>
+                </div>
+                <div class="artist-body" style="padding:0.75rem 1.25rem">
+                  ${g.note ? `<div style="font-size:0.8rem;color:var(--text-dim);margin-bottom:0.75rem">${escHtml(g.note)}</div>` : ''}
+                  ${trackHtml}
+                </div>
+              </div>
+            `;
+          }).join('');
+        })
+        .catch(() => {});
+    }
+
+    if (false) { // LEGACY — planning.json no longer used
+      fetch('planning.json')
         .then(r => r.json())
         .then(plan => {
           const ed = plan.next_edition;
