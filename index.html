@@ -2284,8 +2284,9 @@
 
     function moveToStage(from, id, to) {
       showToast(`Moving to ${to}...`);
+      const labels = { promoted: 'Queued', confirmed: 'Confirmed', suggestion: 'Inbox', 'sauron-pick': "Sauron's Picks", eye: 'The Eye', hot: 'Hot List' };
       adminFetch(`/admin/move/${from}/${id}/${to}`, 'POST').then(() => {
-        showToast(`Moved to ${to}`);
+        showToast(`Moved to ${labels[to] || to}`);
         loadSauronPicks(); loadHotList(); loadEye();
         loadConfirmed(); loadPromoted(); loadSuggestions();
       });
@@ -2813,7 +2814,7 @@
             ${!s.youtube_url && !s.spotify_url && s.link ? `<a class="track-link" href="${escHtml(s.link)}" target="_blank">${ytSvg} Link</a>` : ''}
           </div>` : ''}
           <div class="suggestion-meta">
-            promoted ${s.promoted ? new Date(s.promoted).toLocaleDateString() : ''}
+            queued ${s.promoted ? new Date(s.promoted).toLocaleDateString() : ''}
           </div>
           ${admin ? `<div style="margin-top:0.5rem;display:flex;gap:0.5rem">
             <button onclick="confirmTrack('${s.id}')" class="filter-btn" style="padding:0.3rem 0.6rem;font-size:0.6rem;border-color:#4caf50;color:#4caf50">Confirm</button>
