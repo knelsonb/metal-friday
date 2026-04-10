@@ -1331,6 +1331,15 @@
           </div>
           <div style="font-size:0.7rem;color:var(--text-dim);margin-top:0.5rem">All confirmed tracks publish together as one edition. Commits to GitHub, auto-deploys in ~60s.</div>
         </div>
+        <div id="surgery-controls" style="display:none;margin-top:1rem;padding:0.75rem 1rem;background:var(--bg);border:1px solid #c62828;border-radius:6px">
+          <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap">
+            <div>
+              <div style="font-family:Oswald,sans-serif;font-size:0.85rem;color:#c62828">ARCHIVE SURGERY</div>
+              <div style="font-size:0.65rem;color:var(--text-dim);margin-top:0.2rem">Remove the most recent edition from the archive and restore tracks to Confirmed.</div>
+            </div>
+            <button onclick="archiveSurgery()" class="filter-btn" style="padding:0.4rem 1rem;font-size:0.75rem;border-color:#c62828;color:#c62828;white-space:nowrap">Unpublish Last Edition</button>
+          </div>
+        </div>
       </div>
       <div class="planning-section" id="planning-promoted">
         <h3 class="planning-section-title">Queued — Maybe Next Time</h3>
@@ -2614,6 +2623,23 @@
         });
     }
 
+    function archiveSurgery() {
+      if (!confirm('Remove the most recent edition from the archive and restore its tracks to Confirmed? This commits a CSV change to GitHub.')) return;
+      fetch(`${WORKER_URL}/admin/surgery`, {
+        method: 'POST',
+        headers: { 'X-Admin-Key': getAdminKey() },
+      })
+        .then(r => r.json())
+        .then(r => {
+          if (r.ok) {
+            showToast(`Removed ${r.removed_date} edition (${r.removed_curator}, ${r.removed_tracks} tracks). Tracks restored to Confirmed. Redeploy in ~60s.`);
+            loadConfirmed();
+          } else {
+            showToast(r.error || 'Surgery failed');
+          }
+        });
+    }
+
     function renderBinnedList(binned) {
       const container = document.getElementById('bin-list');
       if (!binned.length) {
@@ -2649,6 +2675,10 @@
     function renderConfirmedList(confirmed) {
           const container = document.getElementById('confirmed-list');
           const admin = isAdmin();
+
+          if (admin) {
+            document.getElementById('surgery-controls').style.display = 'block';
+          }
 
           if (!confirmed.length) {
             container.innerHTML = '<div style="color:var(--text-dim);font-size:0.85rem">No tracks confirmed yet. Promote suggestions, then confirm them here.</div>';
