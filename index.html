@@ -1390,6 +1390,7 @@
 
   <script>
     let DATA = null;
+    const WORKER_URL = 'https://metal-friday-suggestions.metalfriday-api.workers.dev';
     let allTracks = [];
     let currentFilter = 'all';
     let searchTimeout = null;
@@ -2527,7 +2528,7 @@
         });
     }
 
-    const WORKER_URL = 'https://metal-friday-suggestions.metalfriday-api.workers.dev';
+    // WORKER_URL moved to top of script block
 
     // --- ADMIN ---
     function getAdminKey() {
