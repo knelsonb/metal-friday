@@ -2282,22 +2282,40 @@
       `;
     }
 
+    const stageLabels = { promoted: 'Queued', confirmed: 'Confirmed', suggestion: 'Inbox', 'sauron-pick': "Sauron's Picks", eye: 'The Eye', hot: 'Hot List', binned: 'Bin' };
+    function cacheFor(stage) {
+      return { 'sauron-pick': sauronPicksCache, eye: eyeCache, hot: hotCache, confirmed: confirmedCache, promoted: promotedCache, suggestion: suggestionsCache, binned: binnedCache }[stage];
+    }
+    function rerenderStage(stage) {
+      ({ 'sauron-pick': loadSauronPicks, eye: loadEye, hot: loadHotList, confirmed: () => renderConfirmedList(confirmedCache), promoted: () => renderPromotedList(promotedCache), suggestion: () => renderSuggestionsList(suggestionsCache), binned: () => renderBinnedList(binnedCache) }[stage] || (() => {}))();
+    }
+
     function moveToStage(from, id, to) {
-      showToast(`Moving to ${to}...`);
-      const labels = { promoted: 'Queued', confirmed: 'Confirmed', suggestion: 'Inbox', 'sauron-pick': "Sauron's Picks", eye: 'The Eye', hot: 'Hot List' };
-      adminFetch(`/admin/move/${from}/${id}/${to}`, 'POST').then(() => {
-        showToast(`Moved to ${labels[to] || to}`);
-        loadSauronPicks(); loadHotList(); loadEye();
-        loadConfirmed(); loadPromoted(); loadSuggestions();
-      });
+      // Optimistic UI: move in local caches, re-render instantly
+      const fc = cacheFor(from), tc = cacheFor(to);
+      if (fc && tc) {
+        const idx = fc.findIndex(s => s.id === id);
+        if (idx >= 0) tc.unshift(fc.splice(idx, 1)[0]);
+      }
+      rerenderStage(from);
+      rerenderStage(to);
+      showToast(`Moved to ${stageLabels[to] || to}`);
+      adminFetch(`/admin/move/${from}/${id}/${to}`, 'POST');
     }
 
     function binFromStage(stage, id) {
-      showToast('Binning...');
-      adminFetch(`/admin/bin/${stage}/${id}`, 'POST').then(() => {
-        showToast('Binned');
-        loadSauronPicks(); loadHotList(); loadEye(); loadBinned();
-      });
+      const fc = cacheFor(stage);
+      if (fc) {
+        const idx = fc.findIndex(s => s.id === id);
+        if (idx >= 0) {
+          const item = { ...fc.splice(idx, 1)[0], binned_at: new Date().toISOString(), binned_from: stage };
+          binnedCache.unshift(item);
+        }
+      }
+      rerenderStage(stage);
+      renderBinnedList(binnedCache);
+      showToast('Binned');
+      adminFetch(`/admin/bin/${stage}/${id}`, 'POST');
     }
 
     function loadSauronPicks() {
