@@ -2319,7 +2319,10 @@
       const tags = Array.isArray(item.genres) ? [...item.genres].sort((a, b) => (b.votes || 0) - (a.votes || 0)) : [];
       const stageAttr = escHtml(stage);
       const idAttr = escHtml(item.id);
-      const primary = item.genre ? `<span class="genre-tag" style="margin-top:0">${escHtml(item.genre)}</span>` : '';
+      // Suppress primary pill once the canonical genre has been migrated into the votable list —
+      // otherwise the same label shows up twice (static + votable).
+      const primaryInTags = item.genre && tags.some(t => t.tag.toLowerCase() === item.genre.toLowerCase());
+      const primary = (item.genre && !primaryInTags) ? `<span class="genre-tag" style="margin-top:0">${escHtml(item.genre)}</span>` : '';
       const tagHtml = tags.map(t => {
         const votes = t.votes || 0;
         const voteCls = votes > 0 ? 'pos' : votes < 0 ? 'neg' : '';
@@ -3065,24 +3068,15 @@
         .catch(() => { document.getElementById('suggestions-list').innerHTML = '<div style="color:var(--text-dim);font-size:0.85rem">Could not load suggestions.</div>'; });
     }
 
-    // --- TAGLINE ROTATION (changes every Sunday at 00:01) ---
+    // --- TAGLINE: random LotR-metal quote per page load ---
+    // Cache-busts daily so new quotes pushed to quotes.json show up without surfing past a stale CDN copy.
     function loadTagline() {
       fetch('quotes.json?t=' + Math.floor(Date.now() / 86400000))
         .then(r => r.json())
         .then(quotes => {
-          // Weeks 1-2 (through April 19, 2026): override
-          const now = new Date();
-          const override_end = new Date('2026-04-20T00:00:00');
-          if (now < override_end) {
-            document.getElementById('tagline').textContent = 'Better uptime than Milo';
-            return;
-          }
-          // After that: rotate weekly starting from April 20
-          const epoch = new Date('2026-04-20T00:01:00');
-          const msPerWeek = 7 * 24 * 60 * 60 * 1000;
-          const weekIndex = Math.floor((now - epoch) / msPerWeek);
-          const index = ((weekIndex % quotes.length) + quotes.length) % quotes.length;
-          document.getElementById('tagline').textContent = quotes[index];
+          if (!Array.isArray(quotes) || !quotes.length) throw new Error('empty pool');
+          const pick = quotes[Math.floor(Math.random() * quotes.length)];
+          document.getElementById('tagline').textContent = pick;
         })
         .catch(() => {
           document.getElementById('tagline').textContent = 'Curated heaviness since 2016';
